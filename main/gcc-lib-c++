@@ -1,0 +1,37 @@
+name: gcc-lib-c++
+version: 12.2.0
+author: GNU
+url: http//gcc.gnu.org/
+description: The GNU Compiler C++ library
+maintainer: Skythrew
+source: http://ftp.gnu.org/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.xz
+audit: http://ftp.gnu.org/gnu/gcc
+makedeps: gcc
+rundeps: gcc
+build(
+mkdir -v build
+cd build
+export LFS_TGT=$(uname -m)-lfs-linux-gnu
+../libstdc++-v3/configure           \
+    --host=$LFS_TGT                 \
+    --build=$(../config.guess)      \
+    --prefix=/usr                   \
+    --disable-multilib              \
+    --disable-nls                   \
+    --disable-libstdcxx-pch         \
+    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/12.2.0
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+mv -v $PKG/usr/lib64/* $PKG/usr/lib/
+rm -rfv $PKG/usr/lib64
+rm -rfv $PKG/tools
+rm -v $PKG/usr/lib/lib{stdc++,stdc++fs,supc++}.la
+
+mkdir -pv $PKG/usr/share/gdb/auto-load/usr/lib
+mv -v $PKG/usr/lib/*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib
+
+rm -v $LFS/usr/lib/lib{stdc++,stdc++fs,supc++}.la
+)

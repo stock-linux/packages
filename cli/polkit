@@ -1,0 +1,32 @@
+name: polkit 
+description: Polkit is a tool library to define and manage authorizations. 
+
+version: 121
+source: http://gitlab.freedesktop.org/polkit/polkit/-/archive/121/polkit-121.tar.gz 
+
+makedeps: glib js91 gobject-introspection libxslt meson ninja
+rundeps: glib js91 gobject-introspection libxslt
+
+build(
+mkdir build
+cd build
+
+meson --prefix=/usr                       \
+      --buildtype=release                 \
+      -Dman=true                          \
+      -Dsession_tracking=libsystemd-login \
+      -Dtests=true                        \
+      -Djs_engine=mozjs                   \
+      -Dauthfw=shadow                     \
+      ..                                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)
+
+post(
+groupadd -fg 27 polkitd &&
+useradd -c "PolicyKit Daemon Owner" -d /etc/polkit-1 -u 27 \
+        -g polkitd -s /bin/false polkitd
+)

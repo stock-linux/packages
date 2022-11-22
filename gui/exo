@@ -1,0 +1,15 @@
+name: exo
+version: 4.16.4
+description: Exo is a support library used in the Xfce desktop. It also has some helper applications that are used throughout Xfce.
+url: https://www.xfce.org/
+source: https://archive.xfce.org/src/xfce/exo/4.16/exo-4.16.4.tar.bz2
+makedeps: gtk3 libxfce4-ui libxfce4-util
+rundeps: gtk3 libxfce4-ui libxfce4-util
+build(
+
+./configure --prefix=/usr --sysconfdir=/etc &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

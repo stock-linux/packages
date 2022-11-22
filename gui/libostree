@@ -1,0 +1,20 @@
+name: libostree
+version: 2022.6
+description: Operating system and container binary deployment and upgrades
+url: https://github.com/ostreedev/ostree/
+source: https://github.com/ostreedev/ostree/releases/download/v2022.6/libostree-2022.6.tar.xz
+makedeps: openssl glib gpgme fuse libsoup2 e2fsprogs gjs
+rundeps: openssl glib gpgme fuse libsoup2 e2fsprogs gjs
+build(
+
+./configure --prefix=/usr \
+--with-openssl \
+--sysconfdir=/etc \
+--localstatedir=/var
+
+sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+make -j`nproc`
+make DESTDIR=$PKG install
+
+)

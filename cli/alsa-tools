@@ -1,0 +1,32 @@
+name: alsa-tools
+version: 1.2.5
+description: The ALSA Tools package contains advanced tools for certain sound cards.
+url: https://www.alsa-project.org
+source: https://www.alsa-project.org/files/pub/tools/alsa-tools-1.2.5.tar.bz2
+makedeps: alsa-lib
+rundeps: alsa-lib
+build(
+
+for tool in *
+do
+  case $tool in
+    seq )
+      tool_dir=seq/sbiload
+    ;;
+    * )
+      tool_dir=$tool
+    ;;
+  esac
+
+  pushd $tool_dir
+    ./configure --prefix=/usr
+    make -j`nproc`
+    make install
+    make DESTDIR=$PKG install
+    /sbin/ldconfig
+  popd
+
+done
+unset tool tool_dir
+
+)

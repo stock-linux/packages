@@ -1,0 +1,18 @@
+name: python-cairo
+version: 1.21.0
+description: PyCairo provides Python links with Cairo.
+url: https://github.com/pygobject/pycairo
+source: https://github.com/pygobject/pycairo/releases/download/v1.21.0/pycairo-1.21.0.tar.gz
+makedeps: cairo meson ninja
+rundeps: cairo
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

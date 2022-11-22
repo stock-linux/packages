@@ -1,0 +1,19 @@
+name: rest 
+url: https://gnome.org 
+version: 0.9.1 
+source: https://download.gnome.org/core/43/43.1/sources/rest-0.9.1.tar.xz 
+audit: https://download.gnome.org/core/43/43.1/sources
+
+makedeps: make-ca libsoup3 gobject-introspection json-glib libadwaita gtksourceview5 jinja2 markupsafe python-markdown python-pygments python-typogrify meson ninja
+rundeps: make-ca libsoup3 gobject-introspection json-glib libadwaita gtksourceview5 jinja2 markupsafe python-markdown python-pygments python-typogrify
+
+build(
+
+mkdir build
+cd build
+
+meson -Dprefix=/usr -Dgtk_doc=false ..
+ninja
+DESTDIR=$PKG ninja install
+
+)

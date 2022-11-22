@@ -1,0 +1,29 @@
+name: python3 
+url: http://www.python.org/ 
+description: This package contains the Python development environment.
+
+version: 3.10.6
+source: http://www.python.org/ftp/python/3.10.6/Python-3.10.6.tar.xz
+audit: http://www.python.org/ftp/python/
+
+makedeps: readline openssl libffi expat
+rundeps: readline openssl libffi expat
+
+build(
+
+./configure --prefix=/usr        \
+            --enable-shared      \
+            --with-system-expat  \
+            --with-system-ffi    \
+            --with-ensurepip=yes \
+            --enable-optimizations
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)
+
+post(
+python3 -m ensurepip
+)

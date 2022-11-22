@@ -1,0 +1,14 @@
+name: hyprpaper
+version: dev-1
+description: Hyprpaper is a blazing fast wayland wallpaper utility with IPC controls.
+makedeps: hyprland
+rundeps: hyprland
+source: https://github.com/hyprwm/hyprpaper/tarball/main
+build(
+
+make -j`nproc` all
+
+mkdir -p $PKG/usr/bin
+cp -r build/* $PKG/usr/bin/
+
+)

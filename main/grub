@@ -1,0 +1,29 @@
+name: grub
+version: 2.0.6
+source: https://unifoundry.com/pub/unifont/unifont-14.0.04/font-builds/unifont-14.0.04.pcf.gz https://ftp.gnu.org/gnu/grub/grub-2.06.tar.xz
+
+makedeps: efibootmgr freetype 
+rundeps: efibootmgr freetype 
+
+build(
+
+mkdir -pv $PKG/usr/share/fonts/unifont &&
+gunzip -c $PKG/../unifont-14.0.04.pcf.gz > $PKG/usr/share/fonts/unifont/unifont.pcf
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --disable-efiemu     \
+            --enable-grub-mkfont \
+            --with-platform=efi  \
+            --target=x86_64      \
+            --disable-werror     &&
+unset TARGET_CC &&
+make -j`nproc`
+
+
+
+make DESTDIR=$PKG install &&
+mkdir -p $PKG/usr/share/bash-completion/completions
+mv -v $PKG/etc/bash_completion.d/grub $PKG/usr/share/bash-completion/completions
+
+)

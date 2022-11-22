@@ -1,0 +1,22 @@
+name: xinit 
+version: 1.4.1
+source: https://www.x.org/pub/individual/app/xinit-1.4.1.tar.bz2
+
+makedeps: xorg-libs twm xclock xterm
+rundeps: xorg-libs twm xclock xterm
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG --with-xinitdir=/etc/X11/app-defaults &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)
+
+post(
+ldconfig
+)

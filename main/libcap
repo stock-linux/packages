@@ -1,0 +1,16 @@
+name: libcap 
+description: The libcap package
+
+version: 2.63
+source: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.63.tar.xz 
+audit: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/
+
+build(
+
+sed -i '/install -m.*STA/d' libcap/Makefile
+
+make prefix=/usr lib=lib -j`nproc`
+
+make prefix=/usr lib=lib DESTDIR=$PKG install
+
+)

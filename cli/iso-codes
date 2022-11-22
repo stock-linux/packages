@@ -1,0 +1,12 @@
+name: iso-codes 
+version: 4.11.0
+source: http://ftp.debian.org/debian/pool/main/i/iso-codes/iso-codes_4.11.0.orig.tar.xz 
+
+build(
+
+./configure --prefix=/usr &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

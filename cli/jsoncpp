@@ -1,0 +1,17 @@
+name: jsoncpp
+version: 1.9.5
+description: C++ library for interacting with JSON
+url: https://github.com/open-source-parsers/jsoncpp
+source: https://github.com/open-source-parsers/jsoncpp/archive/1.9.5/jsoncpp-1.9.5.tar.gz
+makedeps: python3 meson ninja
+build(
+
+mkdir build
+cd build
+
+meson -Dprefix=/usr ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

@@ -1,0 +1,15 @@
+name: cpio 
+version: 2.13
+source: https://ftp.gnu.org/gnu/cpio/cpio-2.13.tar.bz2
+
+build(
+
+sed -i '/The name/,+2 d' src/global.c
+
+./configure --prefix=/usr \
+            --enable-mt   \
+            --with-rmt=/usr/libexec/rmt &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

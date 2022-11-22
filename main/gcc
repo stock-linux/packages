@@ -1,0 +1,36 @@
+name: gcc
+url: http//gcc.gnu.org/
+description: The GNU Compiler collection
+
+version: 12.2.0
+source: http://ftp.gnu.org/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.xz
+audit: http://ftp.gnu.org/gnu/gcc
+makedeps: libmpc libmpfr libgmp tar flex zlib glibc
+rundeps: libmpc libmpfr libgmp tar flex zlib glibc
+build(
+
+mkdir -v build
+cd       build
+
+../configure --prefix=/usr            \
+             LD=ld                    \
+             --enable-languages=c,c++ \
+             --disable-multilib       \
+             --disable-bootstrap      \
+             --with-system-zlib
+
+make -j`nproc`
+
+make DESTDIR=$PKG install-strip
+
+ln -svr /usr/bin/cpp $PKG/usr/lib
+ln -sv gcc $PKG/usr/bin/cc
+
+ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/12.2.0/liblto_plugin.so \
+        $PKG/usr/lib/bfd-plugins/
+
+mkdir -pv $PKG/usr/share/gdb/auto-load/usr/lib
+mv -v $PKG/usr/lib/*gdb.py \
+$PKG/usr/share/gdb/auto-load/usr/lib
+
+)

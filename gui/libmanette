@@ -1,0 +1,17 @@
+name: libmanette
+version: 0.2.6
+description: Simple GObject game controller library
+url: https://wiki.gnome.org/Apps/Games
+source: https://download.gnome.org/sources/libmanette/0.2/libmanette-0.2.6.tar.xz
+makedeps: libgudev libevdev gobject-introspection vala meson ninja
+rundeps: libgudev libevdev gobject-introspection vala
+build(
+
+mkdir build
+cd build
+
+meson -Dprefix=/usr ..
+ninja
+DESTDIR=$PKG ninja install
+
+)

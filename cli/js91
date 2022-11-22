@@ -1,0 +1,33 @@
+name: js91 
+url: https://mozilla.org 
+description: The JavaScript engine
+
+version: 91.3.0 
+source: https://archive.mozilla.org/pub/firefox/releases/91.3.0esr/source/firefox-91.3.0esr.source.tar.xz 
+audit: https://archive.mozilla.org/pub/firefox/releases/
+
+makedeps: icu rustc which llvm libffi
+rundeps: icu which llvm libffi
+
+build(
+
+mountpoint -q /dev/shm || mount -t tmpfs devshm /dev/shm
+export SHELL=/bin/sh
+
+mkdir obj &&
+cd    obj &&
+
+sh ../js/src/configure.in --prefix=/usr            \
+                          --with-intl-api          \
+                          --with-system-zlib       \
+                          --with-system-icu        \
+                          --disable-jemalloc       \
+                          --disable-debug-symbols  \
+                          --enable-readline        &&
+make -j`nproc`
+
+make DESTDIR=$PKG install && 
+rm $PKG/usr/lib/libjs_static.ajs &&
+sed -i '/@NSPR_CFLAGS@/d' $PKG/usr/bin/js91-config
+
+)

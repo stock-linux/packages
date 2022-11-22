@@ -1,0 +1,42 @@
+name: bzip2 
+url: http://sourceware.org/bzip2/
+description: Bzip2 package contains file compression and decompression softwares.
+version: 1.0.8
+source: http://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz 
+audit: http://www.sourceware.org/pub/bzip2
+author: Julian Seward
+maintainer: Skythrew
+
+# bzip2 package has no dependencies
+
+build(
+
+sed -i "s@\\(ln -s -f \\)$(PREFIX)\/bin\/@\\1@" Makefile
+
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+make -f Makefile-libbz2_so
+make clean
+
+make -j`nproc`
+
+make PREFIX=/usr DESTDIR=$PKG install
+
+mkdir -p $PKG/usr/lib
+
+cp -av libbz2.so.* $PKG/usr/lib
+ln -sv libbz2.so.1.0.8 $PKG/usr/lib/libbz2.so
+
+mkdir -p $PKG/usr/bin
+
+cp -v bzip2-shared $PKG/usr/bin/bzip2
+for i in $PKG/usr/bin/{bzcat,bunzip2}; do
+  ln -sfv bzip2 $i
+done
+
+rm -fv $PKG/usr/lib/libbz2.a
+
+mkdir -p $PKG/usr/include
+cp bzlib.h $PKG/usr/include/bzlib.h
+
+)

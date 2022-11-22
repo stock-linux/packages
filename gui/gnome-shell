@@ -1,0 +1,19 @@
+name: gnome-shell
+version: 43.0
+description: The GNOME Shell is the core user interface of the GNOME Desktop environment.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/gnome-shell-43.0.tar.xz
+makedeps: evolution-data-server gjs gnome-autoar gnome-control-center gtk4 mutter sassc startup-notification systemd desktop-file-utils gnome-bluetooth gst-plugins-base networkmanager meson ninja
+rundeps: evolution-data-server gjs gnome-autoar gnome-control-center gtk4 mutter sassc startup-notification systemd desktop-file-utils gnome-bluetooth gst-plugins-base networkmanager adwaita-icon-theme dconf gnome-backgrounds hicolor-icon-theme
+build(
+sed 's/1.73.1/1.72.2/g' -i meson.build
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Dtests=false .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

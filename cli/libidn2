@@ -1,0 +1,17 @@
+name: libidn2 
+url: http://gnu.org
+version: 2.3.3
+source: https://ftp.gnu.org/gnu/libidn/libidn2-2.3.3.tar.gz 
+audit: https://ftp.gnu.org/gnu/libidn/
+
+makedeps: libunistring
+rundeps: libunistring
+
+build(
+
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

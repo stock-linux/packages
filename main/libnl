@@ -1,0 +1,18 @@
+name: libnl 
+url:  https://github.com/thom311/libnl/
+description: The libnl package is a library collection which provides APIs for the netlink protocol based on the Linux kernel
+
+version: 3.5.0
+source:  http://github.com/thom311/libnl/releases/download/libnl3_5_0/libnl-3.5.0.tar.gz 
+audit:  https://github.com/thom311/libnl/releases/
+
+build(
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

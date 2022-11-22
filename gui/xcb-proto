@@ -1,0 +1,17 @@
+name: xcb-proto 
+url: http://x.org
+description: The xcb-proto package provides the descriptions of the XML-XCB protocol which is used by libxcb to generate the major part of his code and his API.
+version: 1.15.2
+source: https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.15.2.tar.xz
+audit: https://xorg.freedesktop.org/archive/individual/proto/
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+PYTHON=python3 ./configure $XORG_CONFIG
+
+make DESTDIR=$PKG install
+
+)

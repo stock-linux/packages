@@ -1,0 +1,14 @@
+name: autoconf 
+version: 2.71
+author: David Mackenzie
+maintainer: Skythrew
+source: https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz 
+makedeps: m4 perl
+rundeps: m4 perl
+build(
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

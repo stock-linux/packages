@@ -1,0 +1,22 @@
+name: cairo 
+version: 1.17.6
+source: https://download.gnome.org/sources/cairo/1.17/cairo-1.17.6.tar.xz 
+
+makedeps: libpng pixman fontconfig glib xorg-libs
+rundeps: libpng pixman fontconfig glib xorg-libs
+
+build(
+
+sed 's/PTR/void */' -i util/cairo-trace/lookup-symbol.c
+
+sed -e "/@prefix@/a exec_prefix=@exec_prefix@" \
+    -i util/cairo-script/cairo-script-interpreter.pc.in
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --enable-tee &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

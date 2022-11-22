@@ -1,0 +1,12 @@
+name: gnome-common
+version: 3.18.0
+description: Common macros for GNOME 3
+source: https://gitlab.gnome.org/GNOME/gnome-common/-/archive/3.18.0/gnome-common-3.18.0.tar.bz2
+build(
+
+./autogen.sh
+./configure --prefix=/usr
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

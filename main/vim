@@ -1,0 +1,37 @@
+name: vim 
+version: 8.2.4383
+source: https://anduin.linuxfromscratch.org/LFS/vim-8.2.4383.tar.gz 
+
+build(
+
+echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+mkdir -p $PKG/usr/share/doc/
+ln -sv ../vim/vim82/doc $PKG/usr/share/doc/vim-8.2.4383
+
+mkdir -p $PKG/etc
+cat > $PKG/etc/vimrc << "EOF"
+" Début de /etc/vimrc
+
+" Ensure defaults are set before customizing settings, not after
+source $VIMRUNTIME/defaults.vim
+let skip_defaults_vim=1
+
+set nocompatible
+set backspace=2
+set mouse=
+syntax on
+if (&term == "xterm") || (&term == "putty")
+  set background=dark
+endif
+
+" Fin de /etc/vimrc
+EOF
+
+)

@@ -1,0 +1,15 @@
+name: libqmi
+version: 1.30.8
+description: The libqmi package contains a GLib-based library for talking to WWAN modems and devices which speak the Qualcomm MSM Interface (QMI) protocol.
+url: https://www.freedesktop.org/software/libqmi
+source: https://www.freedesktop.org/software/libqmi/libqmi-1.30.8.tar.xz
+makedeps: glib libgudev gobject-introspection libmbim
+rundeps: glib libgudev gobject-introspection libmbim
+build(
+
+PYTHON=python3 ./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

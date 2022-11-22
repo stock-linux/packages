@@ -1,0 +1,18 @@
+name: gtk4
+version: 4.6.7
+description: The GTK 4 package contains libraries used for creating graphical user interfaces for applications.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/gtk/4.6/gtk-4.6.7.tar.xz
+makedeps: fribidi gdk-pixbuf graphene iso-codes libepoxy libxkbcommon pango python-gobject wayland-protocols adwaita-icon-theme gst-plugins-bad gst-plugins-good hicolor-icon-theme librsvg gobject-introspection libtiff meson ninja
+rundeps: fribidi gdk-pixbuf graphene iso-codes libepoxy libxkbcommon pango python-gobject wayland-protocols adwaita-icon-theme gst-plugins-bad gst-plugins-good hicolor-icon-theme librsvg gobject-introspection libtiff
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Dbroadway-backend=true .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

@@ -1,0 +1,18 @@
+name: gnome-online-accounts
+version: 3.46.0
+description: The GNOME Online Accounts package contains a framework used to access the user's online accounts.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/gnome-online-accounts-3.46.0.tar.xz
+makedeps: gcr json-glib rest vala webkitgtk-4.1 gobject-introspection meson ninja
+rundeps: gcr json-glib rest vala webkitgtk-4.1 gobject-introspection
+build(
+
+mkdir build
+cd build
+
+meson -Dprefix=/usr -Dkerberos=false -Dbuildtype=release ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

@@ -1,0 +1,18 @@
+name: gtksourceview5
+version: 5.4.2
+description: The GtkSourceView package contains a library used for extending the GTK text functions to include syntax highlighting.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/gtksourceview/5.4/gtksourceview-5.4.2.tar.xz
+makedeps: gtk4 pcre2 gobject-introspection libxml2 vala meson ninja
+rundeps: gtk4 pcre2 gobject-introspection libxml2 vala
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

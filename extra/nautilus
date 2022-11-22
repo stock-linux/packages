@@ -1,0 +1,24 @@
+name: nautilus
+version: 43.0
+description: The Nautilus package contains the GNOME file manager.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/nautilus-43.0.tar.xz
+makedeps: bubblewrap gexiv2 gnome-autoar gnome-desktop libhandy libnotify libcloudproviders libseccomp libportal tracker desktop-file-utils exempi gobject-introspection gst-plugins-base libexif meson ninja
+rundeps: bubblewrap gexiv2 gnome-autoar gnome-desktop libhandy libnotify libseccomp libcloudproviders libportal tracker desktop-file-utils exempi gobject-introspection gst-plugins-base libexif adwaita-icon-theme gvfs
+build(
+sed 's/4.7.2/4.6.7/g' -i meson.build
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Dselinux=false     \
+      -Dpackagekit=false  \
+      .. &&
+
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

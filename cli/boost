@@ -1,0 +1,14 @@
+name: boost
+version: 1.80.0
+description: Boost provides a set of free peer-reviewed portable C++ source libraries. It includes libraries for linear algebra, pseudorandom number generation, multithreading, image processing, regular expressions and unit testing.
+url: https://boostorg.jfrog.io/
+source: https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.bz2
+makedeps: which
+build(
+
+./bootstrap.sh --prefix=$PKG/usr --with-python=python3 &&
+./b2 stage -j`nproc` threading=multi link=shared
+
+./b2 install threading=multi link=shared
+
+)

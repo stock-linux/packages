@@ -1,0 +1,23 @@
+name: libsoup3
+version: 3.1.1
+description: The libsoup3 is a HTTP client/server library for GNOME. It uses GObject and the GLib main loop to integrate with GNOME applications and it also has an asynchronous API for use in threaded applications.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/libsoup/3.1/libsoup-3.1.1.tar.xz
+makedeps: glib-networking libpsl libxml2 nghttp2 sqlite gobject-introspection vala meson ninja
+rundeps: glib-networking libpsl libxml2 nghttp2 sqlite gobject-introspection vala
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Dvapi=enabled      \
+      -Dgssapi=disabled   \
+      -Dsysprof=disabled  \
+      ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

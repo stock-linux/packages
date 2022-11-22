@@ -1,0 +1,15 @@
+name: icu
+version: 72.1
+description: The International Components for Unicode (ICU) package is a mature, widely used set of C/C++ libraries providing Unicode and Globalization support for software applications. ICU is widely portable and gives applications the same results on all platforms. 
+source: https://github.com/unicode-org/icu/releases/download/releasedownload/release-72-1/icu4c-72_1-src.tgz
+url: https://github.com/unicode-org/icu                           
+build(
+mkdir source &&
+cd source &&
+
+./configure --prefix=/usr &&
+
+make -j `nproc`
+
+make DESTDIR=$PKG install
+)

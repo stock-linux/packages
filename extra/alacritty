@@ -1,0 +1,15 @@
+name: alacritty 
+version: 0.11.0
+source: https://github.com/alacritty/alacritty/archive/refs/tags/v0.11.0.tar.gz
+
+makedeps: rustc cmake freetype fontconfig libxcb libxkbcommon python3
+
+build(
+
+cargo build --release
+
+mkdir -p $PKG/usr/bin/
+
+cp target/release/alacritty $PKG/usr/bin/
+
+)

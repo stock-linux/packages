@@ -1,0 +1,18 @@
+name: slang
+version: 2.3.3
+description: S-Lang (slang) is an interpreted language that may be embedded into an application to make the application extensible. It provides facilities required by interactive applications such as display/screen management, keyboard input and keymaps.
+source: https://www.jedsoft.org/releases/slang/slang-2.3.3.tar.bz2
+build(
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --with-readline=gnu &&
+make -j`nproc`
+
+make DESTDIR=$PKG install_doc_dir=/usr/share/doc/slang-2.3.3   \
+     SLSH_DOC_DIR=/usr/share/doc/slang-2.3.3/slsh \
+     install &&
+
+chmod -v 755 $PKG/usr/lib/slang/v2/modules/*.so
+
+)

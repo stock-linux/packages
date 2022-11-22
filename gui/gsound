@@ -1,0 +1,18 @@
+name: gsound
+version: 1.0.3
+description: The gsound package contains a small library for playing system sounds.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/gsound/1.0/gsound-1.0.3.tar.xz
+makedeps: libcanberra gobject-introspection vala meson ninja
+rundeps: libcanberra gobject-introspection vala
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

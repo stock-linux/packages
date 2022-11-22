@@ -1,0 +1,13 @@
+name: python-typogrify
+version: 2.0.7
+source: https://github.com/mintchaos/typogrify/archive/refs/tags/2.0.7.tar.gz
+
+makedeps: python3 python-poetry
+rundeps: python3 python-poetry
+
+build(
+
+python3 setup.py build
+python3 setup.py install --prefix=/usr --root="${PKG}" -O1 --skip-build
+
+)

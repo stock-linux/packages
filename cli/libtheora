@@ -1,0 +1,16 @@
+name: libtheora 
+version: 1.1.1 
+source: https://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.xz
+
+makedeps: libogg libvorbis 
+rundeps: libogg libvorbis 
+
+build(
+
+sed -i 's/png_\(sizeof\)/\1/g' examples/png2theora.c &&
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

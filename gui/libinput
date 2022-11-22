@@ -1,0 +1,26 @@
+name: libinput 
+version: 1.21.0
+source: https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.21.0/libinput-1.21.0.tar.gz 
+
+makedeps: libevdev mtdev meson ninja
+rundeps: libevdev mtdev 
+
+build(
+
+export XORG_PREFIX=/usr
+
+mkdir build
+cd    build
+
+meson --prefix=$XORG_PREFIX    \
+      --buildtype=release      \
+      -Ddebug-gui=false        \
+      -Dtests=false            \
+      -Dlibwacom=false         \
+      -Dudev-dir=/usr/lib/udev \
+      ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

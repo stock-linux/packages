@@ -1,0 +1,20 @@
+name: gtkmm 
+version: 3.24.7
+description: The Gtkmm package provides a C++ interface to GTK+ 3. 
+url: https://gitlab.gnome.org/GNOME/gtkmm
+source: https://download.gnome.org/sources/gtkmm/3.24/gtkmm-3.24.7.tar.xz 
+makedeps: meson ninja atkmm gtk3 pangomm
+rundeps: atkmm gtk3 pangomm
+build(
+
+mkdir gtkmm3-build
+cd gtkmm3-build
+
+meson -Dprefix=/usr --buildtype=release ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+mv -v $PKG/usr/share/doc/gtkmm-3.0 $PKG/usr/share/doc/gtkmm-3.24.7
+
+)

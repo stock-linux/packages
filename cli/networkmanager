@@ -1,0 +1,32 @@
+name: networkmanager
+version: 1.40.2
+description: NetworkManager is a set of co-operative tools that make networking simple and straightforward. Whether you use WiFi, wired, 3G, or Bluetooth, NetworkManager allows you to quickly move from one network to another: Once a network has been configured and joined once, it can be detected and re-joined automatically the next time it's available.
+source: https://download.gnome.org/sources/NetworkManager/1.40/NetworkManager-1.40.2.tar.xz
+makedeps: jansson libndp curl dhclient gobject-introspection iptables newt nss polkit python-gobject systemd upower vala wpasupplicant meson ninja
+rundeps: jansson libndp curl dhclient gobject-introspection iptables newt nss polkit python-gobject systemd upower vala wpasupplicant
+build(
+
+grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
+
+mkdir build &&
+cd    build    &&
+
+CXXFLAGS+="-O2 -fPIC"            \
+meson --prefix=/usr              \
+      --buildtype=release        \
+      -Dlibaudit=no              \
+      -Dlibpsl=false             \
+      -Dnmtui=true               \
+      -Dovs=false                \
+      -Dppp=false                \
+      -Dselinux=false            \
+      -Dqt=false                 \
+      -Dsession_tracking=systemd \
+      -Dmodem_manager=false      \
+      .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+mv -v $PKG/usr/share/doc/NetworkManager{,-1.40.2}
+
+)

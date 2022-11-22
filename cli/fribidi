@@ -1,0 +1,16 @@
+name: fribidi 
+version: 1.0.12
+source: https://github.com/fribidi/fribidi/releases/download/v1.0.12/fribidi-1.0.12.tar.xz 
+makedeps: meson ninja
+
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

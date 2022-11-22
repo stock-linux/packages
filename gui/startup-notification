@@ -1,0 +1,17 @@
+name: startup-notification
+version: 0.12
+description: The startup-notification package contains startup-notification libraries. These are useful for building a consistent manner to notify the user through the cursor that the application is loading.
+source: https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
+makedeps: xorg-libs xcb-util
+rundeps: xorg-libs xcb-util
+build(
+
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+install -v -m644 -D doc/startup-notification.txt \
+    $PKG/usr/share/doc/startup-notification-0.12/startup-notification.txt
+
+)

@@ -1,0 +1,32 @@
+name: cracklib
+version: 2.9.8
+description: Library to enforce passwords by comparing user selected passwords to words lists
+url: http://sourceforge.net/projects/cracklib/
+source: https://github.com/cracklib/cracklib/releases/download/v2.9.8/cracklib-words-2.9.8.bz2 https://github.com/cracklib/cracklib/releases/download/v2.9.8/cracklib-2.9.8.tar.bz2
+build(
+
+autoreconf -fiv &&
+
+PYTHON=python3               \
+./configure --prefix=/usr    \
+            --sbindir=/usr/bin
+            --disable-static \
+            --with-default-dict=/usr/lib/cracklib/pw_dict &&
+make -j`nproc`
+make DESTDIR=$PKG install
+
+install -v -m644 -D    $PKG/../cracklib-words-2.9.8.bz2 \
+                         $PKG/usr/share/dict/cracklib-words.bz2    &&
+
+bunzip2 -v               $PKG/usr/share/dict/cracklib-words.bz2    &&
+ln -v -sf cracklib-words $PKG/usr/share/dict/words
+echo "heyman" >>      $PKG/usr/share/dict/cracklib-extra-words
+
+)
+
+post(
+install -v -m755 -d      /usr/lib/cracklib                     &&
+
+create-cracklib-dict     /usr/share/dict/cracklib-words \
+                         /usr/share/dict/cracklib-extra-words
+)

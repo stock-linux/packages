@@ -1,0 +1,18 @@
+name: gnome-console
+version: 43.0
+description: A simple user-friendly terminal emulator for the GNOME desktop.
+url: https://www.gnome.org
+source: https://gitlab.gnome.org/GNOME/console/-/archive/43.0/console-43.0.tar.bz2
+makedeps: gcr gtk4 desktop-file-utils libadwaita vte-gtk4 libgtop pcre2 gsettings-desktop-schemas meson ninja
+rundeps: gcr gtk4 desktop-file-utils libadwaita vte-gtk4 libgtop pcre2 gsettings-desktop-schemas
+build(
+
+mkdir build
+cd build
+
+meson -Dprefix=/usr -Dbuildtype=release ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

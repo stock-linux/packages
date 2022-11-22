@@ -1,0 +1,18 @@
+name: dconf
+version: 0.40.0
+description: The DConf package contains a low-level configuration system. Its main purpose is to provide a backend to GSettings on platforms that don't already have configuration storage systems.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/dconf/0.40/dconf-0.40.0.tar.xz
+makedeps: dbus glib libxslt vala meson ninja
+rundeps: dbus glib libxslt vala
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Dbash_completion=false .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

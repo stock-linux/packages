@@ -1,0 +1,17 @@
+name: libvorbis 
+version: 1.3.7 
+source: https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz 
+
+makedeps: libogg
+rundeps: libogg
+
+build(
+
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+mkdir -p $PKG/usr/share/doc/libvorbis-1.3.7
+install -v -m644 doc/Vorbis* $PKG/usr/share/doc/libvorbis-1.3.7
+
+)

@@ -1,0 +1,15 @@
+name: enchant
+version: 2.3.3
+description: The enchant package provides a generic interface into various existing spell checking libraries.
+url: https://github.com/AbiWord/enchant
+source: https://github.com/AbiWord/enchant/releases/download/v2.3.3/enchant-2.3.3.tar.gz
+makedeps: glib aspell
+rundeps: glib aspell
+build(
+
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

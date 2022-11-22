@@ -1,0 +1,17 @@
+name: dbus-glib 
+version: 0.112
+source: https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz 
+url: https://dbus.freedesktop.org/
+makedeps: dbus glib
+rundeps: dbus glib
+
+build(
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

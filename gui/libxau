@@ -1,0 +1,20 @@
+name: libxau 
+url: https://x.org 
+description: The libXau package contains a library which implements the X11 authorization protocol.
+version: 1.0.9
+source: https://www.x.org/pub/individual/lib/libXau-1.0.9.tar.bz2
+audit: https://www.x.org/pub/individual/lib/
+makedeps: xorgproto
+rundeps: xorgproto
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

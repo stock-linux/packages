@@ -1,0 +1,18 @@
+name: udisks
+version: 2.9.4
+description: The UDisks package provides a daemon, tools and libraries to access and manipulate disks and storage devices.
+url: https://github.com/storaged-project/udisks/
+source: https://github.com/storaged-project/udisks/releases/download/udisks-2.9.4/udisks-2.9.4.tar.bz2
+makedeps: libatasmart libblockdev libgudev libxslt polkit btrfs-progs dbus dosfstools gptfdisk mdadm xfsprogs gobject-introspection
+rundeps: libatasmart libblockdev libgudev libxslt polkit btrfs-progs dbus dosfstools gptfdisk mdadm xfsprogs gobject-introspection
+build(
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static     &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

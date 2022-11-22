@@ -1,0 +1,21 @@
+name: libdrm
+description: libdrm provides a user space library for accessing the DRM, direct rendering manager, on operating systems that support the ioctl interface. libdrm is a low-level library, typically used by graphics drivers such as the Mesa DRI drivers, the X drivers, libva and similar projects.
+version: 2.4.113
+source: https://dri.freedesktop.org/libdrm/libdrm-2.4.113.tar.xz
+makedeps: xorg-libs meson ninja
+rundeps: xorg-libs 
+
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr \
+      --buildtype=release   \
+      -Dudev=true           \
+      -Dvalgrind=disabled      &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

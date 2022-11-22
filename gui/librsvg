@@ -1,0 +1,22 @@
+name: librsvg 
+version: 2.54.5
+source: https://download.gnome.org/sources/librsvg/2.54/librsvg-2.54.5.tar.xz 
+
+makedeps: cairo gdk-pixbuf pango rustc gobject-introspection vala 
+rundeps: cairo pango gobject-introspection vala 
+
+build(
+
+./configure --prefix=/usr    \
+            --enable-vala    \
+            --disable-static \
+            --docdir=/usr/share/doc/librsvg-2.54.5 &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)
+
+post(
+gdk-pixbuf-query-loaders --update-cache
+)

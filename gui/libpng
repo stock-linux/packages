@@ -1,0 +1,19 @@
+name: libpng 
+description: The libpng package contains libraries used by other programs to read and write PNG files.
+version: 1.6.37
+source: https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-1.6.37-apng.patch.gz https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz
+audit: https://downloads.sourceforge.net/libpng/
+
+makedeps: gzip
+rundeps: gzip
+
+build(
+
+gzip -cd $PKG/../libpng-1.6.37-apng.patch.gz | patch -p1
+
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,16 @@
+name: xmlparser 
+version: 2.46
+source: https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz 
+
+makedeps: expat perl
+rundeps: expat perl
+
+build(
+
+perl Makefile.PL
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,14 @@
+name: grim
+version: 1.4.0
+description: Grab images from a Wayland compositor
+url: https://github.com/emersion/grim
+source: https://github.com/emersion/grim/releases/download/v1.4.0/grim-1.4.0.tar.gz
+makedeps: wayland pixman libpng meson ninja
+rundeps: wayland pixman libpng 
+build(
+
+meson -Dprefix=/usr build
+ninja -C build
+
+DESTDIR=$PKG ninja -C build install
+)

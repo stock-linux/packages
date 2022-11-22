@@ -1,0 +1,25 @@
+name: util-linux 
+version: 2.38.1
+source: https://www.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
+makedeps: file ncurses readline systemd zlib 
+rundeps: file ncurses readline zlib 
+build(
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+            --bindir=/usr/bin    \
+            --libdir=/usr/lib    \
+            --sbindir=/usr/sbin  \
+            --docdir=/usr/share/doc/util-linux-2.38.1 \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --disable-static     \
+            --without-python
+            
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

@@ -1,0 +1,24 @@
+name: pulseaudio 
+version: 16.1 
+source: https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-16.1.tar.xz 
+
+makedeps: libsndfile glib alsa-lib dbus xorg-libs gdbm meson ninja libtool check xmlparser
+rundeps: libsndfile glib alsa-lib dbus xorg-libs
+
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Ddatabase=gdbm     \
+      -Ddoxygen=false     \
+      -Dbluez5=disabled   &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+rm -f $PKG/etc/dbus-1/system.d/pulseaudio-system.conf
+
+)

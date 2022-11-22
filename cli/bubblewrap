@@ -1,0 +1,16 @@
+name: bubblewrap
+version: 0.6.2
+description: Bubblewrap is a setuid implementation of user namespaces, or sandboxing, that provides access to a subset of kernel user namespace features. Bubblewrap allows user owned processes to run in an isolated environment with limited access to the underlying filesystem.
+url: https://github.com/containers/bubblewrap
+source: https://github.com/containers/bubblewrap/releases/download/v0.6.2/bubblewrap-0.6.2.tar.xz
+makedeps: meson ninja
+build(
+
+mkdir build            &&
+cd    build            &&
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

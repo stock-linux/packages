@@ -1,0 +1,19 @@
+name: sed
+description: The sed package
+
+version: 4.8
+source: https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz 
+audit: https://ftp.gnu.org/gnu/sed/
+makedeps: texinfo
+rundeps: texinfo
+build(
+./configure --prefix=/usr
+
+make -j`nproc`
+make html -j`nproc`
+
+make DESTDIR=$PKG install
+
+install -d -m755           $PKG/usr/share/doc/sed-4.8
+install -m644 doc/sed.html $PKG/usr/share/doc/sed-4.8
+)

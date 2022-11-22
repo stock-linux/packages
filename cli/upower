@@ -1,0 +1,26 @@
+name: upower
+description: UPower
+version: 1.90.0
+source: https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.0/upower-v1.90.0.tar.bz2
+makedeps: libgudev libusb polkit gobject-introspection
+rundeps: libgudev libusb polkit gobject-introspection
+build(
+
+sed '/parse_version/d' -i src/linux/integration-test.py
+
+mkdir build                         &&
+cd    build                         &&
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Dgtk-doc=false     \
+      -Dman=false         \
+      ..                            &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)
+
+post(
+systemctl enable upower
+)

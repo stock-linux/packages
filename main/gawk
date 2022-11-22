@@ -1,0 +1,15 @@
+name: gawk 
+version: 5.1.1
+source: https://ftp.gnu.org/gnu/gawk/gawk-5.1.1.tar.xz
+
+build(
+
+sed -i 's/extras//' Makefile.in
+
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

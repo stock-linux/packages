@@ -1,0 +1,10 @@
+name: perl-json
+version: 4.10
+description: JSON provides a simple wrapper for JSON::XS-compatible modules with some additional features.
+source: https://www.cpan.org/authors/id/I/IS/ISHIGAKI/JSON-4.10.tar.gz
+build(
+perl Makefile.PL &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

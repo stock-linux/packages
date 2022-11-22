@@ -1,0 +1,18 @@
+name: pipewire
+version: 0.3.56
+description: The pipewire package contains a server and user-space API to handle multimedia pipelines. This includes a universal API to connect to multimedia devices, as well as sharing multimedia files between applications.
+url: https://github.com/PipeWire/pipewire/
+source: https://github.com/PipeWire/pipewire/archive/0.3.56/pipewire-0.3.56.tar.gz
+makedeps: bluez gstreamer gst-plugins-base libva pulseaudio sbc v4l-utils sdl2 meson ninja
+rundeps: bluez gstreamer gst-plugins-base libva pulseaudio sbc v4l-utils sdl2
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Dffmpeg=disabled -Dsession-managers= .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

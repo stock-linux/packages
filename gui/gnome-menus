@@ -1,0 +1,17 @@
+name: gnome-menus
+version: 3.36.0
+description: The GNOME Menus package contains an implementation of the draft Desktop Menu Specification from freedesktop.org. It also contains the GNOME menu layout configuration files and .directory files.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/gnome-menus/3.36/gnome-menus-3.36.0.tar.xz
+makedeps: glib gobject-introspection
+rundeps: glib gobject-introspection
+build(
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

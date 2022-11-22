@@ -1,0 +1,13 @@
+name: libpipeline 
+version: 1.5.5
+source: https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.5.tar.gz
+
+build(
+
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

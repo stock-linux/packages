@@ -1,0 +1,18 @@
+name: libpwquality
+version: 1.4.4
+description: The libpwquality package provides common functions for password quality checking and also scoring them based on their apparent randomness. The library also provides a function for generating random passwords with good pronounceability.
+url: https://github.com/libpwquality/libpwquality/
+source: https://github.com/libpwquality/libpwquality/releases/download/libpwquality-1.4.4/libpwquality-1.4.4.tar.bz2
+makedeps: cracklib pam
+rundeps: cracklib pam
+build(
+
+./configure --prefix=/usr                      \
+            --disable-static                   \
+            --with-securedir=/usr/lib/security \
+            --with-python-binary=python3       &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,40 @@
+name: nss
+version: 3.84
+description: The Network Security Services package is a set of libraries designed to support cross-platform development of security-enabled client and server applications. Applications built with NSS can support SSL v2 and v3, TLS, PKCS #5, PKCS #7, PKCS #11, PKCS #12, S/MIME, X.509 v3 certificates, and other security standards. This is useful for implementing SSL and S/MIME or other Internet security standards into an application.
+url: https://wiki.mozilla.org/NSS
+source: https://www.linuxfromscratch.org/patches/blfs/svn/nss-3.84-standalone-1.patch https://archive.mozilla.org/pub/security/nss/releases/NSS_3_84_RTM/src/nss-3.84.tar.gz
+makedeps: nspr sqlite
+rundeps: p11kit
+build(
+
+patch -Np1 -i $PKG/../nss-3.84-standalone-1.patch &&
+
+cd nss &&
+
+make BUILD_OPT=1                  \
+  NSPR_INCLUDE_DIR=/usr/include/nspr  \
+  USE_SYSTEM_ZLIB=1                   \
+  ZLIB_LIBS=-lz                       \
+  NSS_ENABLE_WERROR=0                 \
+  $([ $(uname -m) = x86_64 ] && echo USE_64=1) \
+  $([ -f /usr/include/sqlite3.h ] && echo NSS_USE_SYSTEM_SQLITE=1) -j`nproc`
+  
+mkdir -p $PKG/usr/lib
+mkdir $PKG/usr/include
+mkdir $PKG/usr/lib/pkgconfig
+mkdir $PKG/usr/bin
+
+cd ../dist                                                          &&
+
+install -v -m755 Linux*/lib/*.so              $PKG/usr/lib              &&
+install -v -m644 Linux*/lib/{*.chk,libcrmf.a} $PKG/usr/lib              &&
+
+install -v -m755 -d                           $PKG/usr/include/nss      &&
+cp -v -RL {public,private}/nss/*              $PKG/usr/include/nss      &&
+chmod -v 644                                  $PKG/usr/include/nss/*    &&
+
+install -v -m755 Linux*/bin/{certutil,nss-config,pk12util} $PKG/usr/bin &&
+
+install -v -m644 Linux*/lib/pkgconfig/nss.pc  $PKG/usr/lib/pkgconfig
+
+)

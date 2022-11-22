@@ -1,0 +1,14 @@
+name: efibootmgr 
+version: 18
+source: https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz 
+
+makedeps: efivar popt
+rundeps: efivar popt
+
+build(
+
+make EFIDIR=STOCKLINUX EFI_LOADER=grubx64.efi -j`proc`
+
+make DESTDIR=$PKG install EFIDIR=STOCKLINUX
+
+)

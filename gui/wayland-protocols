@@ -1,0 +1,17 @@
+name: wayland-protocols 
+version: 1.26
+source: https://wayland.freedesktop.org/releases/wayland-protocols-1.26.tar.xz 
+makedeps: wayland meson ninja
+rundeps: wayland 
+
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

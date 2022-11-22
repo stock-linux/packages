@@ -1,0 +1,14 @@
+name: libmpdclient
+version: 2.20
+description: C library to implement a MPD client
+source: https://github.com/MusicPlayerDaemon/libmpdclient/archive/refs/tags/v2.20.tar.gz
+url: https://github.com/MusicPlayerDaemon/libmpdclient/
+makedeps: meson ninja
+build(
+
+meson . output
+
+ninja -C output
+DESTDIR=$PKG ninja -C output install
+
+)

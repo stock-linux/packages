@@ -1,0 +1,21 @@
+name: xcb-util-errors 
+url: http://x.org
+description: The xcb-util package provides additional add-ons for the XCB library.
+version: 1.0.1
+source: https://xorg.freedesktop.org/archive/individual/lib/xcb-util-errors-1.0.1.tar.xz
+audit: https://xcb.freedesktop.org/dist/
+
+makedeps: libxcb xorgproto
+rundeps: libxcb
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

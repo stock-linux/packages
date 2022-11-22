@@ -1,0 +1,21 @@
+name: gst-libav
+version: 1.20.3
+description: The GStreamer Libav package contains GStreamer plugins for Libav (a fork of FFmpeg).
+url: https://gstreamer.freedesktop.org/
+source: https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.20.3.tar.xz
+makedeps: ffmpeg gst-plugins-base meson ninja
+rundeps: ffmpeg gst-plugins-base
+build(
+
+mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr       \
+       --buildtype=release \
+       -Dpackage-origin=https://www.linuxfromscratch.org/blfs/view/11.2-systemd/ \
+       -Dpackage-name="GStreamer 1.20.3 Stock Linux" &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

@@ -1,0 +1,22 @@
+name: libffi
+url: http://sourceware.org/libffi/ 
+description: This package contains a programmable high level interface.
+
+version: 3.4.2
+source: http://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz
+audit: http://github.com/libffi/libffi/releases/
+
+# libffi package has no dependencies
+
+build(
+
+./configure --prefix=/usr          \
+            --disable-static       \
+            --with-gcc-arch=native \
+            --disable-exec-static-tramp
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

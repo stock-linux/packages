@@ -1,0 +1,18 @@
+name: m4 
+url: http://www.gnu.org/software/m4/ 
+description: This package contains a macros processor
+author: René Seindal
+maintainer: Skythrew
+version: 1.4.19
+source: http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz 
+audit: http://ftp.gnu.org/gnu/m4/
+
+build(
+
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

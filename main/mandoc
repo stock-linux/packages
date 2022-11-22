@@ -1,0 +1,16 @@
+name: mandoc 
+version: 1.14.6
+source: https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz 
+
+build(
+
+./configure &&
+make mandoc -j`nproc`
+
+mkdir -p $PKG/usr/bin
+mkdir -p $PKG/usr/share/man/man1
+
+install -vm755 mandoc   $PKG/usr/bin &&
+install -vm644 mandoc.1 $PKG/usr/share/man/man1
+
+)

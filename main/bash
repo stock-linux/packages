@@ -1,0 +1,24 @@
+name: bash
+url: http://www.gnu.org/software/bash/
+description: The GNU Bourne-Again Shell
+version: 5.1.16
+source: http://ftp.gnu.org/gnu/bash/bash-5.1.16.tar.gz
+audit: http://ftp.gnu.org/gnu/bash
+author: Brian Fox
+maintainer: Skythrew
+makedeps: readline ncurses
+rundeps: readline ncurses
+build(
+./configure --prefix=/usr                      \
+            --docdir=/usr/share/doc/bash-5.1.16 \
+            --without-bash-malloc              \
+            --with-installed-readline
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+mkdir -p $PKG/bin
+mv -vf $PKG/usr/bin/bash $PKG/bin
+ln -s bash $PKG/bin/sh
+)

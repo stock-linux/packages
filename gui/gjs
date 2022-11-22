@@ -1,0 +1,18 @@
+name: gjs
+version: 1.74.1
+description: Gjs is a set of Javascript bindings for GNOME.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/gjs/1.74/gjs-1.74.1.tar.xz
+makedeps: cairo dbus gobject-introspection js102 gtk3 gtk4 meson ninja
+rundeps: cairo dbus gobject-introspection js102 gtk3 gtk4
+build(
+
+mkdir gjs-build &&
+cd    gjs-build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

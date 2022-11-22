@@ -1,0 +1,22 @@
+name: nodejs
+version: 18.12.1
+description: Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. 
+url: https://nodejs.org
+source: https://nodejs.org/dist/v18.12.1/node-v18.12.1.tar.xz
+makedeps: which c-ares icu libuv nghttp2
+rundeps: which c-ares icu libuv nghttp2
+build(
+sed -e '/=.*exec/a command -v python3.11 >/dev/null && exec python3.11 "$0" "$@"' \
+    -e s'/((/((3, 11), (/'  \
+    -i configure
+./configure --prefix=/usr          \
+            --shared-cares         \
+            --shared-libuv         \
+            --shared-openssl       \
+            --shared-nghttp2       \
+            --shared-zlib          \
+            --with-intl=system-icu
+            
+make DESTDIR=$PKG install &&
+ln -sf node $PKG/usr/share/doc/node-18.12.1
+)

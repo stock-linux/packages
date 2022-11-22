@@ -1,0 +1,20 @@
+name: gnome-terminal
+version: 3.46.6
+description: The GNOME Terminal package contains the terminal emulator for GNOME Desktop.
+url: https://www.gnome.org
+source: https://github.com/GNOME/gnome-terminal/archive/refs/tags/3.46.6.tar.gz
+makedeps: dconf gnome-shell pango harfbuzz gsettings-desktop-schemas itstool pcre2 vte nautilus meson ninja
+rundeps: dconf gnome-shell pango harfbuzz gsettings-desktop-schemas itstool pcre2 vte nautilus
+build(
+
+sed -i -r 's:"(/system):"/org/gnome\1:g' src/external.gschema.xml
+
+mkdir build &&
+cd   build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

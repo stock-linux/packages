@@ -1,0 +1,17 @@
+name: libgrss
+version: 0.7.0
+description: The libgrss package contains a library designed to manipulate RSS and Atom feeds.
+url: https://www.gnome.org
+source: https://www.linuxfromscratch.org/patches/blfs/11.2/libgrss-0.7.0-bugfixes-2.patch https://download.gnome.org/sources/libgrss/0.7/libgrss-0.7.0.tar.xz
+makedeps: libsoup2
+rundeps: libsoup2
+build(
+
+patch -Np1 -i $PKG/../libgrss-0.7.0-bugfixes-2.patch &&
+autoreconf -fv &&
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

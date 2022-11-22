@@ -1,0 +1,22 @@
+name: curl 
+url: https://curl.se 
+description: The curl tool and library
+
+version: 7.84.0
+source: https://curl.se/download/curl-7.84.0.tar.xz 
+
+makedeps: p11kit openssl
+rundeps: p11kit openssl
+
+build(
+
+./configure --prefix=/usr                           \
+            --disable-static                        \
+            --with-openssl                          \
+            --enable-threaded-resolver              \
+            --with-ca-path=/etc/ssl/certs &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

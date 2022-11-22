@@ -1,0 +1,19 @@
+name: twm 
+version: 1.0.12
+source: https://www.x.org/pub/individual/app/twm-1.0.12.tar.xz
+
+makedeps: xorg-server 
+rundeps: xorg-server 
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+sed -i -e '/^rcdir =/s,^\(rcdir = \).*,\1/etc/X11/app-defaults,' src/Makefile.in &&
+./configure $XORG_CONFIG &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

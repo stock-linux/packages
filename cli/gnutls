@@ -1,0 +1,19 @@
+name: gnutls 
+version: 3.7.7
+source: https://www.gnupg.org/ftp/gcrypt/gnutls/v3.7/gnutls-3.7.7.tar.xz 
+
+makedeps: nettle make-ca libunistring libtasn1 p11kit
+rundeps: nettle make-ca libunistring libtasn1 p11kit
+
+build(
+
+./configure --prefix=/usr \
+            --docdir=/usr/share/doc/gnutls-3.7.7 \
+            --disable-guile \
+            --disable-rpath \
+            --with-default-trust-store-pkcs11="pkcs11:" &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

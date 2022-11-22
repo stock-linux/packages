@@ -1,0 +1,17 @@
+name: inih
+version: 56
+description: This package is a simple .INI file parser written in C.
+url: https://github.com/benhoyt/inih/
+source: https://github.com/benhoyt/inih/archive/r56/inih-r56.tar.gz
+makedeps: meson ninja
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

@@ -1,0 +1,20 @@
+name: spdlog 
+version: 1.11.0
+description: Fast C++ logging library. 
+url: https://github.com/gabime/spdlog 
+source: https://github.com/gabime/spdlog/archive/refs/tags/v1.11.0.tar.gz 
+makedeps: ninja cmake
+build(
+mkdir -pv build
+cd build
+
+cmake .. -G Ninja \
+         -DCMAKE_BUILD_TYPE=Release \
+         -DCMAKE_INSTALL_PREFIX=/usr \
+         -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+         -DBUILD_SHARED_LIBS=1
+
+cmake --build .
+
+DESTDIR=$PKG cmake --build . --target install
+)

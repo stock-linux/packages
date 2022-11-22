@@ -1,0 +1,9 @@
+name: libmpc
+description: Complex-number arithmetic calculation librairy
+url: http://multiprecision.org/mpc
+
+version: 1.2.1
+source: http://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz
+
+makedeps: libgmp libmpfr
+makedeps: libgmp libmpfr

@@ -1,0 +1,17 @@
+name: xf86-video-vbox 
+version: 1.0.0
+source: https://gitlab.freedesktop.org/xorg/driver/xf86-video-vbox/-/archive/xf86-video-vboxvideo-1.0.0/xf86-video-vbox-xf86-video-vboxvideo-1.0.0.tar.gz
+makedeps: xorg-server libtool
+rundeps: xorg-server
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./autogen.sh $XORG_CONFIG
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

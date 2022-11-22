@@ -1,0 +1,17 @@
+name: libgusb
+version: 0.3.10
+description: The libgusb package contains the GObject wrappers for libusb-1.0 that makes it easy to do asynchronous control, bulk and interrupt transfers with proper cancellation and integration into a mainloop.
+source: https://people.freedesktop.org/~hughsient/releases/libgusb-0.3.10.tar.xz
+makedeps: libusb
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Ddocs=false .. &&
+ninja
+
+
+DESTDIR=$PKG ninja install
+
+)

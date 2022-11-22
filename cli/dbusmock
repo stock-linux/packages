@@ -1,0 +1,13 @@
+name: dbusmock
+version: 0.28.6
+description: dbusmock is a Python library useful for writing tests for software which talks to D-Bus services.
+url: https://github.com/martinpitt/python-dbusmock/
+source: https://github.com/martinpitt/python-dbusmock/releases/download/0.28.6/python-dbusmock-0.28.6.tar.gz
+makedeps: python-dbus
+rundeps: python-dbus
+build(
+
+python3 setup.py build
+python3 setup.py install --root=$PKG --optimize=1
+
+)

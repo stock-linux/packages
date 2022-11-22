@@ -1,0 +1,23 @@
+name: appstream
+version: 0.15.5
+description: Provides a standard for creating app stores across distributions
+url: https://distributions.freedesktop.org/wiki/AppStream
+source: https://www.freedesktop.org/software/appstream/releases/AppStream-0.15.5.tar.xz
+makedeps: meson ninja xmlto gobject-introspection itstool vala gperf curl libyaml librsvg libxmlb libsoup2 docbook-xml
+rundeps: xmlto gobject-introspection itstool vala gperf curl librsvg libyaml libsoup2 libxmlb
+build(
+
+mkdir build
+cd    build
+
+meson --prefix=/usr \
+      -Dstemming=false \
+      -Dqt=false  \
+      -Dvapi=true \
+      -Dapidocs=false \
+      -Dcompose=true \
+      ..
+ninja
+DESTDIR=$PKG ninja install
+
+)

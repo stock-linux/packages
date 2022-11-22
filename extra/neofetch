@@ -1,0 +1,11 @@
+name: neofetch
+version: 1.0.0
+description: Neofetch is a simple tool to show basic informations about the current running distro
+source: https://github.com/stock-linux/hyfetch/archive/refs/tags/v1.0.0.tar.gz
+rundeps: pciutils
+build(
+
+mkdir -p $PKG/usr/bin
+cp neofetch $PKG/usr/bin/
+
+)

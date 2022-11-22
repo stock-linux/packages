@@ -1,0 +1,9 @@
+name: libmpfr
+description: Multi-precision arithmetic librairies
+url: http://www.mpfr.org
+
+version: 4.1.0
+source: http://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz
+
+makedeps: libgmp
+makedeps: libgmp

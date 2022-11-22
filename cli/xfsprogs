@@ -1,0 +1,18 @@
+name: xfsprogs
+version: 5.19.0
+description: The xfsprogs package contains administration and debugging tools for the XFS file system.
+source: https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.19.0.tar.xz
+makedeps: inih liburcu icu
+rundeps: liburcu icu inih
+build(
+
+make DEBUG=-DNDEBUG     \
+     INSTALL_USER=root  \
+     INSTALL_GROUP=root -j`nproc`
+     
+make DESTDIR=$PKG PKG_DOC_DIR=/usr/share/doc/xfsprogs-5.19.0 install     &&
+make DESTDIR=$PKG PKG_DOC_DIR=/usr/share/doc/xfsprogs-5.19.0 install-dev &&
+
+rm -rfv $PKG/usr/lib/libhandle.{a,la}
+
+)

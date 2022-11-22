@@ -1,0 +1,21 @@
+name: seatd
+version: 0.7.0
+source: https://git.sr.ht/~kennylevinsen/seatd/archive/0.7.0.tar.gz
+
+makedeps: meson ninja
+build(
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=plain \
+          -Dexamples="disabled" \
+          -Dserver="enabled" \
+          -Dlibseat-logind="systemd" \
+          ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+install -Dm644 "sysuser.conf" $PKG/usr/lib/sysusers.d/seatd.conf
+
+)

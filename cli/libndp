@@ -1,0 +1,16 @@
+name: libndp
+version: 1.8
+description: The libndp package provides a wrapper for IPv6 Neighbor Discovery Protocol. It also provides a tool named ndptool for sending and receiving NDP messages.
+url: http://libndp.org/
+source: http://libndp.org/files/libndp-1.8.tar.gz
+build(
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static     &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

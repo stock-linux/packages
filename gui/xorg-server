@@ -1,0 +1,21 @@
+name: xorg-server 
+version: 21.1.4
+source: https://www.x.org/pub/individual/xserver/xorg-server-21.1.4.tar.xz
+
+makedeps: libxcvt pixman xorg-fonts xkeyboardconfig libepoxy libtirpc meson ninja libxdmcp
+rundeps: libxcvt pixman xorg-fonts xkeyboardconfig libepoxy libtirpc libxdmcp
+
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr \
+      --localstatedir=/var  \
+      -Dsuid_wrapper=true   \
+      -Dxkb_output_dir=/var/lib/xkb &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

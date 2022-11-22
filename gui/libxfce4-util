@@ -1,0 +1,15 @@
+name: libxfce4-util
+version: 4.16.0
+description: The libxfce4util package is a basic utility library for the Xfce desktop environment.
+url: https://www.xfce.org/
+source: https://archive.xfce.org/src/xfce/libxfce4util/4.16/libxfce4util-4.16.0.tar.bz2
+makedeps: glib gobject-introspection vala intltool
+rundeps: glib gobject-introspection vala
+build(
+
+./configure --prefix=/usr &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

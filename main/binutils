@@ -1,0 +1,23 @@
+name: binutils
+url: http://www.gnu.org/software/binutils
+description: linker, assembler and other tools to help compilation
+
+version: 2.38
+source: http://ftp.gnu.org/gnu/binutils/binutils-2.38.tar.xz
+audit: http://ftp.gnu.org/gnu/binutils/
+makedeps: flex
+rundeps: flex
+build(
+sed -e '/R_386_TLS_LE /i \ || (TYPE) == R_386_TLS_IE \\' -i ./bfd/elfxx-x86.h
+
+mkdir build && cd build
+
+../configure --prefix=/usr --disable-gold --disable-nls --disable-werror --enable-ld=default --enable-plugins --enable-shared --with-system-zlib --enable-multilib --enable-64-bit-bfd
+
+make tooldir=/usr -j`nproc`
+make tooldir=/usr DESTDIR=$PKG install
+
+rm -fv $PKG/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.a
+rm $PKG/usr/lib/libbfd.la
+
+) 

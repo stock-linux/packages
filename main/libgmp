@@ -1,0 +1,20 @@
+name: libgmp
+description: Precision arithmetic library
+url: http://gmplib.org
+
+version: 6.2.1
+source: http://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz
+
+audit: http://ftp.gnu.org/gnu/gmp
+
+# GMP has no dependencies
+
+build(
+
+./configure --prefix=/usr --enable-cxx --disable-static --docdir=/usr/share/doc/gmp-6.2.1
+
+make
+
+make DESTDIR=$PKG install
+
+)

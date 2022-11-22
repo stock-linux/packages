@@ -1,0 +1,19 @@
+name: waybar
+description: Highly customizable Wayland bar for Sway and Wlroots based compositors.
+version: 0.9.15
+url: https://github.com/Alexays/Waybar
+source: https://github.com/Alexays/Waybar/archive/refs/tags/0.9.15.tar.gz
+makedeps: gtkmm jsoncpp libsigc++ fmt wayland chrono-date spdlog gtk3 glib pulseaudio libnl libappindicator-gtk3 libmpdclient libevdev libxkbcommon upower
+rundeps: gtkmm jsoncpp libsigc++ fmt wayland chrono-date spdlog gtk3 glib pulseaudio libnl libappindicator-gtk3 libmpdclient libevdev libxkbcommon upower
+build(
+
+mkdir build
+cd build
+
+sed -i 's/zext_workspace_handle_v1_activate(workspace_handle_);/const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());/g' ../src/modules/wlr/workspace_manager.cpp
+meson -Dprefix=/usr -Dexperimental=true ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

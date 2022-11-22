@@ -1,0 +1,22 @@
+name: libcairomm-1.0
+version: 1.14.4
+description: The libcairomm-1.0 package provides a C++ interface to Cairo. 
+url: https://www.cairographics.org/
+source: https://www.cairographics.org/releases/cairomm-1.14.4.tar.xz
+makedeps: cairo libsigc++ meson ninja
+rundeps: cairo libsigc++
+build(
+
+mkdir bld &&
+cd    bld &&
+
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Dbuild-tests=false  \
+      -Dboost-shared=true \
+      ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

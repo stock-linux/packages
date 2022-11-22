@@ -1,0 +1,21 @@
+name: xcb-util-wm 
+url: http://x.org
+description: The xcb-util package provides additional add-ons for the XCB library.
+version: 0.4.1
+source: https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.1.tar.bz2
+audit: https://xcb.freedesktop.org/dist/
+
+makedeps: libxcb
+rundeps: libxcb
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

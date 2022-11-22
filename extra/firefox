@@ -1,0 +1,19 @@
+name: firefox
+version: 106.0.5 
+source: https://download-installer.cdn.mozilla.net/pub/firefox/releases/106.0.5/linux-x86_64/fr/firefox-106.0.5.tar.bz2 
+makedeps: wget
+rundeps: glibc gtk3 dbus dbus-glib alsa-lib
+
+build(
+
+mkdir -p $PKG/opt/firefox
+mv * $PKG/opt/firefox/
+
+mkdir -p $PKG/usr/bin
+ln -s /opt/firefox/firefox $PKG/usr/bin/firefox
+
+mkdir -p $PKG/usr/share/applications
+
+wget --no-check-certificate https://raw.githubusercontent.com/mozilla/sumo-kb/main/install-firefox-linux/firefox.desktop -P $PKG/usr/share/applications
+
+)

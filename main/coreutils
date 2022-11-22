@@ -1,0 +1,23 @@
+name: coreutils 
+version: 9.1
+source: https://www.linuxfromscratch.org/patches/lfs/11.2/coreutils-9.1-i18n-1.patch https://ftp.gnu.org/gnu/coreutils/coreutils-9.1.tar.xz 
+makedeps: autoconf automake gettext libcap
+rundeps: autoconf automake gettext libcap
+build(
+patch -Np1 -i $PKG/../coreutils-9.1-i18n-1.patch
+
+autoreconf -fiv
+FORCE_UNSAFE_CONFIGURE=1 ./configure \
+            --prefix=/usr            \
+            --enable-no-install-program=kill,uptime
+            
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+mkdir -p $PKG/usr/sbin/
+mv -v $PKG/usr/bin/chroot $PKG/usr/sbin/
+mkdir -p $PKG/usr/share/man/man8
+mv -v $PKG/usr/share/man/man1/chroot.1 $PKG/usr/share/man/man8/chroot.8
+sed -i 's/"1"/"8"/' $PKG/usr/share/man/man8/chroot.8
+)

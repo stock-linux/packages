@@ -1,0 +1,24 @@
+name: alsa-utils
+version: 1.2.8
+description: The ALSA Utilities package contains various utilities which are useful for controlling your sound card.
+url: https://www.alsa-project.org
+source: https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.8.tar.bz2
+makedeps: alsa-lib
+rundeps: alsa-lib
+build(
+
+./configure --disable-alsaconf \
+            --disable-bat   \
+            --disable-xmlto \
+            --with-curses=ncursesw &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)
+
+post(
+
+alsactl -L store
+
+)

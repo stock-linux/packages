@@ -1,0 +1,10 @@
+name: jinja2 
+version: 3.0.3
+source: https://files.pythonhosted.org/packages/source/J/Jinja2/Jinja2-3.0.3.tar.gz 
+makedeps: python3 markupsafe
+rundeps: python3 markupsafe
+build(
+python3 setup.py build
+
+python3 setup.py install --root="$PKG" --optimize=1
+)

@@ -1,0 +1,45 @@
+name: squirrel 
+url: https://github.com/stock-linux/squirrel
+description: The squirrel package manager
+
+version: 1.0.2
+source: https://github.com/stock-linux/squirrel/tarball/1.0.2
+makedeps: python3
+rundeps: python3
+
+build(
+
+pip3 install docopt --root=$PKG
+pip3 install requests --root=$PKG
+pip3 install pyaml --root=$PKG
+pip3 install packaging --root=$PKG
+
+mkdir -p $PKG/usr/lib/squirrel
+
+cp -r * $PKG/usr/lib/squirrel
+
+mkdir -p $PKG/usr/bin/
+echo -e "#!/bin/bash\npython3 /usr/lib/squirrel/main.py \$@" > $PKG/usr/bin/squirrel
+chmod +x $PKG/usr/bin/squirrel
+
+mkdir -p $PKG/etc/squirrel
+echo "main http://stocklinux.hopto.org:8080/main/main" > $PKG/etc/squirrel/branches
+echo "gui http://stocklinux.hopto.org:8080/main/gui" > $PKG/etc/squirrel/branches
+echo "extra http://stocklinux.hopto.org:8080/main/extra" > $PKG/etc/squirrel/branches
+echo "cli http://stocklinux.hopto.org:8080/main/cli" > $PKG/etc/squirrel/branches
+
+
+mkdir -p $PKG/var/squirrel/repos/local
+mkdir -p $PKG/var/squirrel/repos/dist
+touch $PKG/var/squirrel/repos/local/INDEX
+
+)
+
+post(
+
+pip3 install docopt
+pip3 install requests
+pip3 install pyaml
+pip3 install packaging
+
+)

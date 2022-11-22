@@ -1,0 +1,65 @@
+name: networkmanager
+version: 1.38.4
+description: NetworkManager is a set of co-operative tools that make networking simple and straightforward. Whether you use WiFi, wired, 3G, or Bluetooth, NetworkManager allows you to quickly move from one network to another: Once a network has been configured and joined once, it can be detected and re-joined automatically the next time it's available.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/NetworkManager/1.38/NetworkManager-1.38.4.tar.xz
+makedeps: jansson libndp curl dhclient gobject-introspection iptables newt gnutls polkit python-gobject systemd upower vala wpasupplicant meson ninja
+rundeps: jansson libndp curl dhclient gobject-introspection iptables newt gnutls polkit python-gobject systemd upower vala wpasupplicant
+build(
+
+grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
+
+mkdir build &&
+cd    build    &&
+
+CXXFLAGS+="-O2 -fPIC"            \
+meson --prefix=/usr              \
+      --buildtype=release        \
+      -Dlibaudit=no              \
+      -Dlibpsl=false             \
+      -Dnmtui=true               \
+      -Dovs=false                \
+      -Dppp=false                \
+      -Dselinux=false            \
+      -Dcrypto=gnutls		 \
+      -Dqt=false                 \
+      -Dsession_tracking=systemd \
+      -Dmodem_manager=false      \
+      .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+mkdir -p $PKG/etc/NetworkManager
+cat >> $PKG/etc/NetworkManager/NetworkManager.conf << "EOF"
+[main]
+plugins=keyfile
+EOF
+
+mkdir $PKG/etc/NetworkManager/conf.d
+
+cat > $PKG/etc/NetworkManager/conf.d/polkit.conf << "EOF"
+[main]
+auth-polkit=true
+EOF
+
+cat > $PKG/etc/NetworkManager/conf.d/dhcp.conf << "EOF"
+[main]
+dhcp=dhclient
+EOF
+
+cat > $PKG/etc/NetworkManager/conf.d/no-dns-update.conf << "EOF"
+[main]
+dns=none
+EOF
+
+mv -v $PKG/usr/share/doc/NetworkManager{,-1.38.4}
+
+)
+
+post(
+
+systemctl enable NetworkManager
+systemctl disable NetworkManager-wait-online
+
+)

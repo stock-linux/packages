@@ -1,0 +1,19 @@
+name: expat
+url: http://libexpat.github.io/
+description: This package contains a flux-oriented C library to parse XML
+
+version: 2.4.8
+source: https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.xz
+audit: http://prdownloads.sourceforge.net/expat/
+
+build(
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/expat-2.4.8
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

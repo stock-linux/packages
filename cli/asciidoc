@@ -1,0 +1,12 @@
+name: asciidoc
+version: 10.2.0
+description: The Asciidoc package is a text document format for writing notes, documentation, articles, books, ebooks, slideshows, web pages, man pages and blogs. AsciiDoc files can be translated to many formats including HTML, PDF, EPUB, and man page.
+url: https://pypi.org/project/asciidoc/
+source: https://files.pythonhosted.org/packages/source/a/asciidoc/asciidoc-10.2.0.tar.gz
+build(
+
+python3 setup.py build
+
+python3 setup.py install --root=$PKG --optimize=1
+
+)

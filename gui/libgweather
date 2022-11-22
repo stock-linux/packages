@@ -1,0 +1,18 @@
+name: libgweather
+version: 4.2.0
+description: The libgweather package is a library used to access weather information from online services for numerous locations.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/libgweather-4.2.0.tar.xz
+makedeps: geocode-glib-2.0 gtk3 libsoup3 gobject-introspection libxml2 vala meson ninja
+rundeps: geocode-glib-2.0 gtk3 libsoup3 gobject-introspection libxml2 vala
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Dsoup2=false -Dgtk_doc=false .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

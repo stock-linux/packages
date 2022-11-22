@@ -1,0 +1,22 @@
+name: zlib 
+url: http://www.zlib.net/ 
+description: Zlib package contains compression and decompression routines used by some softwares.
+author: Jean-loup Gailly and Mark Adler
+maintainer: Skythrew
+version: 1.2.13
+source: http://zlib.net/zlib-1.2.13.tar.xz
+audit: http://github.com/madler/zlib/tags
+
+# Zlib package has no dependencies
+
+build(
+
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+rm -fv $PKG/usr/lib/libz.a
+
+)

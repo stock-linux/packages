@@ -1,0 +1,10 @@
+name: otf-font-awesome
+version: 6.2.0
+description: Iconic font designed for Bootstrap
+source: https://github.com/FortAwesome/Font-Awesome/archive/6.2.0.tar.gz
+url: https://fontawesome.com/
+build(
+install -Dm644 LICENSE.txt "$PKG/usr/share/licenses/$pkgname/LICENSE.txt"
+install -d "$PKG/usr/share/fonts/OTF"
+install -m644 ./otfs/*.otf "$PKG/usr/share/fonts/OTF"
+)

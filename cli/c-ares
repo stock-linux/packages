@@ -1,0 +1,15 @@
+name: c-ares
+version: 1.18.1
+description: c-ares is a C library for asynchronous DNS requests.
+source: https://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz
+url: https://c-ares.haxx.se/
+makedeps: cmake
+build(
+mkdir build &&
+cd    build &&
+
+cmake  -DCMAKE_INSTALL_PREFIX=/usr .. &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

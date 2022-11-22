@@ -1,0 +1,12 @@
+name: cbindgen
+version: 0.24.3
+source: https://github.com/eqrion/cbindgen/archive/v0.24.3/cbindgen-0.24.3.tar.gz
+makedeps: rustc
+rundeps: rustc
+build(
+
+cargo build --release
+mkdir -p $PKG/usr/bin
+install -Dm755 target/release/cbindgen $PKG/usr/bin/
+
+)

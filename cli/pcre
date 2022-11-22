@@ -1,0 +1,20 @@
+name: pcre 
+version: 8.45
+source: https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2 
+
+build(
+
+./configure --prefix=/usr                     \
+            --docdir=/usr/share/doc/pcre-8.45 \
+            --enable-unicode-properties       \
+            --enable-pcre16                   \
+            --enable-pcre32                   \
+            --enable-pcregrep-libz            \
+            --enable-pcregrep-libbz2          \
+            --enable-pcretest-libreadline     \
+            --disable-static                 &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

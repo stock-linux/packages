@@ -1,0 +1,20 @@
+name: nghttp2 
+url: https://github.com/nghttp2 
+version: 1.50.0 
+source: https://github.com/nghttp2/nghttp2/releases/download/v1.50.0/nghttp2-1.50.0.tar.xz 
+audit: https://github.com/nghttp2/nghttp2/releases/
+
+makedeps: libxml2
+rundeps: libxml2
+
+build(
+
+./configure --prefix=/usr     \
+            --disable-static  \
+            --enable-lib-only \
+            --docdir=/usr/share/doc/nghttp2-1.50.0 &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

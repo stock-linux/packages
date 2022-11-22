@@ -1,0 +1,15 @@
+name: texinfo 
+description: The texinfo package
+
+version: 6.8
+source: https://ftp.gnu.org/gnu/texinfo/texinfo-6.8.tar.xz
+audit: https://ftp.gnu.org/gnu/texinfo/
+makedeps: perl
+rundeps: perl
+build(
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

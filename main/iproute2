@@ -1,0 +1,16 @@
+name: iproute2 
+version: 5.16.0
+source: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.16.0.tar.xz 
+
+makedeps: libcap bison flex
+rundeps: libcap bison flex
+
+build(
+
+sed -i /ARPD/d Makefile
+rm -fv man/man8/arpd.8
+
+make -j`nproc`
+
+make SBINDIR=/usr/sbin DESTDIR=$PKG install
+)

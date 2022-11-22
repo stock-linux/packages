@@ -1,0 +1,15 @@
+name: libgee
+version: 0.20.6
+description: The libgee package is a collection library providing GObject based interfaces and classes for commonly used data structures.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/libgee-0.20.6.tar.xz
+makedeps: glib gobject-introspection vala
+rundeps: glib gobject-introspection vala
+build(
+
+./configure --prefix=/usr &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

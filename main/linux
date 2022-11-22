@@ -1,0 +1,24 @@
+name: linux 
+url: http://kernel.org
+description: The Linux Kernel
+
+version: 6.0.3
+source: http://stocklinux.hopto.org:8080/sources/linux-6.0.3.tar.xz
+
+makedeps: bison flex perl libgmp libmpc libelf diffutils cpio bc
+rundeps: kmod
+
+build(
+make menuconfig
+
+make -j`nproc`
+make INSTALL_MOD_PATH=$PKG INSTALL_MOD_STRIP=1 modules_install
+
+mkdir -p $PKG/boot
+
+cp -iv arch/x86/boot/bzImage $PKG/boot/vmlinuz-6.0.3-stocklinux
+
+cp -iv System.map $PKG/boot/System.map-6.0.3
+
+cp -iv .config $PKG/boot/config-6.0.3
+)

@@ -1,0 +1,18 @@
+name: libcloudproviders
+version: 0.3.1
+description: libcloudproviders is a DBus API that allows cloud storage sync clients to expose their services. Clients such as file managers and desktop environments can then provide integrated access to the cloud providers services.
+url: https://gitlab.gnome.org/World/libcloudproviders
+source: https://gitlab.gnome.org/World/libcloudproviders/-/archive/0.3.1/libcloudproviders-0.3.1.tar.bz2
+makedeps: glib dbus meson ninja
+rundeps: glib dbus
+build(
+
+mkdir build
+cd build
+
+meson -Dprefix=/usr -Dbuildtype=release ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

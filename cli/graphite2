@@ -1,0 +1,19 @@
+name: graphite2 
+version: 1.3.14
+source: https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz 
+
+makedeps: cmake 
+
+build(
+
+sed -i '/cmptest/d' tests/CMakeLists.txt
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,13 @@
+name: libuv 
+version: 1.44.2
+source: https://dist.libuv.org/dist/v1.44.2/libuv-v1.44.2.tar.gz
+makedeps: libtool
+build(
+
+sh autogen.sh                              &&
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

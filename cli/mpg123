@@ -1,0 +1,15 @@
+name: mpg123 
+version: 1.31.1 
+source: https://downloads.sourceforge.net/mpg123/mpg123-1.31.1.tar.bz2 
+
+makedeps: alsa-lib
+rundeps: alsa-lib
+
+build(
+
+./configure --prefix=/usr &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,18 @@
+name: x265
+version: 20220819
+description: x265 package provides a library for encoding video streams into the H.265/HEVC format.
+source: https://anduin.linuxfromscratch.org/BLFS/x265/x265-20220819.tar.xz
+makedeps: cmake nasm
+build(
+
+mkdir bld &&
+cd    bld &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DGIT_ARCHETYPE=1 ../source &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+rm -vf /usr/lib/libx265.a 
+
+)

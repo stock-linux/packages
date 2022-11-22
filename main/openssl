@@ -1,0 +1,25 @@
+name: openssl 
+url: http://www.openssl.org/ 
+description: This package contains managing tools and cryptographic libraries
+
+version: 1.1.1
+source: http://www.openssl.org/source/openssl-1.1.1q.tar.gz
+audit: http://www.openssl.org/source/
+makedeps: zlib
+rundeps: zlib
+build(
+
+./config --prefix=/usr         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         shared                \
+         zlib-dynamic
+
+make -j`nproc`
+
+sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+make MANSUFFIX=ssl DESTDIR=$PKG install
+
+mv -v $PKG/usr/share/doc/openssl $PKG/usr/share/doc/openssl-1.1.1
+
+)

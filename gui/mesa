@@ -1,0 +1,35 @@
+name: mesa 
+version: 22.1.7
+source: https://mesa.freedesktop.org/archive/mesa-22.1.7.tar.xz 
+
+makedeps: xorg-libs llvm libdrm mako libva libvdpau wayland-protocols meson ninja xorgproto libtool expat vulkan-icd-loader libelf libglvnd
+rundeps: xorg-libs llvm libdrm mako libva libvdpau wayland-protocols xorgproto vulkan libelf libglvnd
+
+build(
+
+mkdir build
+cd    build
+
+
+meson --prefix=/usr                  \
+      -Dbuildtype=release            \
+      -Dgallium-drivers="nouveau,virgl,r300,r600,radeonsi,svga,swrast,iris,zink,crocus" \
+      -Dvulkan-drivers="intel,amd,swrast" \
+      -Dgallium-nine=false       \
+      -Dgallium-vdpau=true       \
+      -Dgallium-va=enabled       \
+      -Dglx=dri                  \
+      -Dosmesa=true              \
+      -Dvalgrind=false           \
+      -Dlibunwind=false          \
+      -Ddri3=enabled             \
+      -Dglvnd=true               \
+      -Dglx-direct=true          \
+      ..
+
+
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

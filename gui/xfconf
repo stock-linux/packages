@@ -1,0 +1,15 @@
+name: xfconf
+version: 4.16.0
+description: Xfconf is the configuration storage system for Xfce.
+url: https://www.xfce.org//
+source: https://archive.xfce.org/src/xfce/xfconf/4.16/xfconf-4.16.0.tar.bz2
+makedeps: libxfce4-util
+rundeps: libxfce4-util
+build(
+
+./configure --prefix=/usr &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

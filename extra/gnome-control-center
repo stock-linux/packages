@@ -1,0 +1,18 @@
+name: gnome-control-center
+version: 43.1
+description: The GNOME Control Center package contains the GNOME settings manager.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/gnome-control-center-43.1.tar.xz
+makedeps: accountsservice colord-gtk gnome-online-accounts gnome-settings-daemon gsound libgtop libpwquality krb5 shared-mime-info udisks cups samba gnome-bluetooth ibus libhandy modemmanager libnma meson ninja
+rundeps: accountsservice colord-gtk gnome-online-accounts gnome-settings-daemon gsound libgtop libpwquality krb5 shared-mime-info udisks cups samba gnome-bluetooth ibus libhandy modemmanager libnma
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

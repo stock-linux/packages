@@ -1,0 +1,21 @@
+name: tracker
+version: 3.3.3
+description: Tracker is the file indexing and search provider used in the GNOME desktop environment.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/tracker/3.3/tracker-3.3.3.tar.xz
+makedeps: json-glib libseccomp vala gobject-introspection icu libsoup2 sqlite meson ninja dbus python-gobject
+rundeps: json-glib libseccomp vala gobject-introspection icu libsoup2 sqlite dbus python-gobject
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Ddocs=false        \
+      -Dman=false -Dsoup=soup2 ..      &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

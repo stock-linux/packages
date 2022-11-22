@@ -1,0 +1,14 @@
+name: grep 
+
+version: 3.7
+source: https://ftp.gnu.org/gnu/grep/grep-3.7.tar.xz
+audit: https://ftp.gnu.org/gnu/grep/
+makedeps: perl
+rundeps: perl
+build(
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

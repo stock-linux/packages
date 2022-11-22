@@ -1,0 +1,13 @@
+name: make 
+version: 4.3
+source: https://ftp.gnu.org/gnu/make/make-4.3.tar.gz 
+
+build(
+
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

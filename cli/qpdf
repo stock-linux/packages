@@ -1,0 +1,22 @@
+name: qpdf
+version: 11.1.1
+description: The Qpdf package contains command-line programs and a library that does structural, content-preserving transformations on PDF files.
+url: https://github.com/qpdf/qpdf/
+source: https://github.com/qpdf/qpdf/releases/download/v11.1.1/qpdf-11.1.1.tar.gz
+makedeps: libjpeg-turbo cmake
+rundeps: libjpeg-turbo
+build(
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DBUILD_STATIC_LIBS=OFF     \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/qpdf-11.1.1 \
+      .. &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

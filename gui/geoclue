@@ -1,0 +1,18 @@
+name: geoclue
+version: 2.6.0
+description: GeoClue is a modular geoinformation service built on top of the D-Bus messaging system. The goal of the GeoClue project is to make creating location-aware applications as simple as possible.
+url: https://gitlab.freedesktop.org/geoclue/geoclue
+source: https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/2.6.0/geoclue-2.6.0.tar.bz2
+makedeps: json-glib libsoup2 modemmanager vala avahi meson ninja
+rundeps: json-glib libsoup2 modemmanager vala avahi
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Dgtk-doc=false -Ddemo-agent=false .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

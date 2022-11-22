@@ -1,0 +1,18 @@
+name: zenity
+version: 3.42.1
+description: Zenity is a rewrite of gdialog, the GNOME port of dialog which allows you to display GTK+ dialog boxes from the command line and shell scripts.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/zenity/3.42/zenity-3.42.1.tar.xz
+makedeps: gtk3 itstool libnotify libxslt meson ninja
+rundeps: gtk3 itstool libnotify libxslt
+build(
+
+mkdir build &&
+cd build    &&
+
+meson --prefix=/usr --buildtype=release -Dlibnotify=true .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

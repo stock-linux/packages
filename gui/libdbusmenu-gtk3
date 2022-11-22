@@ -1,0 +1,20 @@
+name: libdbusmenu-gtk3
+version: 16.04.0
+description: Library for passing menus over DBus
+source: https://launchpad.net/libdbusmenu/16.04/16.04.0/+download/libdbusmenu-16.04.0.tar.gz 
+makedeps: gnome-common gobject-introspection gtk3 intltool dbus vala
+rundeps: gobject-introspection gtk3 intltool dbus vala
+build(
+sed -i 's/-Werror//' libdbusmenu-*/Makefile.{am,in}
+export HAVE_VALGRIND_FALSE='#'
+
+./configure --prefix=/usr \
+      --sysconfdir=/etc \
+      --localstatedir=/var \
+      --disable-{dumper,static,tests,docs} \
+      --with-gtk=3
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

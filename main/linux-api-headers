@@ -1,0 +1,20 @@
+name: linux-api-headers
+url: http://kernel.org
+description: This package contains API headers of the Linux kernel
+version: 6.0.2
+source: http://www.kernel.org/pub/linux/kernel/v6.x/linux-6.0.2.tar.xz
+audit: http://kernel.org
+
+# linux-api-headers package has no dependencies
+
+build(
+
+make mrproper
+
+make headers -j`nproc`
+find usr/include -name '.*' -delete
+rm usr/include/Makefile
+mkdir -p $PKG/usr
+cp -rv usr/include $PKG/usr
+
+)

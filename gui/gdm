@@ -1,0 +1,28 @@
+name: gdm
+version: 43.0
+description: GDM is a system service that is responsible for providing graphical logins and managing local and remote displays.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/gdm-43.0.tar.xz
+makedeps: accountsservice gtk3 iso-codes itstool libcanberra pam dconf meson ninja
+rundeps: accountsservice gtk3 iso-codes itstool libcanberra pam gnome-session dconf gnome-shell systemd
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr               \
+      --buildtype=release         \
+      -Ddefault-pam-config=lfs    \
+      -Dgdm-xsession=true ..      &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)
+
+post(
+groupadd -g 21 gdm &&
+useradd -c "GDM Daemon Owner" -d /var/lib/gdm -u 21 \
+        -g gdm -s /bin/false gdm &&
+passwd -ql gdm
+)

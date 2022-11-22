@@ -1,0 +1,29 @@
+name: pciutils
+version: 3.8.0
+description: The PCI Utils package contains a set of programs for listing PCI devices, inspecting their status and setting their configuration registers.
+url: https://www.kernel.org
+source: https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.8.0.tar.xz
+rundeps: wget which
+build(
+
+make PREFIX=/usr                \
+     SHAREDIR=/usr/share/hwdata \
+     SHARED=yes -j`nproc`
+     
+make DESTDIR=$PKG PREFIX=/usr                \
+     SHAREDIR=/usr/share/hwdata \
+     SHARED=yes                 \
+     install install-lib        &&
+
+chmod -v 755 $PKG/usr/lib/libpci.so
+
+mkdir -p $PKG/etc/cron.weekly
+
+cat > $PKG/etc/cron.weekly/update-pciids.sh << "EOF" &&
+#!/bin/bash
+/usr/sbin/update-pciids
+EOF
+
+chmod 754 $PKG/etc/cron.weekly/update-pciids.sh
+
+)

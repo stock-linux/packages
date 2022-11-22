@@ -1,0 +1,17 @@
+name: libsigc++-2.0
+version: 2.10.8
+description: libsigc++ implements a typesafe callback system for standard C++. It allows you to define signals and to connect those signals to any callback function, either global or a member function, regardless of whether it is static or virtual.
+url: https://github.com/libsigcplusplus/libsigcplusplus
+source: https://download.gnome.org/sources/libsigc++/2.10/libsigc++-2.10.8.tar.xz 
+makedeps: meson ninja
+build(
+
+mkdir bld &&
+cd    bld &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

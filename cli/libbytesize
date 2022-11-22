@@ -1,0 +1,15 @@
+name: libbytesize
+version: 2.7
+description: The libbytesize package is a library which facilitates the common operations with sizes in bytes.
+url: https://github.com/storaged-project/libbytesize/
+source: https://github.com/storaged-project/libbytesize/releases/download/2.7/libbytesize-2.7.tar.gz
+makedeps: pcre2 python-pygments
+rundeps: pcre2 python-pygments
+build(
+
+./configure --prefix=/usr &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

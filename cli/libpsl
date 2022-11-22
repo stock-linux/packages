@@ -1,0 +1,18 @@
+name: libpsl 
+url: https://github.com/rockdaboot/libpsl
+version: 0.21.1
+source: https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz 
+audit: https://github.com/rockdaboot/libpsl/releases/
+
+makedeps: libidn2 
+rundeps: libidn2 
+
+build(
+
+sed -i 's/env python/&3/' src/psl-make-dafsa &&
+./configure --prefix=/usr --disable-static       &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

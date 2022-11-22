@@ -1,0 +1,17 @@
+name: thunar
+version: 4.16.11
+description: Thunar is the Xfce file manager, a GTK+ 3 GUI to organise the files on your computer.
+url: https://www.xfce.org/
+source: https://archive.xfce.org/src/xfce/thunar/4.16/thunar-4.16.11.tar.bz2
+makedeps: exo libgudev libnotify pcre
+rundeps: exo libgudev libnotify pcre hicolor-icon-theme
+build(
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/thunar-4.16.11 &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

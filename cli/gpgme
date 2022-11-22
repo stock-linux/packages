@@ -1,0 +1,20 @@
+name: gpgme
+version: 1.18.0
+description: The GPGME package is a C library that allows cryptography support to be added to a program. It is designed to make access to public key crypto engines like GnuPG or GpgSM easier for applications. GPGME provides a high-level crypto API for encryption, decryption, signing, signature verification and key management.
+url: https://www.gnupg.org
+source: https://www.linuxfromscratch.org/patches/blfs/svn/gpgme-1.18.0-gpg_error_1_46-1.patch https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.18.0.tar.bz2
+makedeps: libassuan
+rundeps: libassuan
+build(
+sed -e 's/3\.9/3.11/'                    \
+    -e 's/:3/:4/'                        \
+    -i configure
+    
+patch -Np1 -i $PKG/../gpgme-1.18.0-gpg_error_1_46-1.patch
+
+./configure --prefix=/usr --disable-gpg-test &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

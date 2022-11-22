@@ -1,0 +1,26 @@
+name: dbus 
+version: 1.12.20
+source: https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz 
+
+makedeps: systemd expat
+rundeps: systemd expat
+
+build(
+
+./configure --prefix=/usr                        \
+            --sysconfdir=/etc                    \
+            --localstatedir=/var                 \
+            --disable-static                     \
+            --disable-doxygen-docs               \
+            --disable-xml-docs                   \
+            --docdir=/usr/share/doc/dbus-1.12.20 \
+            --with-console-auth-dir=/run/console \
+            --with-system-pid-file=/run/dbus/pid \
+            --with-system-socket=/run/dbus/system_bus_socket
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+ln -sv /etc/machine-id $PKG/var/lib/dbus
+
+)

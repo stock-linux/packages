@@ -1,0 +1,36 @@
+name: webkitgtk-5.0
+version: 2.38.2
+description: The WebKitGTK package is a port of the portable web rendering engine WebKit to the GTK+ 3 and GTK 4 platforms.
+url: https://webkitgtk.org
+source: https://webkitgtk.org/releases/webkitgtk-2.38.2.tar.xz
+makedeps: cairo cmake gst-plugins-base gst-plugins-bad gtk4 icu little-cms libgudev libsecret libsoup3 libtasn1 libwebp mesa openjpeg ruby sqlite which wpebackend-fdo enchant geoclue gobject-introspection libnotify libmanette ninja
+rundeps: cairo gst-plugins-base gst-plugins-bad gtk4 icu little-cms libgudev libsecret libsoup3 libtasn1 libwebp mesa openjpeg ruby sqlite which wpebackend-fdo enchant geoclue gobject-introspection libnotify libmanette
+build(
+
+mkdir -vp build &&
+cd        build &&
+
+# Produce minimal debug info: 4.3 GB of debug data makes the
+# build too slow and is too much to package for debuginfod
+
+CFLAGS+=' -g1'
+CXXFLAGS+=' -g1'
+
+CFLAGS+=' -g1' CXXFLAGS+=' -g1' cmake -DPORT=GTK \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_INSTALL_LIBEXECDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DUSE_GTK4=ON \
+      -DENABLE_DOCUMENTATION=OFF \
+      -DUSE_LIBHYPHEN=OFF \
+      -DUSE_WOFF2=OFF \
+      -DENABLE_BUBBLEWRAP_SANDBOX=OFF \
+      -DENABLE_MINIBROWSER=ON \
+      -Wno-dev -G Ninja ..        &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

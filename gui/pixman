@@ -1,0 +1,15 @@
+name: pixman
+version: 0.40.0
+source: https://www.cairographics.org/releases/pixman-0.40.0.tar.gz 
+makedeps: meson ninja
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

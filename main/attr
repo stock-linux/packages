@@ -1,0 +1,21 @@
+name: attr 
+description: The attr package
+version: 2.5.1
+source: http://download.savannah.gnu.org/releases/attr/attr-2.5.1.tar.gz 
+audit: http://download.savannah.gnu.org/releases/attr/
+url: https://savannah.nongnu.org/projects/attr/
+author: Savannah
+maintainer: Skythrew
+
+build(
+
+./configure --prefix=/usr     \
+            --disable-static  \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/attr-2.5.1
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,42 @@
+name: xf86-video-intel 
+version: 2021.02.22
+source: https://anduin.linuxfromscratch.org/BLFS/xf86-video-intel/xf86-video-intel-20210222.tar.xz
+
+makedeps: xcb-util xorg-server automake autoconf libtool
+rundeps: xcb-util xorg-server
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./autogen.sh $XORG_CONFIG     \
+            --enable-kms-only \
+            --enable-uxa      \
+            --mandir=/usr/share/man &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+mkdir -p $PKG/usr/share/man/man1
+
+mv -v $PKG/usr/share/man/man4/intel-virtual-output.4 \
+      $PKG/usr/share/man/man1/intel-virtual-output.1 &&
+
+sed -i '/\.TH/s/4/1/' $PKG/usr/share/man/man1/intel-virtual-output.1
+
+)
+
+post(
+
+cat >> /etc/X11/xorg.conf.d/20-intel.conf << "EOF"
+Section   "Device"
+        Identifier "Intel Graphics"
+        Driver     "intel"
+        #Option     "DRI" "2"            # DRI3 is default
+        #Option     "AccelMethod"  "sna" # default
+        #Option     "AccelMethod"  "uxa" # fallback
+EndSection
+EOF
+
+)

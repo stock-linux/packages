@@ -1,0 +1,25 @@
+name: fuse
+version: 3.12.0
+description: FUSE alias "Filesystem in Userspace" is a simple interface for userspace programs to export a virtual filesystem to the Linux kernel. Fuse also aims to provide a secure method for non privileged users to create and mount their own filesystem implementations.
+url: https://github.com/libfuse/libfuse/
+source: https://github.com/libfuse/libfuse/releases/download/fuse-3.12.0/fuse-3.12.0.tar.xz
+build(
+
+sed -i '/^udev/,$ s/^/#/' util/meson.build &&
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+chmod u+s $PKG/usr/bin/fusermount3
+
+cd ..                          &&
+install -v -m755 -d $PKG/usr/share/doc/fuse-3.12.0 &&
+install -v -m644    doc/{README.NFS,kernel.txt} \
+                    $PKG/usr/share/doc/fuse-3.12.0 &&
+cp -Rv doc/html     $PKG/usr/share/doc/fuse-3.12.0
+
+)

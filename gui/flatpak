@@ -1,0 +1,25 @@
+name: flatpak
+version: 1.14.0
+description: Next generation technology for building and distributing desktop applications
+url: https://flatpak.org/
+source: http://downloads.nutyx.org/x86_64/rolling/gui-extra/flatpak/http2-check.patch https://github.com/flatpak/flatpak/releases/download/1.14.0/flatpak-1.14.0.tar.xz
+makedeps: glib libsoup2 gpgme polkit fuse libostree json-glib appstream libseccomp python-parsing meson ninja
+rundeps: glib libsoup2 gpgme polkit fuse libostree json-glib appstream libseccomp python-parsing
+build(
+
+patch -Np1 -i $PKG/../http2-check.patch
+
+./configure --prefix=/usr \
+--sysconfdir=/etc \
+--localstatedir=/var \
+--with-priv-mode=setuid \
+--with-system-helper-user=flatpak \
+--with-system-bubblewrap
+
+sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,15 @@
+name: mako 
+version: 1.2.1
+description: Implements hyperfast and lightweight templating for the Python platform.
+url: https://pypi.org/project/Mako/
+maintainer: Skythrew
+source: https://files.pythonhosted.org/packages/source/M/Mako/Mako-1.2.1.tar.gz 
+
+makedeps: python3
+rundeps: python3
+
+build(
+
+python3 setup.py install --root=$PKG --optimize=1
+
+)

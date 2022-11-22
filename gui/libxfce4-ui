@@ -1,0 +1,15 @@
+name: libxfce4-ui
+version: 4.16.1
+description: The libxfce4ui package contains GTK+ 2 widgets that are used by other Xfce applications.
+url: https://www.xfce.org
+source: https://archive.xfce.org/src/xfce/libxfce4ui/4.16/libxfce4ui-4.16.1.tar.bz2
+makedeps: gtk3 xfconf startup-notification libgudev
+rundeps: gtk3 xfconf startup-notification libgudev
+build(
+
+./configure --prefix=/usr --sysconfdir=/etc &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

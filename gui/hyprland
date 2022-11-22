@@ -1,0 +1,19 @@
+name: hyprland
+version: 0.16.0
+source: https://github.com/hyprwm/Hyprland/releases/download/v0.16.0beta/source-v0.16.0beta.tar.gz
+makedeps: pango libxkbcommon xcb-util-errors seatd libdrm cmake xorg-libs xf86-input-libinput mesa libxcb xcb-util-wm xwayland meson ninja
+rundeps: pango libxkbcommon xcb-util-errors seatd libdrm mesa libxcb xcb-util-wm
+
+build(
+
+cd "./subprojects/wlroots/" && meson build/ --prefix="/usr" --buildtype=release && ninja -C build/ && mkdir -p "${srcdir}/tmpwlr" && DESTDIR=$PKG ninja -C build/ install && cd ../../
+
+make DESTDIR=$PKG PREFIX=$PKG/usr install
+
+)
+
+post(
+
+ln -s /usr/lib/libwlroots.so /usr/lib/libwlroots.so.11032
+
+)

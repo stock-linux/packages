@@ -1,0 +1,29 @@
+name: evolution-data-server
+version: 3.46.1
+description: The Evolution Data Server package provides a unified backend for programs that work with contacts, tasks, and calendar information. It was originally developed for Evolution (hence the name), but is now used by other packages as well.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/evolution-data-server/3.46/evolution-data-server-3.46.1.tar.xz
+makedeps: cmake gcr4 libical libsecret nss sqlite gnome-online-accounts gobject-introspection gtk3 icu nspr libcanberra libgdata libgweather vala libsoup3 webkitgtk-5.0
+rundeps: gcr4 libical libsecret nss sqlite gnome-online-accounts gobject-introspection gtk3 icu libcanberra nspr libgdata libgweather libsoup3 vala webkitgtk-5.0
+build(
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr   \
+      -DSYSCONF_INSTALL_DIR=/etc    \
+      -DENABLE_VALA_BINDINGS=ON     \
+      -DENABLE_INSTALLED_TESTS=ON   \
+      -DENABLE_GOOGLE=ON            \
+      -DWITH_OPENLDAP=OFF           \
+      -DWITH_KRB5=OFF               \
+      -DENABLE_INTROSPECTION=ON     \
+      -DENABLE_GTK_DOC=OFF          \
+      -DWITH_LIBDB=OFF              \
+      -DWITH_GWEATHER4=ON           \
+      .. &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

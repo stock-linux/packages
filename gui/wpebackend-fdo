@@ -1,0 +1,17 @@
+name: wpebackend-fdo
+version: 1.12.1
+description: The wpebackend-fdo package contains the Freedesktop.org backend for WPE WebKit and the WPE renderer.
+source: https://wpewebkit.org/releases/wpebackend-fdo-1.12.1.tar.xz
+makedeps: libepoxy libwpe wayland-protocols meson ninja
+rundeps: libepoxy libwpe wayland-protocols
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release ..
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

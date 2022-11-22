@@ -1,0 +1,27 @@
+name: libva 
+version: 2.15.0
+source: https://github.com/intel/intel-vaapi-driver/releases/download/2.4.1/intel-vaapi-driver-2.4.1.tar.bz2 https://github.com/intel/libva/releases/download/2.15.0/libva-2.15.0.tar.bz2
+
+makedeps: libdrm 
+rundeps: libdrm 
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG &&
+make -j`nproc`
+
+make install
+make DESTDIR=$PKG install
+
+tar -xf $PKG/../intel-vaapi-driver-2.4.1.tar.bz2 &&
+cd intel-vaapi-driver-2.4.1
+
+./configure $XORG_CONFIG &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

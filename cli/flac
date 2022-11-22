@@ -1,0 +1,14 @@
+name: flac 
+version: 1.4.2 
+source: https://downloads.xiph.org/releases/flac/flac-1.4.2.tar.xz 
+
+build(
+
+./configure --prefix=/usr                                \
+            --disable-thorough-tests                     \
+            --docdir=/usr/share/doc/flac-1.4.2          &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

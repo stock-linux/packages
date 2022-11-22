@@ -1,0 +1,20 @@
+name: harfbuzz 
+version: 5.1.0
+source: https://github.com/harfbuzz/harfbuzz/releases/download/5.1.0/harfbuzz-5.1.0.tar.xz
+
+makedeps: glib graphite2 icu freetype meson ninja gobject-introspection
+rundeps: freetype glib graphite2 icu gobject-introspection
+
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr        \
+      --buildtype=release  \
+      -Dgraphite2=enabled  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

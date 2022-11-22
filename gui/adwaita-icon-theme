@@ -1,0 +1,13 @@
+name: adwaita-icon-theme 
+version: 43.0
+source: https://download.gnome.org/sources/adwaita-icon-theme/43/adwaita-icon-theme-43.tar.xz
+rundeps: hicolor-icon-theme
+
+build(
+
+./configure --prefix=/usr
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

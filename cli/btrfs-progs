@@ -1,0 +1,14 @@
+name: btrfs-progs
+version: 6.0.1
+description: The btrfs-progs package contains administration and debugging tools for the B-tree file system.
+source: https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v6.0.1.tar.xz
+makedeps: lzo asciidoc xmlto e2fsprogs
+rundeps: lzo e2fsprogs
+build(
+
+./configure --prefix=/usr --disable-documentation &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

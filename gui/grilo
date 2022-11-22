@@ -1,0 +1,20 @@
+name: grilo
+version: 0.3.15
+description: Grilo is a framework focused on making media discovery and browsing easy for applications and application developers.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/grilo/0.3/grilo-0.3.15.tar.xz
+makedeps: glib libxml2 gobject-introspection gtk3 libsoup3 totem-pl-parser vala meson ninja
+rundeps: glib libxml2 gobject-introspection gtk3 libsoup3 totem-pl-parser vala
+build(
+
+mkdir build &&
+cd    build    &&
+
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Denable-gtk-doc=false .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

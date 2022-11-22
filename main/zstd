@@ -1,0 +1,19 @@
+name: zstd 
+url: http://facebook.github.io/zstd/ 
+description: Zstandard is a real-time compression algorithm which provides high compression ratios.
+
+version: 1.5.2
+source: http://github.com/facebook/zstd/releases/download/v1.5.2/zstd-1.5.2.tar.gz 
+audit: http://github.com/facebook/zstd/releases/
+
+# Zstd package has no dependencies
+
+build(
+
+make prefix=/usr -j`nproc`
+
+make prefix=/usr DESTDIR=$PKG install
+
+rm -v $PKG/usr/lib/libzstd.a
+
+)

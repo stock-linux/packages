@@ -1,0 +1,13 @@
+name: python-pygments 
+version: 2.13.0
+source: https://files.pythonhosted.org/packages/source/P/Pygments/Pygments-2.13.0.tar.gz
+audit: https://files.pythonhosted.org/packages/source/P/Pygments/ 
+
+makedeps: python3
+rundeps: python3
+
+build(
+
+python3 setup.py install --root=$PKG -O1
+
+)

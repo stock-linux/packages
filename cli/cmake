@@ -1,0 +1,24 @@
+name: cmake 
+version: 3.24.2
+source: https://cmake.org/files/v3.24/cmake-3.24.2.tar.gz
+
+makedeps: libuv libarchive
+rundeps: libuv libarchive
+
+build(
+sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
+
+./bootstrap --prefix=/usr        \
+            --system-libs        \
+            --mandir=/share/man  \
+            --parallel=`nproc` \
+            --no-system-curl \
+            --no-system-nghttp2 \
+            --no-system-jsoncpp  \
+            --no-system-librhash \
+            --docdir=/share/doc/cmake-3.24.1 &&
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+)

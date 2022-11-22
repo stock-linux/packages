@@ -1,0 +1,11 @@
+name: linux-firmware 
+version: 20221012
+source: https://cdn.kernel.org/pub/linux/kernel/firmware/linux-firmware-20221012.tar.xz
+
+build(
+
+mkdir -p $PKG/lib/firmware
+
+cp -r * $PKG/lib/firmware
+
+)

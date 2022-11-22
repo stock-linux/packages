@@ -1,0 +1,19 @@
+name: vte
+version: 0.70.0
+description: The VTE package contains a termcap file implementation for terminal emulators.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/vte-0.70.0.tar.xz
+makedeps: gtk3 libxml2 pcre2 icu gnutls gobject-introspection vala meson ninja
+rundeps: gtk3 libxml2 pcre2 icu gnutls gobject-introspection vala
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release -Dfribidi=false .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+rm -v $PKG/etc/profile.d/vte.*
+
+)

@@ -1,0 +1,30 @@
+name: ibus
+version: 1.5.27
+description: ibus is an Intelligent Input Bus. It is a new input framework for the Linux OS. It provides a fully featured and user friendly input method user interface.
+url: https://github.com/ibus/ibus/
+source: https://www.unicode.org/Public/zipped/14.0.0/UCD.zip https://github.com/ibus/ibus/releases/download/1.5.27/ibus-1.5.27.tar.gz
+makedeps: dconf iso-codes vala gobject-introspection gtk3 gtk4 libnotify
+rundeps: dconf iso-codes vala gobject-introspection gtk3 gtk4 libnotify
+build(
+
+mkdir -p                $PKG/usr/share/unicode/ucd &&
+unzip -uo $PKG/../UCD.zip -d $PKG/usr/share/unicode/ucd
+
+sed -i 's@/desktop/ibus@/org/freedesktop/ibus@g' \
+    data/dconf/org.freedesktop.ibus.gschema.xml
+
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --disable-python2      \
+            --disable-gtk2	   \
+            --enable-gtk3	   \
+            --enable-gtk4 	   \
+            --disable-emoji-dict   \
+            --disable-unicode-dict &&
+rm -f tools/main.c                 &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+gzip -dfv $PKG/usr/share/man/man{{1,5}/ibus*.gz,5/00-upstream-settings.5.gz}
+
+)

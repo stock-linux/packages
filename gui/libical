@@ -1,0 +1,24 @@
+name: libical
+version: 3.0.14
+description: The libical package contains an implementation of the iCalendar protocols and data formats.
+url: https://github.com/libical/libical/
+source: https://github.com/libical/libical/releases/download/v3.0.14/libical-3.0.14.tar.gz
+makedeps: cmake gobject-introspection vala
+rundeps: gobject-introspection vala
+build(
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr  \
+      -DCMAKE_BUILD_TYPE=Release   \
+      -DSHARED_ONLY=yes            \
+      -DICAL_BUILD_DOCS=false      \
+      -DGOBJECT_INTROSPECTION=true \
+      -DICAL_GLIB_VAPI=true        \
+      .. &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

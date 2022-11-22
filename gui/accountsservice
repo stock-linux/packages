@@ -1,0 +1,33 @@
+name: accountsservice
+version: 22.08.8
+description: The AccountsService package provides a set of D-Bus interfaces for querying and manipulating user account information and an implementation of those interfaces based on the usermod(8), useradd(8) and userdel(8) commands.
+source: https://www.freedesktop.org/software/accountsservice/accountsservice-22.08.8.tar.xz
+makedeps: polkit gobject-introspection systemd meson ninja
+rundeps: polkit gobject-introspection systemd
+build(
+
+mkdir build &&
+cd build &&
+
+meson --prefix=/usr       \
+      --buildtype=release \
+      -Dadmin_group=adm   \
+      .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+mkdir -p $PKG/etc/polkit-1/rules.d/
+cat > $PKG/etc/polkit-1/rules.d/40-adm.rules << "EOF"
+polkit.addAdminRule(function(action, subject) {
+   return ["unix-group:adm"];
+   });
+EOF
+
+)
+
+post(
+
+systemctl enable accounts-daemon
+
+)

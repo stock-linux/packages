@@ -1,0 +1,14 @@
+name: cryptsetup
+version: 2.4.3
+description: cryptsetup is used to set up transparent encryption of block devices using the kernel crypto API.
+source: https://www.kernel.org/pub/linux/utils/cryptsetup/v2.4/cryptsetup-2.4.3.tar.xz
+makedeps: json-c lvm2 popt
+rundeps: json-c lvm2 popt
+build(
+
+./configure --prefix=/usr --disable-ssh-token &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

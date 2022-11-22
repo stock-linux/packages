@@ -1,0 +1,15 @@
+name: libexif
+version: 0.6.24
+description: The libexif package contains a library for parsing, editing, and saving EXIF data. Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. All EXIF tags described in EXIF standard 2.1 are supported.
+url: https://github.com/libexif/libexif/
+source: https://github.com/libexif/libexif/releases/download/v0.6.24/libexif-0.6.24.tar.bz2
+build(
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --with-doc-dir=/usr/share/doc/libexif-0.6.24 &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

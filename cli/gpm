@@ -1,0 +1,17 @@
+name: gpm
+version: 1.20.7
+description: The GPM package contains a mouse server for the console and xterm. It not only provides cut and paste support generally, but its library component is used by various software such as Links to provide mouse support to the application. It is useful on desktops, especially if following (Beyond) Linux From Scratch instructions; it's often much easier (and less error prone) to cut and paste between two console windows than to type everything by hand!
+source: https://github.com/telmich/gpm/tarball/master
+makedeps: texinfo
+build(
+./autogen.sh                                     &&
+./configure --prefix=/usr --sysconfdir=/etc --infodir=/usr/share/info     &&
+make -j1
+
+make DESTDIR=$PKG install
+rm -fv $PKG/usr/lib/libgpm.a                              &&
+ln -sfv libgpm.so.2.1.0 $PKG/usr/lib/libgpm.so            &&
+mkdir -p $PKG/etc
+install -v -m644 conf/gpm-root.conf $PKG/etc
+
+)

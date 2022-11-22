@@ -1,0 +1,17 @@
+name: util-macros 
+url: https://gitlab.freedesktop.org/xorg/util/macros 
+description: This is a set of autoconf macros used by the configure.ac scripts in other Xorg modular packages, and is needed to generate new versions of their configure scripts with autoconf.
+version: 1.19.3
+source: https://www.x.org/pub/individual/util/util-macros-1.19.3.tar.bz2 
+audit: https://www.x.org/pub/individual/util/
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG
+
+make DESTDIR=$PKG install
+
+)

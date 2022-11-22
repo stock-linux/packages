@@ -1,0 +1,20 @@
+name: libtiff 
+version: 4.4.0
+source: https://download.osgeo.org/libtiff/tiff-4.4.0.tar.gz 
+
+makedeps: cmake ninja
+
+build(
+
+mkdir -p libtiff-build &&
+cd       libtiff-build &&
+
+cmake -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libtiff-4.4.0 \
+      -DCMAKE_INSTALL_PREFIX=/usr -G Ninja .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+sed -i /Version/s/\$/$(cat ../VERSION)/ $PKG/usr/lib/pkgconfig/libtiff-4.pc
+
+)

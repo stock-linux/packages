@@ -1,0 +1,15 @@
+name: diffutils 
+version: 3.8
+url: https://www.gnu.org/software/diffutils/
+source: http://ftp.gnu.org/gnu/diffutils/diffutils-3.8.tar.xz 
+author: GNU
+maitainer: Skythrew
+build(
+
+./configure --prefix=/usr
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

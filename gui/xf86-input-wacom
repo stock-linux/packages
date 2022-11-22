@@ -1,0 +1,18 @@
+name: xf86-input-wacom 
+version: 1.1.0
+source: https://github.com/linuxwacom/xf86-input-wacom/releases/download/xf86-input-wacom-1.1.0/xf86-input-wacom-1.1.0.tar.bz2
+
+makedeps: xorg-server
+rundeps: xorg-server
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG --with-systemd-unit-dir=no
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

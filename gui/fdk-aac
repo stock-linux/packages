@@ -1,0 +1,13 @@
+name: fdk-aac
+version: 2.0.2
+description: fdk-aac package provides the Fraunhofer FDK AAC library, which is purported to be a high quality Advanced Audio Coding implementation.
+url: https://github.com/mstorsjo/fdk-aac
+source: https://downloads.sourceforge.net/opencore-amr/fdk-aac-2.0.2.tar.gz
+build(
+
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,18 @@
+name: graphene
+version: 1.10.8
+description: The Graphene package provides a thin layer of types for graphics libraries.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
+makedeps: glib gobject-introspection meson ninja
+rundeps: glib gobject-introspection
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

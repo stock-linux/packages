@@ -1,0 +1,18 @@
+name: xcursor-themes 
+version: 1.0.6
+source: https://www.x.org/pub/individual/data/xcursor-themes-1.0.6.tar.bz2
+
+makedeps: xorg-apps
+rundeps: xorg-apps
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

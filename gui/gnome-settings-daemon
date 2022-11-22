@@ -1,0 +1,18 @@
+name: gnome-settings-daemon
+version: 43.0
+description: The GNOME Settings Daemon is responsible for setting various parameters of a GNOME Session and the applications that run under it.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/gnome-settings-daemon-43.0.tar.xz
+makedeps: alsa-lib colord fontconfig gcr geoclue geocode-glib-2.0 gnome-desktop little-cms nspr gcr4 libcanberra libgweather libnotify libwacom pulseaudio systemd upower alsa-utils cups networkmanager nss wayland meson ninja
+rundeps: alsa-lib colord fontconfig gcr geoclue geocode-glib-2.0 gnome-desktop little-cms nspr gcr4 libcanberra libgweather libnotify libwacom pulseaudio systemd upower alsa-utils cups networkmanager nss wayland
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

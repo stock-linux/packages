@@ -1,0 +1,18 @@
+name: xf86-input-libinput 
+version: 1.2.1
+source: https://www.x.org/pub/individual/driver/xf86-input-libinput-1.2.1.tar.xz
+
+makedeps: libinput xorg-server
+rundeps: libinput xorg-server
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

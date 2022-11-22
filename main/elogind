@@ -1,0 +1,64 @@
+name: elogind 
+description: elogind is the systemd project's "logind", extracted out to be a standalone daemon. It integrates with Linux-PAM-1.5.2 to know the set of users that are logged in to a system and whether they are logged in graphically, on the console, or remotely. Elogind exposes this information via the standard org.freedesktop.login1 D-Bus interface, as well as through the file system using systemd's standard /run/systemd layout. 
+version: 246.10
+source: https://github.com/elogind/elogind/archive/v246.10/elogind-246.10.tar.gz 
+
+makedeps: dbus pam polkit docbook-xml docbook-xsl libxslt 
+rundeps: dbus pam polkit docbook-xml docbook-xsl libxslt 
+
+build(
+
+sed -i '/Disable polkit/,+8 d' meson.build &&
+
+sed '/request_name/i\
+r = sd_bus_set_exit_on_disconnect(m->bus, true);\
+if (r < 0)\
+    return log_error_errno(r, "Failed to set exit on disconnect: %m");' \
+    -i src/login/logind.c &&
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr                        \
+      --buildtype=release                  \
+      -Dcgroup-controller=elogind          \
+      -Ddbuspolicydir=/etc/dbus-1/system.d \
+      -Dman=auto                           \
+      ..  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+ln -sf  libelogind.pc $PKG/usr/lib/pkgconfig/libsystemd.pc &&
+ln -sfn elogind $PKG/usr/include/systemd
+
+mkdir -p $PKG/etc/pam.d
+
+cat >> $PKG/etc/pam.d/system-session << "EOF" &&
+# Begin elogind addition
+
+session  required    pam_loginuid.so
+session  optional    pam_elogind.so
+
+# End elogind addition
+EOF
+cat > /etc/pam.d/elogind-user << "EOF"
+# Begin /etc/pam.d/elogind-user
+
+account  required    pam_access.so
+account  include     system-account
+
+session  required    pam_env.so
+session  required    pam_limits.so
+session  required    pam_unix.so
+session  required    pam_loginuid.so
+session  optional    pam_keyinit.so force revoke
+session  optional    pam_elogind.so
+
+auth     required    pam_deny.so
+password required    pam_deny.so
+
+# End /etc/pam.d/elogind-user
+EOF
+
+)

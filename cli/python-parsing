@@ -1,0 +1,11 @@
+name: python-parsing
+version: 3.0.7
+description: General parsing module for Python
+url: https://github.com/pyparsing/pyparsing/
+source: https://github.com/pyparsing/pyparsing/archive/pyparsing_3.0.7.tar.gz
+build(
+
+python3 setup.py build
+python3 setup.py install --prefix=/usr --root=$PKG --optimize=1
+
+)

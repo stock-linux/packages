@@ -1,0 +1,17 @@
+name: iana-etc 
+description: Services and network data
+url: http://github.com/Mic92/iana-etc/
+
+version: 2022.06.10
+source: http://github.com/Mic92/iana-etc/releases/download/20220812/iana-etc-20220812.tar.gz
+
+audit: http://github.com/Mic92/iana-etc/releases/latest
+
+# iana-etc has no dependencies
+
+build(
+mkdir $PKG/etc
+cp services protocols $PKG/etc
+
+)
+

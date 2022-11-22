@@ -1,0 +1,20 @@
+name: xz 
+url: http://tukaani.org/xz
+description: The XZ package contains file compression and decompression programs.
+author: Lasse Collin
+maintainer: Skythrew
+version: 5.2.5
+source: http://tukaani.org/xz/xz-5.2.5.tar.xz 
+audit: http://tukaani.org/xz/
+
+build(
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/xz-5.2.5
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

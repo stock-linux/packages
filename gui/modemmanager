@@ -1,0 +1,20 @@
+name: modemmanager
+version: 1.18.10
+description: ModemManager provides a unified high level API for communicating with mobile broadband modems, regardless of the protocol used to communicate with the actual device.
+source: https://www.freedesktop.org/software/ModemManager/ModemManager-1.18.10.tar.xz
+makedeps: libgudev gobject-introspection libmbim libqmi polkit vala
+rundeps: libgudev gobject-introspection libmbim libqmi polkit vala
+build(
+
+./configure --prefix=/usr                 \
+            --sysconfdir=/etc             \
+            --localstatedir=/var          \
+            --disable-static              \
+            --disable-maintainer-mode     \
+            --with-systemd-journal        \
+            --with-systemd-suspend-resume &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

@@ -1,0 +1,13 @@
+name: python-poetry 
+url: https://python-poetry.org/ 
+version: 1.2.2
+source: N/A 
+audit: https://github.com/python-poetry/poetry/releases/
+makedeps: python3 
+rundeps: python3 
+
+build(
+
+pip3 install --root=$PKG poetry
+
+)

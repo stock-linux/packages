@@ -1,0 +1,9 @@
+name: man-pages 
+version: 5.13
+source: http://www.kernel.org/pub/linux/docs/man-pages/man-pages-5.13.tar.xz 
+
+build(
+
+make prefix=/usr DESTDIR=$PKG install
+
+)

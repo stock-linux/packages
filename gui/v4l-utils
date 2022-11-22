@@ -1,0 +1,17 @@
+name: v4l-utils
+version: 1.22.1
+description: v4l-utils provides a series of utilities for media devices, allowing to handle the proprietary formats available at most webcams (libv4l), and providing tools to test V4L devices.
+url: https://www.linuxtv.org/
+source: https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.22.1.tar.bz2
+makedeps: llvm alsa-lib glu libjpeg-turbo
+rundeps: llvm alsa-lib glu libjpeg-turbo
+build(
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

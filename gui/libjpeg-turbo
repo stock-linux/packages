@@ -1,0 +1,23 @@
+name: libjpeg-turbo 
+version: 2.1.4
+source: https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-2.1.4.tar.gz 
+
+makedeps: cmake nasm
+rundeps: cmake nasm
+
+build(
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=RELEASE  \
+      -DENABLE_STATIC=FALSE       \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libjpeg-turbo-2.1.4 \
+      -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib  \
+      .. &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

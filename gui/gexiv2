@@ -1,0 +1,18 @@
+name: gexiv2
+version: 0.14.0
+description: gexiv2 is a GObject-based wrapper around the Exiv2 library.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/gexiv2/0.14/gexiv2-0.14.0.tar.xz
+makedeps: exiv2 vala meson ninja
+rundeps: exiv2 vala
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

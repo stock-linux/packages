@@ -1,0 +1,22 @@
+name: xorgproto 
+url: https://xorg.freedesktop.org/
+description: The xorgproto package provides the required header files to build the X window server.
+version: 2022.2
+source: https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2022.2.tar.xz
+audit: https://xorg.freedesktop.org/archive/individual/proto/
+
+makedeps: util-macros meson ninja
+rundeps: util-macros
+
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr -Dlegacy=true .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+mv -v $PKG/usr/share/doc/xorgproto{,-2022.2}
+
+)

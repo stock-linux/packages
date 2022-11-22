@@ -1,0 +1,51 @@
+name: openldap
+version: 2.6.3
+description: The OpenLDAP package provides an open source implementation of the Lightweight Directory Access Protocol.
+url: https://www.openldap.org/
+source: https://www.linuxfromscratch.org/patches/blfs/svn/openldap-2.6.3-consolidated-1.patch https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.6.3.tgz
+build(
+patch -Np1 -i $PKG/../openldap-2.6.3-consolidated-1.patch &&
+autoconf &&
+
+./configure --prefix=/usr         \
+            --sysconfdir=/etc     \
+            --localstatedir=/var  \
+            --libexecdir=/usr/lib \
+            --disable-static      \
+            --enable-versioning=yes \
+            --disable-debug       \
+            --with-tls=openssl    \
+            --enable-dynamic      \
+            --enable-crypt        \
+            --disable-spasswd      \
+            --enable-slapd        \
+            --enable-modules      \
+            --enable-rlookups     \
+            --enable-backends=mod \
+            --disable-sql         \
+            --disable-wt          \
+            --enable-overlays=mod &&
+
+make depend -j`nproc` &&
+make -j`nproc`
+
+make DESTDIR=$PKG install &&
+
+sed -e "s/\.la/.so/" -i $PKG/etc/openldap/slapd.{conf,ldif}{,.default} &&
+
+install -v -dm700 -o ldap -g ldap $PKG/var/lib/openldap     &&
+
+install -v -dm700 -o ldap -g ldap $PKG/etc/openldap/slapd.d &&
+chmod   -v    640     $PKG/etc/openldap/slapd.{conf,ldif}   &&
+chown   -v  root:ldap $PKG/etc/openldap/slapd.{conf,ldif}   &&
+
+install -v -dm755 $PKG/usr/share/doc/openldap-2.6.3 &&
+cp      -vfr      doc/{drafts,rfc,guide} \
+                  $PKG/usr/share/doc/openldap-2.6.3
+)
+post(
+groupadd -g 83 ldap &&
+useradd  -c "OpenLDAP Daemon Owner" \
+         -d /var/lib/openldap -u 83 \
+         -g ldap -s /bin/false ldap
+)

@@ -1,0 +1,9 @@
+name: glibc
+description: GLIBC contains the main C library.
+url: http://www.gnu.org/software/libc/
+
+version: 2.36
+source: http://ftp.gnu.org/gnu/glibc/glibc-2.36.tar.xz
+audit: http://ftp.gnu.org/gnu/glibc/
+
+makedeps: linux-api-headers python3 

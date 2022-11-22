@@ -1,0 +1,17 @@
+name: gptfdisk
+version: 1.0.9
+description: The gptfdisk package is a set of programs for creation and maintenance of GUID Partition Table disk drives. A GPT partitioned disk is required for drives greater than 2 TB and is a modern replacement for legacy PC-BIOS partitioned disk drives that use a Master Boot Record. The main program, gdisk, has an interface similar to the classic fdisk program.
+source: https://www.linuxfromscratch.org/patches/blfs/svn/gptfdisk-1.0.9-convenience-1.patch https://downloads.sourceforge.net/gptfdisk/gptfdisk-1.0.9.tar.gz
+makedeps: popt
+build(
+
+patch -Np1 -i $PKG/../gptfdisk-1.0.9-convenience-1.patch &&
+sed -i 's|ncursesw/||' gptcurses.cc &&
+sed -i 's|sbin|usr/sbin|' Makefile &&
+sed -i '/UUID_H/s/^.*$/#if defined (_UUID_UUID_H) || defined (_UL_LIBUUID_UUID_H)/' guid.cc &&
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

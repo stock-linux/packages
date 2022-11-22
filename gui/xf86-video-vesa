@@ -1,0 +1,15 @@
+name: xf86-video-vesa
+version: 2.5.0
+url: https://xorg.freedesktop.org/
+source: https://xorg.freedesktop.org/releases/individual/driver/xf86-video-vesa-2.5.0.tar.bz2
+makedeps: xorg-server libtool
+rundeps: xorg-server
+
+build(
+
+./configure --prefix=/usr
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

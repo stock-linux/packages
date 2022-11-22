@@ -1,0 +1,17 @@
+name: libxslt
+version: 1.1.36
+source: https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.36.tar.xz 
+
+makedeps: libxml2
+rundeps: libxml2 docbook-xml docbook-xsl
+
+build(
+
+sed -i s/3000/5000/ libxslt/transform.c doc/xsltproc.{1,xml} &&
+
+./configure --prefix=/usr --disable-static --without-python  &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

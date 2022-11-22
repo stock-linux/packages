@@ -1,0 +1,20 @@
+name: libxdmcp 
+url: https://x.org 
+description: The libXdmcp package contains a library which implements the control protocol of the display manager
+version: 1.1.3
+source: https://www.x.org/pub/individual/lib/libXdmcp-1.1.3.tar.bz2
+
+makedeps: xorgproto
+rundeps: xorgproto
+
+build(
+
+export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+./configure $XORG_CONFIG --docdir=/usr/share/doc/libXdmcp-1.1.3 &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

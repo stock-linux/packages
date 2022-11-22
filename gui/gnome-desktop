@@ -1,0 +1,20 @@
+name: gnome-desktop
+version: 43.rc
+description: The GNOME Desktop package contains a library that provides an API shared by several applications on the GNOME Desktop.
+url: https://www.gnome.org
+source: https://download.gnome.org/core/43/43.1/sources/gnome-desktop-43.rc.tar.xz
+makedeps: gsettings-desktop-schemas gtk3 gtk4 iso-codes itstool libseccomp libxml2 xkeyboardconfig bubblewrap gobject-introspection meson ninja
+rundeps: gsettings-desktop-schemas gtk3 gtk4 iso-codes itstool libseccomp libxml2 xkeyboardconfig bubblewrap gobject-introspection
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr                 \
+      --buildtype=release           \
+       .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

@@ -1,0 +1,12 @@
+name: wheel 
+version: 0.37.1
+source: https://anduin.linuxfromscratch.org/LFS/wheel-0.37.1.tar.gz 
+
+makedeps: python3
+rundeps: python3
+
+build(
+
+pip3 install --no-index --root=$PKG $PWD
+
+)

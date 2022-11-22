@@ -1,0 +1,14 @@
+name: docutils 
+version: 0.19
+source: https://downloads.sourceforge.net/docutils/docutils-0.19.tar.gz 
+
+makedeps: python3
+rundeps: python3
+
+build(
+
+python3 setup.py install --root=$PKG
+cd $PKG/usr/bin
+rename '.py' '' *.py
+
+)

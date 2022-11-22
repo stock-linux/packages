@@ -1,0 +1,17 @@
+name: less 
+description: Less is a free, open-source file pager. It can be found on most versions of Linux, Unix and Mac OS, as well as on many other operating systems.
+version: 590
+author: greenwoodsoftware
+maintainer: Skythrew
+source: https://www.greenwoodsoftware.com/less/less-590.tar.gz 
+audit: https://www.greenwoodsoftware.com/less/
+
+build(
+
+./configure --prefix=/usr --sysconfdir=/etc
+
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

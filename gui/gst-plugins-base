@@ -1,0 +1,21 @@
+name: gst-plugins-base
+version: 1.20.3
+description: 'Base' GStreamer plugins and helper libraries. This module has been merged into the main GStreamer repo for further development.
+source: https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.20.3.tar.xz
+makedeps: gstreamer alsa-lib gobject-introspection iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis mesa pango wayland-protocols xorg-libs meson ninja
+rundeps: gstreamer alsa-lib gobject-introspection iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis mesa pango wayland-protocols xorg-libs
+build(
+
+mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr       \
+       --buildtype=release \
+       -Dpackage-origin=https://www.linuxfromscratch.org/blfs/view/11.2-systemd/ \
+       -Dpackage-name="GStreamer 1.20.3 Stock Linux"    \
+       --wrap-mode=nodownload &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)

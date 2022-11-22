@@ -1,0 +1,16 @@
+name: python-markdown 
+url: https://github.com/Python-Markdown/markdown 
+version: 3.4.1 
+source: https://github.com/Python-Markdown/markdown/archive/refs/tags/3.4.1.tar.gz 
+audit: https://github.com/Python-Markdown/markdown/tags 
+
+makedeps: python3
+rundeps: python3
+
+build(
+
+python3 setup.py build
+
+python3 setup.py install --root=$PKG --optimize=1
+
+)

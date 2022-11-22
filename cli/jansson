@@ -1,0 +1,16 @@
+name: jansson
+version: 2.14
+description: The Jansson package contains a library used to encode, decode, and manipulate JSON data.
+url: https://github.com/akheron/jansson/
+source: https://github.com/akheron/jansson/releases/download/v2.14/jansson-2.14.tar.bz2
+build(
+
+sed -e "/DT/s;| sort;| sed 's/@@libjansson.*//' &;" \
+    -i test/suites/api/check-exports
+    
+./configure --prefix=/usr --disable-static &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)

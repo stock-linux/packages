@@ -1,0 +1,26 @@
+name: gsettings-desktop-schemas
+version: 42.0
+description: The GSettings Desktop Schemas package contains a collection of GSettings schemas for settings shared by various components of a GNOME Desktop.
+url: https://www.gnome.org
+source: https://download.gnome.org/sources/gsettings-desktop-schemas/42/gsettings-desktop-schemas-42.0.tar.xz
+makedeps: glib gobject-introspection meson ninja
+rundeps: glib gobject-introspection
+build(
+
+sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in &&
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)
+
+post(
+
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+)

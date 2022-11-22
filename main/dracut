@@ -1,0 +1,14 @@
+name: dracut 
+version: 057
+source: https://github.com/dracutdevs/dracut/archive/refs/tags/057.tar.gz
+
+makedeps: cpio kmod
+rundeps: cpio kmod
+
+build(
+
+./configure --prefix=/usr --disable-documentation
+make -j`nproc`
+make DESTDIR=$PKG install
+
+)
