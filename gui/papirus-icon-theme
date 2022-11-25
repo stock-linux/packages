@@ -1,0 +1,13 @@
+name: papirus-icon-theme
+version: 2022.11.01
+description: Papirus icon theme for Linux
+source: https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/refs/tags/20221101.tar.gz
+rundeps: hicolor-icon-theme
+build(
+
+mkdir -p $PKG/usr/share/icons/
+
+cp -r ePapirus* $PKG/usr/share/icons/
+cp -r Papirus* $PKG/usr/share/icons/
+
+)
