@@ -193,6 +193,6 @@ geocode-glib-2.0 3.26.4
 gnome 43.0
 vte-gtk4 0.70.0
 libostree 2022.6
-appstream 0.15.5f
+appstream 0.15.5
 flatpak 1.14.0
 xorg 21.1.7
