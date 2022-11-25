@@ -1,0 +1,32 @@
+name: discord 
+version: 0.0.21
+source: https://dl.discordapp.net/apps/linux/0.0.21/discord-0.0.21.tar.gz
+
+rundeps: gtk3 libnotify xorg-libs glibc alsa-lib nspr nss pulseaudio
+
+build(
+
+install -d $PKG/opt/discord
+cp -a . $PKG/opt/discord
+chmod 755 $PKG/opt/discord/Discord
+
+install -d $PKG/usr/share/applications
+ln -s /opt/discord/discord.desktop $PKG/usr/share/applications
+
+install -d $PKG/usr/bin
+ln -s /opt/discord/Discord $PKG/usr/bin/discord
+
+install -d $PKG/usr/share/pixmaps
+ln -s /opt/discord/$name.png $PKG/usr/share/pixmaps/discord.png
+
+chmod u+s $PKG/opt/discord/chrome-sandbox
+
+)
+
+post(
+
+chmod 644 /opt/discord/discord.desktop
+sed 's/\/usr\/share\/discord/\/opt\/discord/g' -i /opt/discord/discord.desktop
+sed 's/Icon\=discord/Icon=\/opt\/discord\/discord.png/g' -i /opt/discord/discord.desktop
+
+)

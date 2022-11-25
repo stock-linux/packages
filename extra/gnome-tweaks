@@ -1,0 +1,23 @@
+name: gnome-tweaks
+description: A simple tool to customize the GNOME DE
+version: 40.10
+source: https://download.gnome.org/sources/gnome-tweaks/40/gnome-tweaks-40.10.tar.xz
+makedeps: gtk3 gsettings-desktop-schemas libhandy python-gobject meson ninja
+rundeps: gtk3 gsettings-desktop-schemas libhandy python-gobject
+build(
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --buildtype=release &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+)
+
+post(
+
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+)

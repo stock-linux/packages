@@ -1,0 +1,10 @@
+name: xorg
+version: 21.1.7
+description: The Xorg Server Group
+url: https://www.x.org/
+rundeps: util-macros xorgproto libxau libxdmcp xcb-proto libxcb xorg-libs libxcvt xcb-util xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm xcb-util-cursor mesa xbitmaps xorg-apps xcursor-themes xorg-fonts xkeyboardconfig xorg-server xf86-video-intel xf86-video-amdgpu xf86-input-evdev xf86-input-libinput twm xterm xclock xinit
+source: N/A
+build(
+# This is a useless comment xD
+)
+
