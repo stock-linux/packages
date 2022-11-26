@@ -198,3 +198,4 @@ flatpak 1.14.0
 xorg 21.1.7
 papirus-icon-theme 2022.11.01
 gnome-browser-connector 42.1
+xdg-user-dirs 0.18
