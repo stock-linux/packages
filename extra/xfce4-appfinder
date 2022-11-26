@@ -1,0 +1,17 @@
+name: xfce4-appfinder
+version: 4.16.1
+description: Xfce4 Appfinder is a tool to find and launch installed applications by searching the .desktop files installed on your system.
+url: https://www.xfce.org/
+source: https://archive.xfce.org/src/xfce/xfce4-appfinder/4.16/xfce4-appfinder-4.16.1.tar.bz2
+makedeps: garcon
+rundeps: garcon
+build(
+
+./configure --prefix=/usr \
+ 
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)
+
