@@ -7,3 +7,9 @@ rundeps: gcr gcr4 gsettings-desktop-schemas libsecret rest totem-pl-parser vte y
 build(
 
 )
+
+post(
+
+dbus-launch --exit-with-session gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+
+)
