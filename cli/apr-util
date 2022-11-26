@@ -1,0 +1,18 @@
+name: apr-util
+description: The Apache Portable Runtime Utility Library provides a predictable and consistent interface to underlying client library interfaces. This application programming interface assures predictable if not identical behaviour regardless of which libraries are available on a given platform.
+version: 1.6.1
+makedeps: apr
+source: https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2
+rundeps: apr
+build(
+
+./configure --prefix=/usr       \
+            --with-apr=/usr     \
+            --with-gdbm=/usr    \
+            --with-openssl=/usr \
+            --with-crypto &&
+make -j`nproc`
+
+make DESTDIR=$PKG install
+
+)
