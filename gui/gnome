@@ -3,7 +3,7 @@ version: 43.0
 description: The GNOME Desktop Environment
 url: https://www.gnome.org
 source: N/A
-rundeps: gcr gcr4 gsettings-desktop-schemas libsecret rest totem-pl-parser vte yelp-xsl gconf geocode-glib geocode-glib-2.0 gjs gnome-autoar gnome-desktop gnome-menus gnome-online-accounts grilo libgdata libgee libgtop libgweather libpeas evolution-data-server folks tracker tracker-miners gsound dconf gnome-backgrounds gvfs gexiv2 nautilus zenity gnome-bluetooth gnome-keyring gnome-settings-daemon gnome-control-center mutter gnome-shell gnome-shell-extensions gnome-session gdm gnome-terminal
+rundeps: gcr gcr4 gsettings-desktop-schemas libsecret rest totem-pl-parser vte yelp-xsl gconf geocode-glib geocode-glib-2.0 gjs gnome-autoar gnome-desktop gnome-menus gnome-online-accounts grilo libgdata libgee libgtop libgweather libpeas evolution-data-server folks tracker tracker-miners gsound dconf gnome-backgrounds gvfs gexiv2 nautilus zenity gnome-bluetooth gnome-keyring gnome-settings-daemon gnome-control-center mutter gnome-shell gnome-shell-extensions gnome-session gdm gnome-terminal papirus-icon-theme
 build(
 
 )
