@@ -1,0 +1,17 @@
+name: gnome-browser-connector
+version: 42.1
+description: OS-native connector counterpart for GNOME Shell browser extension.
+url: https://gitlab.gnome.org/GNOME/gnome-browser-connector
+source: https://gitlab.gnome.org/GNOME/gnome-browser-connector/-/archive/v42.1/gnome-browser-connector-v42.1.tar.bz2
+makedeps: python-gobject meson ninja
+rundeps: python-gobject
+build(
+
+mkdir build
+cd build
+
+meson --prefix=/usr ..
+ninja
+DESTDIR=$PKG ninja install
+
+)
