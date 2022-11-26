@@ -1,0 +1,22 @@
+name: thunar-volman
+version: 4.16.0
+description: The Thunar Volume Manager is an extension for the Thunar file manager, which enables automatic management of removable drives and media.
+url: https://www.xfce.org/
+source: https://archive.xfce.org/src/xfce/thunar-volman/4.16/thunar-volman-4.16.0.tar.bz2
+
+makedeps: exo libgudev libnotify gvfs intltool
+rundeps: exo libgudev libnotify gvfs
+
+build(
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --libexecdir=/usr/lib/xfce4 \
+            --localstatedir=/var \
+            --disable-static \
+            --disable-debug
+make 
+
+make DESTDIR=$PKG install
+
+)
