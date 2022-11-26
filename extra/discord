@@ -2,7 +2,7 @@ name: discord
 version: 0.0.21
 source: https://dl.discordapp.net/apps/linux/0.0.21/discord-0.0.21.tar.gz
 
-rundeps: gtk3 libnotify xorg-libs glibc alsa-lib nspr nss pulseaudio
+rundeps: gtk3 libnotify xorg-libs glibc alsa-lib nspr nss pulseaudio font-noto-emoji
 
 build(
 
