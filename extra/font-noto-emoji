@@ -1,0 +1,11 @@
+name: font-noto-emoji
+version: 15.0 
+description: Google Noto emoji fonts
+url: https://www.google.com/get/noto/
+source: https://github.com/googlefonts/noto-emoji/archive/refs/tags/v2.038.tar.gz
+build(
+
+mkdir -p "$PKG"/usr/share/fonts/noto
+install -m644 fonts/NotoColorEmoji.ttf "$PKG"/usr/share/fonts/noto
+
+)
