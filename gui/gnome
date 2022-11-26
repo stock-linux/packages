@@ -12,4 +12,6 @@ post(
 
 dbus-launch --exit-with-session gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
+echo "PLEASE REINSTALL SYSTEMD TO HAVE A GOOD EXPERIENCE"
+
 )
