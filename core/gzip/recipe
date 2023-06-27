@@ -1,0 +1,6 @@
+name=gzip
+version=1.12
+release=1
+description="The Gzip package contains programs for compressing and decompressing files."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew

@@ -1,0 +1,15 @@
+name=libcap
+version=2.69
+release=1
+description="The Libcap package implements the userspace interface to the POSIX 1003.1e capabilities available in Linux kernel."
+source=(https://www.kernel.org/pub/linux/libs/security/linux-privs/${name}2/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+
+    sed -i '/install -m.*STA/d' libcap/Makefile
+
+    make prefix=/usr lib=lib
+
+    make prefix=/usr lib=lib DESTDIR=$PKG install
+
+}

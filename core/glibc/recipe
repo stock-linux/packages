@@ -1,0 +1,85 @@
+name=glibc
+version=2.37
+release=1
+description="The Glibc package contains the main C library."
+kernelversion=6.1
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/$name-$version-fhs-1.patch https://www.kernel.org/pub/linux/kernel/v${kernelversion:0:1}.x/linux-$kernelversion.tar.xz glibc.locales.supported)
+packager=Skythrew
+build() {
+    cd ..
+    tar -xf linux-$kernelversion.tar.*
+    cd linux-$kernelversion
+    make mrproper
+    make headers
+    find usr/include -name '.*' -delete
+    rm usr/include/Makefile
+    mkdir -p $PKG/usr/include
+    cp -rv usr/include/* $PKG/usr/include
+    cd ../$name-$version
+
+    patch -Np1 -i ../$name-$version-fhs-1.patch
+
+    mkdir $PKG/lib64
+    
+    ln -s ../lib/ld-linux-x86-64.so.2 $PKG/lib64
+    ln -s ../lib/ld-linux-x86-64.so.2 $PKG/lib64/ld-lsb-x86-64.so.3
+    
+    sed '/width -=/s/workend - string/number_length/' \
+    -i stdio-common/vfprintf-process-arg.c
+
+    mkdir -v build
+    cd       build
+
+    echo "rootsbindir=/usr/sbin" > configparms
+
+    ../configure --prefix=/usr                            \
+             --disable-werror                         \
+             --enable-kernel=4.14                      \
+             --enable-stack-protector=strong          \
+             --with-headers=/usr/include              \
+             --enable-multi-arch                      \
+             libc_cv_slibdir=/usr/lib
+
+    make
+
+    sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
+
+    make install_root=$PKG install
+
+    sed '/RTLDLIST=/s@/usr@@g' -i $PKG/usr/bin/ldd
+
+    mkdir -p $PKG/etc
+    cp -v ../nscd/nscd.conf $PKG/etc/nscd.conf
+    mkdir -pv $PKG/var/cache/nscd
+
+    cp ../../glibc.locales.supported \
+        ../localedata/SUPPORTED
+    make install_root=$PKG localedata/install-locales
+    
+    cat > $PKG/etc/nsswitch.conf << "EOF"
+# Begin /etc/nsswitch.conf
+
+passwd: files
+group: files
+shadow: files
+
+hosts: files dns
+networks: files
+
+protocols: files
+services: files
+ethers: files
+rpc: files
+
+# End /etc/nsswitch.conf
+EOF
+
+    cat > $PKG/etc/ld.so.conf << "EOF"
+# Begin /etc/ld.so.conf
+/usr/local/lib
+/opt/lib
+/usr/lib32
+include /etc/ld.so.conf.d/*.conf
+EOF
+
+}

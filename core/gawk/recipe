@@ -1,0 +1,19 @@
+name=gawk
+version=5.2.2
+release=1
+description="The Gawk package contains programs for manipulating text files."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+
+    sed -i 's/extras//' Makefile.in
+
+    ./configure --prefix=/usr
+
+    make
+
+    make LN='ln -f' DESTDIR=$PKG install
+
+    ln -sv gawk.1 $PKG/usr/share/man/man1/awk.1
+
+}

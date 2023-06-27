@@ -1,0 +1,23 @@
+name=ninja
+version=1.11.1
+release=1
+description="Ninja is a small build system with a focus on speed."
+source=(https://github.com/$name-build/$name/archive/v$version/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+
+    sed -i '/int Guess/a \
+  int   j = 0;\
+  char* jobs = getenv( "NINJAJOBS" );\
+  if ( jobs != NULL ) j = atoi( jobs );\
+  if ( j > 0 ) return j;\
+' src/ninja.cc
+
+    python3 configure.py --bootstrap
+
+    mkdir -p $PKG/usr/bin
+    install -vm755 ninja $PKG/usr/bin/
+    install -vDm644 misc/bash-completion $PKG/usr/share/bash-completion/completions/ninja
+    install -vDm644 misc/zsh-completion  $PKG/usr/share/zsh/site-functions/_ninja
+
+}

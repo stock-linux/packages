@@ -1,0 +1,40 @@
+name=gcc
+version=13.1.0
+release=1
+description="The GNU Compiler Collection"
+source=(https://ftp.gnu.org/gnu/$name/$name-$version/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+
+    sed -e '/m64=/s/lib64/lib/' \
+    -e '/m32=/s/m32=.*/m32=..\/lib32$(call if_multiarch,:i386-linux-gnu)/' \
+    -i.orig gcc/config/i386/t-linux64
+
+    mkdir -v build
+    cd       build
+
+    mlist=m64,m32
+    ../configure --prefix=/usr               \
+             LD=ld                       \
+             --enable-languages=c,c++    \
+             --enable-default-pie        \
+             --enable-default-ssp        \
+             --enable-multilib           \
+             --with-multilib-list=$mlist \
+             --disable-bootstrap         \
+             --with-system-zlib
+
+    make
+    make DESTDIR=$PKG install
+    ln -svr /usr/bin/cpp $PKG/usr/lib
+
+    ln -s gcc $PKG/usr/bin/cc
+    ln -s gcc.1 $PKG/usr/share/man/man1/cc.1
+
+    ln -sf ../../libexec/gcc/x86_64-pc-linux-gnu/13.1.0/liblto_plugin.so \
+        $PKG/usr/lib/bfd-plugins/
+
+    mkdir -p $PKG/usr/share/gdb/auto-load/usr/lib
+    mv $PKG/usr/lib/*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib
+
+}

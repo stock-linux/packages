@@ -1,0 +1,6 @@
+name=texinfo
+version=7.0.3
+release=1
+description="The Texinfo package contains programs for reading, writing, and converting info pages."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew

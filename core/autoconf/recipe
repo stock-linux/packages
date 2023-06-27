@@ -1,0 +1,11 @@
+name=autoconf
+version=2.71
+release=1
+description="The Autoconf package contains programs for producing shell scripts that can automatically configure source code."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew
+pre_build() {
+    sed -e 's/SECONDS|/&SHLVL|/'               \
+    -e '/BASH_ARGV=/a\        /^SHLVL=/ d' \
+    -i.orig tests/local.at
+}

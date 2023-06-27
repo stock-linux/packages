@@ -1,0 +1,25 @@
+name=python
+version=3.11.4
+release=1
+description="The Python 3 package contains the Python development environment."
+source=(https://www.$name.org/ftp/$name/$version/Python-$version.tar.xz)
+packager=Skythrew
+unpack() {
+    tar -xf Python-$version.tar.*
+    cd Python-$version
+}
+build() {
+
+    ./configure --prefix=/usr        \
+            --enable-shared      \
+            --with-system-expat  \
+            --with-system-ffi    \
+            --enable-optimizations
+
+    make
+
+    make DESTDIR=$PKG install
+
+    ln -s python3 $PKG/usr/bin/python
+
+}

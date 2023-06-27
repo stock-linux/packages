@@ -1,0 +1,6 @@
+name=expat
+version=2.5.0
+release=1
+description="The Expat package contains a stream oriented C library for parsing XML."
+source=(https://prdownloads.sourceforge.net/$name/$name-$version.tar.xz)
+packager=Skythrew

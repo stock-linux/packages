@@ -1,0 +1,30 @@
+name=binutils
+version=2.40
+release=1
+description="The Binutils package contains a linker, an assembler, and other tools for handling object files."
+source=(https://sourceware.org/pub/$name/releases/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+    
+    mkdir build
+    cd    build
+
+    ../configure --prefix=/usr       \
+             --sysconfdir=/etc   \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --enable-shared     \
+             --disable-werror    \
+             --enable-64-bit-bfd \
+             --with-system-zlib  \
+             --enable-multilib
+
+    make tooldir=/usr
+
+    make tooldir=/usr DESTDIR=$PKG install
+
+    rm -fv $PKG/usr/lib/lib{bfd,ctf,ctf-nobfd,sframe,opcodes}.a
+    rm -fv $PKG/usr/share/man/man1/{gprofng,gp-*}.1
+
+}

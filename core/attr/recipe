@@ -1,0 +1,18 @@
+name=attr
+version=2.5.1
+release=1
+description="The Attr package contains utilities to administer the extended attributes of filesystem objects."
+source=(https://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+
+    ./configure --prefix=/usr     \
+            --disable-static  \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/attr-$version
+
+    make
+
+    make DESTDIR=$PKG install
+
+}

@@ -1,0 +1,13 @@
+name=python-markupsafe
+version=2.1.3
+release=1
+description="MarkupSafe is a Python module that implements an XML/HTML/XHTML Markup safe string."
+source=(https://pypi.org/packages/source/M/MarkupSafe/MarkupSafe-$version.tar.gz)
+packager=Skythrew
+unpack() {
+    tar -xf MarkupSafe-$version.tar.*
+    cd MarkupSafe-$version
+}
+build() {
+build_python
+}

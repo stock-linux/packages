@@ -1,0 +1,9 @@
+name=grep
+version=3.11
+release=1
+description="The Grep package contains programs for searching through the contents of files."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew
+pre_build() {
+    sed -i "s/echo/#echo/" src/egrep.sh
+}

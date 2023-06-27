@@ -1,0 +1,6 @@
+name=sed
+version=4.9
+release=1
+description="The Sed package contains a stream editor."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew

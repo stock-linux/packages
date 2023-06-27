@@ -1,0 +1,13 @@
+name=make-ca
+version=1.12
+release=1
+description="CA Certificates needed for HTTPS."
+source=(https://github.com/lfs-book/$name/releases/download/v$version/$name-$version.tar.xz)
+packager=Skythrew
+run=(p11-kit)
+build() {
+
+    make DESTDIR=$PKG install
+    install -vdm755 $PKG/etc/ssl/local
+
+}

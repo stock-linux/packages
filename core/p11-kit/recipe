@@ -1,0 +1,31 @@
+name=p11-kit
+version=0.24.1
+release=1
+description="The p11-kit package provides a way to load and enumerate PKCS #11 (a Cryptographic Token Interface Standard) modules."
+source=(https://github.com/p11-glue/$name/releases/download/$version/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+
+    sed '20,$ d' -i trust/trust-extract-compat &&
+    cat >> trust/trust-extract-compat << "EOF"
+# Copy existing anchor modifications to /etc/ssl/local
+/usr/libexec/make-ca/copy-trust-modifications
+
+# Update trust stores
+/usr/sbin/make-ca -r
+EOF
+
+    mkdir p11-build &&
+    cd    p11-build &&
+
+    meson setup ..            \
+        --prefix=/usr       \
+        --buildtype=release \
+        -Dtrust_paths=/etc/pki/anchors &&
+    ninja
+
+    DESTDIR=$PKG ninja install &&
+    ln -sfv /usr/libexec/p11-kit/trust-extract-compat \
+        $PKG/usr/bin/update-ca-certificates
+
+}

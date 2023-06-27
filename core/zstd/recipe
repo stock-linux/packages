@@ -1,0 +1,13 @@
+name=zstd
+version=1.5.5
+release=1
+description="Zstandard is a real-time compression algorithm, providing high compression ratios."
+source=(https://github.com/facebook/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+    make prefix=$PKG/usr
+
+    make prefix=$PKG/usr install
+
+    rm -v $PKG/usr/lib/libzstd.a
+}

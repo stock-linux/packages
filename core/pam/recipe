@@ -1,0 +1,25 @@
+name=pam
+version=1.5.3
+release=1
+description="The Linux PAM package contains Pluggable Authentication Modules used by the local system administrator to control how application programs authenticate users."
+source=(https://github.com/linux-$name/linux-$name/releases/download/v$version/Linux-PAM-$version.tar.xz#$name-$version.tar.xz)
+packager=Skythrew
+unpack() {
+    tar -xf $name-$version.tar.*
+    cd Linux-PAM-$version
+}
+build() {
+
+    ./configure --prefix=/usr                        \
+            --sbindir=/usr/sbin                  \
+            --sysconfdir=/etc                    \
+            --libdir=/usr/lib                    \
+            --enable-securedir=/usr/lib/security \
+            --docdir=/usr/share/doc/Linux-PAM-$version &&
+    make
+
+    make DESTDIR=$PKG install
+
+    chmod -v 4755 $PKG/usr/sbin/unix_chkpwd
+
+}

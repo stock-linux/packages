@@ -1,0 +1,19 @@
+name=bash
+version=5.2.15
+release=1
+description="The Bash package contains the Bourne-Again Shell."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+
+    ./configure --prefix=/usr             \
+            --without-bash-malloc     \
+            --with-installed-readline \
+            --docdir=/usr/share/doc/bash-5.2.15
+
+    make
+
+    make DESTDIR=$PKG install
+
+    ln -s bash $PKG/usr/bin/sh
+}

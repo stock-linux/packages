@@ -1,0 +1,11 @@
+name=libtool
+version=2.4.7
+release=1
+description="The Libtool package contains the GNU generic library support script. It makes the use of shared libraries simpler with a consistent, portable interface."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew
+post_build() {
+
+    rm -f $PKG/usr/lib/libltdl.a
+
+}

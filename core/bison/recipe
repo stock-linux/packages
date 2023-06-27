@@ -1,0 +1,6 @@
+name=bison
+version=3.8.2
+release=1
+description="The Bison package contains a parser generator."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew

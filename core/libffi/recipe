@@ -1,0 +1,17 @@
+name=libffi
+version=3.4.4
+release=1
+description="The Libffi library provides a portable, high level programming interface to various calling conventions."
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+
+./configure --prefix=/usr          \
+            --disable-static       \
+            --with-gcc-arch=native
+
+make
+
+make DESTDIR=$PKG install
+
+}

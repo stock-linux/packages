@@ -1,0 +1,9 @@
+name=findutils
+version=4.9.0
+release=1
+description="The Findutils package contains programs to find files."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+    ./configure --prefix=/usr --localstatedir=/var/lib/locate && make && make DESTDIR=$PKG install
+}

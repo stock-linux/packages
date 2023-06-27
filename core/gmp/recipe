@@ -1,0 +1,20 @@
+name=gmp
+version=6.2.1
+release=1
+description="The GMP package contains math libraries."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+
+    ./configure --prefix=/usr    \
+            --enable-cxx     \
+            --disable-static \
+            --docdir=/usr/share/doc/gmp-$version
+
+    make
+    make html
+
+    make DESTDIR=$PKG install
+    make DESTDIR=$PKG install-html
+
+}

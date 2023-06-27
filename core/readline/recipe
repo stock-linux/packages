@@ -1,0 +1,21 @@
+name=readline
+version=8.2
+release=1
+description="The Readline package is a set of libraries that offer command-line editing and history capabilities."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+
+    sed -i '/MV.*old/d' Makefile.in
+    sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+    ./configure --prefix=/usr    \
+            --disable-static \
+            --with-curses    \
+            --docdir=/usr/share/doc/readline-$version
+
+    make SHLIB_LIBS="-lncursesw"
+
+    make SHLIB_LIBS="-lncursesw" DESTDIR=$PKG install
+
+}

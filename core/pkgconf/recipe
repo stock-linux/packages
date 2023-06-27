@@ -1,0 +1,10 @@
+name=pkgconf
+version=1.9.5
+release=1
+description="The pkgconf package is a successor to pkg-config and contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations."
+source=(https://distfiles.dereferenced.org/$name/$name-$version.tar.xz)
+packager=Skythrew
+post_build() {
+    ln -sv pkgconf   $PKG/usr/bin/pkg-config
+    ln -sv pkgconf.1 $PKG/usr/share/man/man1/pkg-config.1
+}

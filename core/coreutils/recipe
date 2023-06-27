@@ -1,0 +1,26 @@
+name=coreutils
+version=9.3
+release=1
+description="The Coreutils package contains the basic utility programs needed by every operating system."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/coreutils-$version-i18n-1.patch)
+packager=Skythrew
+build() {
+
+    patch -Np1 -i ../coreutils-$version-i18n-1.patch
+    export FORCE_UNSAFE_CONFIGURE=1
+    autoreconf -fiv
+    ./configure \
+            --prefix=/usr            \
+            --enable-no-install-program=kill,uptime
+    make
+
+    make DESTDIR=$PKG install
+
+    mkdir -p $PKG/usr/sbin
+    mv $PKG/usr/bin/chroot $PKG/usr/sbin
+    mkdir -p $PKG/usr/share/man/man8
+    mv $PKG/usr/share/man/man1/chroot.1 $PKG/usr/share/man/man8/chroot.8
+    sed -i 's/"1"/"8"/' $PKG/usr/share/man/man8/chroot.8
+    unset FORCE_UNSAFE_CONFIGURE
+
+}
