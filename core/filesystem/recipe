@@ -1,6 +1,6 @@
 name=filesystem
 version=23.06
-release=1
+release=2
 description="Simple Linux filesystem"
 iana_version=20230524
 source=(https://github.com/Mic92/iana-etc/releases/download/$iana_version/iana-etc-$iana_version.tar.gz)
@@ -105,7 +105,7 @@ DISTRIB_CODENAME="sunbird"
 DISTRIB_DESCRIPTION="Stock Linux"
 EOF
 
-    cat > /etc/resolv.conf << "EOF"
+    cat > $PKG/etc/resolv.conf << "EOF"
 nameserver 8.8.8.8
 nameserver 8.8.4.4
 EOF
