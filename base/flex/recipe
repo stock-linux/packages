@@ -1,0 +1,17 @@
+name=flex
+version=2.6.4
+release=1
+description="The Flex package contains a utility for generating programs that recognize patterns in text. "
+source=(https://github.com/westes/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=camini
+build() {
+	./configure --prefix=/usr \
+            --docdir=/usr/share/doc/flex-2.6.4 \
+            --disable-static
+
+	make
+	make DESTDIR=$PKG install
+
+	ln -sv flex  $PKG/usr/bin/lex
+	ln -sv flex.1 $PKG/usr/share/man/man1/lex.1
+}
