@@ -1,0 +1,17 @@
+name=procps-ng
+version=4.0.3
+release=1
+description="The Procps-ng package contains programs for monitoring processes. "
+source=(https://sourceforge.net/projects/$name/files/Production/$name-$version.tar.xz)
+packager=camini
+build(){
+	./configure --prefix=/usr                           \
+            --docdir=/usr/share/doc/procps-ng-4.0.3 \
+            --disable-static                        \
+            --disable-kill                          \
+            --with-systemd
+
+	make
+	make DESTDIR=$PKG install
+
+}
