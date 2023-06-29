@@ -1,0 +1,14 @@
+name=psmisc
+version=23.6
+release=1
+description="The Psmisc package contains programs for displaying information about running processes. "
+source=(https://sourceforge.net/projects/$name/files/$name/$name-$version.tar.xz)
+packager=camini
+build (){
+	./configure --prefix=/usr
+
+	make
+	make DESTDIR=$PKG install
+
+
+}
