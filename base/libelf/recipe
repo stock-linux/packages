@@ -1,0 +1,23 @@
+name=libelf
+version=0.189
+release=1
+description="Libelf is a library for handling ELF (Executable and Linkable Format) files. "
+source=(https://sourceware.org/ftp/elfutils/$version/elfutils-$version.tar.bz2)
+packager=camini
+unpack(){
+	tar -xf elfutils-$version.tar.bz2
+	cd elfutils-$version
+}
+build(){
+	./configure --prefix=/usr                \
+            --disable-debuginfod         \
+            --enable-libdebuginfod=dummy
+
+	make
+	make -C libelf DESTDIR=$PKG install
+
+	mkdir -pv $PKG/usr/lib/pkgconfig
+	install -vm644 config/libelf.pc $PKG/usr/lib/pkgconfig
+	rm $PKG/usr/lib/libelf.a
+
+}
