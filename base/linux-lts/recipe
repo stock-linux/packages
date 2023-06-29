@@ -1,0 +1,25 @@
+name=linux-lts
+version=6.1.36
+release=1
+description="Linux Kernel Long-Term-Support"
+source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$version.tar.xz config)
+packager=Skythrew
+makedepends=(bc flex cpio libelf)
+unpack() {
+    tar -xf linux-$version.tar.xz
+    cd linux-$version
+}
+build() {
+    make mrproper
+
+    cp ../config ./.config
+
+    make
+
+    make INSTALL_MOD_PATH=$PKG INSTALL_MOD_STRIP=1 modules_install
+    mkdir -p $PKG/boot
+    cp -iv arch/x86/boot/bzImage $PKG/boot/vmlinuz-lts
+    cp -iv System.map $PKG/boot/System.map-lts
+    cp -iv .config $PKG/boot/config-lts
+    rm -rf $PKG/lib/firmware
+}
