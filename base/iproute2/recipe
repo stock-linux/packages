@@ -1,0 +1,15 @@
+name=iproute2
+version=6.3.0
+release=1
+description="The IPRoute2 package contains programs for basic and advanced IPV4-based networking."
+source=(https://www.kernel.org/pub/linux/utils/net/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(flex)
+build() {
+    sed -i /ARPD/d Makefile
+    rm -f man/man8/arpd.8
+
+    make NETNS_RUN_DIR=/run/netns
+
+    make SBINDIR=/usr/sbin DESTDIR=$PKG install
+}
