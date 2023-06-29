@@ -1,0 +1,12 @@
+name=groff
+version=1.22.4
+release=1
+description="The Groff package contains programs for processing and formatting text and images."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+packager=Skythrew
+pre_build() {
+    export PAGE=A4
+}
+post_build() {
+    unset PAGE
+}
