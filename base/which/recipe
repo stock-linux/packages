@@ -1,0 +1,6 @@
+name=which
+version=2.21
+release=1
+description="The first option is to install the actual GNU which package."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+packager=Skythrew
