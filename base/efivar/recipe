@@ -1,0 +1,14 @@
+name=efivar
+version=38
+release=1
+description="The efivar package provides tools and libraries to manipulate EFI variables."
+source=(https://github.com/rhboot/$name/releases/download/$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(mandoc)
+build() {
+    sed '/prep :/a\\ttouch prep' -i src/Makefile
+
+    make ERRORS=
+
+    make DESTDIR=$PKG install LIBDIR=/usr/lib
+}
