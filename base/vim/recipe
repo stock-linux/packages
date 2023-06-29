@@ -1,0 +1,15 @@
+name=vim
+version=9.0.1671
+release=1
+description="Vim is a greatly improved version of the good old UNIX editor Vi."
+source=(https://github.com/$name/$name/archive/refs/tags/v$version.tar.gz#vim-$version.tar.gz)
+packager=Skythrew
+pre_build() {
+    echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+}
+post_build() {
+    ln -sv vim $PKG/usr/bin/vi
+    for L in  $PKG/usr/share/man/{,*/}man1/vim.1; do
+        ln -sv vim.1 $(dirname $L)/vi.1
+    done
+}
