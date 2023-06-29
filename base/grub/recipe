@@ -1,0 +1,28 @@
+name=grub
+version=2.06
+release=1
+description="The GRUB package provides GRand Unified Bootloader."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz https://www.linuxfromscratch.org/patches/blfs/svn/grub-$version-upstream_fixes-1.patch https://unifoundry.com/pub/unifont/unifont-15.0.01/font-builds/unifont-15.0.01.pcf.gz)
+packager=Skythrew
+makedepends=(freetype flex)
+run=(efibootmgr)
+pre_build() {
+    mkdir -pv $PKG/usr/share/fonts/unifont &&
+    gunzip -c ../unifont-15.0.01.pcf.gz > $PKG/usr/share/fonts/unifont/unifont.pcf
+    patch -Np1 -i ../grub-$version-upstream_fixes-1.patch
+}
+build() {
+    ./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --disable-efiemu     \
+            --enable-grub-mkfont \
+            --with-platform=efi  \
+            --target=x86_64      \
+            --disable-werror     &&
+    unset TARGET_CC &&
+    make
+
+    make DESTDIR=$PKG install
+    mkdir -p $PKG/usr/share/bash-completion/completions
+    mv -v $PKG/etc/bash_completion.d/grub $PKG/usr/share/bash-completion/completions
+}
