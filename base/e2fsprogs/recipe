@@ -1,0 +1,26 @@
+name=e2fsprogs
+version=1.47.0
+release=1
+description="The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems."
+source=(https://downloads.sourceforge.net/project/$name/$name/v$version/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+    mkdir -v build
+    cd       build
+
+    ../configure --prefix=/usr           \
+             --sysconfdir=/etc       \
+             --enable-elf-shlibs     \
+             --disable-libblkid      \
+             --disable-libuuid       \
+             --disable-uuidd         \
+             --disable-fsck
+
+    make
+
+    make DESTDIR=$PKG install
+
+    rm -fv $PKG/usr/lib/{libcom_err,libe2p,libext2fs,libss}.a
+    gunzip -v $PKG/usr/share/info/libext2fs.info.gz
+    install-info --dir-file=$PKG/usr/share/info/dir $PKG/usr/share/info/libext2fs.info
+}
