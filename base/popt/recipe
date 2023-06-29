@@ -1,0 +1,6 @@
+name=popt
+version=1.19
+release=1
+description="The popt package contains the popt libraries which are used by some programs to parse command-line options."
+source=(http://ftp.rpm.org/$name/releases/$name-1.x/$name-$version.tar.gz)
+packager=Skythrew
