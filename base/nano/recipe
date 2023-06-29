@@ -1,0 +1,18 @@
+name=nano
+version=7.2
+release=1
+description="The Nano package contains a small, simple text editor. "
+source=(https://www.$name-editor.org/dist/v7/$name-$version.tar.xz)
+packager=camini
+build(){
+	./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --enable-utf8     \
+            --docdir=/usr/share/doc/nano-7.2 &&
+
+	make
+	make DESTDIR=$PKG install
+
+	mkdir -pv $PKG/usr/share/doc/nano-7.2
+	install -v -m644 doc/{nano.html,sample.nanorc} $PKG/usr/share/doc/nano-7.2
+}
