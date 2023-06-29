@@ -1,0 +1,13 @@
+name=python-wheel
+version=0.40.0
+release=1
+description="Wheel is a Python library that is the reference implementation of the Python wheel packaging standard. "
+source=(https://pypi.org/packages/source/w/wheel/wheel-$version.tar.gz)
+packager=camini
+unpack() {
+    tar -xf wheel-$version.tar.gz
+    cd wheel-$version 
+}
+build() {
+build_python
+}
