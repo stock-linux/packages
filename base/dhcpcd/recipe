@@ -1,6 +1,6 @@
 name=dhcpcd
 version=10.0.1
-release=1
+release=2
 description="DHCP client implementation"
 source=(https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$version/dhcpcd-$version.tar.xz)
 packager=Skythrew
@@ -9,7 +9,8 @@ build() {
             --sysconfdir=/etc            \
             --libexecdir=/usr/lib/dhcpcd \
             --dbdir=/var/lib/dhcpcd      \
-            --runstatedir=/run
+            --runstatedir=/run           \
+            --disable-privsep
 
     make
 
