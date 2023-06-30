@@ -1,6 +1,6 @@
 name=filesystem
 version=23.06
-release=2
+release=3
 description="Simple Linux filesystem"
 iana_version=20230524
 source=(https://github.com/Mic92/iana-etc/releases/download/$iana_version/iana-etc-$iana_version.tar.gz)
@@ -89,6 +89,10 @@ EOF
 chgrp -v utmp $PKG/var/log/lastlog
 chmod -v 664  $PKG/var/log/lastlog
 chmod -v 600  $PKG/var/log/btmp
+
+    cat > $PKG/etc/squirrel.conf << EOF
+stocklinux https://packages.stocklinux.org/x86_64/testing
+EOF
 
     cat > $PKG/etc/os-release << EOF
 NAME="Stock Linux"
