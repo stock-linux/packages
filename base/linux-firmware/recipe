@@ -1,0 +1,9 @@
+name=linux-firmware
+version=20230625
+release=1
+description="The Linux Kernel Firmware"
+source=(https://git.kernel.org/pub/scm/linux/kernel/git/firmware/$name.git/snapshot/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+    make DESTDIR=$PKG FIRMWAREDIR=/lib/firmware install
+}
