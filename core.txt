@@ -5,7 +5,6 @@ coreutils
 gettext
 grep
 libtasn1
-make-ca
 ncurses
 pam
 python
@@ -53,3 +52,5 @@ zstd
 lib32-glibc
 lib32-zlib
 lib32-gmp
+curl
+stock-packaging
