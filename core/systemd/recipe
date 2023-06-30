@@ -1,6 +1,6 @@
 name=systemd
 version=253
-release=1
+release=2
 description="The systemd package contains programs for controlling the startup, running, and shutdown of the system."
 source=(https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz)
 packager=Skythrew
@@ -19,6 +19,7 @@ build() {
     mkdir -p build
     cd       build
 
+    mkdir -p $PKG/usr/include
     meson setup \
       --prefix=/usr                 \
       --buildtype=release           \
@@ -32,6 +33,7 @@ build() {
       -Duserdb=false                \
       -Dman=false                   \
       -Dmode=release                \
+      -Dpam=true                    \
       -Dpamconfdir=/etc/pam.d               \
       -Ddev-kvm-mode=0660           \
       -Ddocdir=/usr/share/doc/systemd-$version \
