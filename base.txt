@@ -38,7 +38,14 @@ zstd
 lib32-glibc
 lib32-zlib
 lib32-gmp
+dbus
+man-db
 shadow
+iproute2
+nano
+which
+procps-ng
+psmisc
 tzdata
 linux-firmware
 dhcpcd
