@@ -1,0 +1,15 @@
+name=libnl
+version=3.7.0
+release=1
+description="The libnl suite is a collection of libraries providing APIs to netlink protocol based Linux kernel interfaces. "
+source=(https://github.com/thom311/$name/releases/download/${name}3_7_0/$name-$version.tar.gz)
+packager=camini
+makedepends=(flex)
+build(){
+	./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  &&
+
+	make
+	make DESTDIR=$PKG install
+}
