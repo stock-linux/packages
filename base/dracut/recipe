@@ -1,0 +1,13 @@
+name=dracut
+version=059
+release=1
+description="The event driven initramfs infrastructure"
+source=(https://github.com/${name}devs/$name/archive/refs/tags/$version.tar.gz#dracut-$version.tar.gz)
+packager=Skythrew
+makedepends=(cpio kmod)
+run=(cpio)
+build() {
+    ./configure --prefix=/usr --disable-documentation
+    make
+    make DESTDIR=$PKG install
+}
