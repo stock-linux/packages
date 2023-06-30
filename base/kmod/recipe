@@ -1,9 +1,9 @@
 name=kmod
 version=30
-release=1
+release=2
 description="The Kmod package contains libraries and utilities for loading kernel modules "
 source=(https://www.kernel.org/pub/linux/utils/kernel/$name/$name-$version.tar.xz)
-packager=camini
+packager=Skythrew
 build(){
 	./configure --prefix=/usr          \
             --sysconfdir=/etc      \
@@ -15,7 +15,7 @@ build(){
 	make
 	make DESTDIR=$PKG install
 
-	mkdir -p $PKG/sbin
+	mkdir -p $PKG/usr/sbin
 	for target in depmod insmod modinfo modprobe rmmod; do
 	ln -sfv ../bin/kmod $PKG/usr/sbin/$target
 	done
