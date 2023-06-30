@@ -42,6 +42,7 @@ dbus
 man-db
 shadow
 iproute2
+kbd
 nano
 which
 procps-ng
