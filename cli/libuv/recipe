@@ -1,0 +1,18 @@
+name=libuv
+version=1.45.0
+release=1
+description=" The libuv package is a multi-platform support library with a focus on asynchronous I/O. "
+source=(https://dist.$name.org/dist/v$version/$name-v$version.tar.gz)
+packager=camini
+makedepends=(libtool sed automake)
+unpack(){
+	tar -xf $name-v$version.tar.gz
+	cd $name-v$version
+}
+build(){
+	sh autogen.sh                              &&
+	./configure --prefix=/usr --disable-static &&
+
+	make
+	make DESTDIR=$PKG install 
+}
