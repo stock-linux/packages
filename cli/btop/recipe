@@ -1,0 +1,17 @@
+name=btop
+version=1.2.13
+release=1
+description="A monitor of system resources, bpytop ported to C++."
+source=(https://github.com/aristocratos/$name/archive/refs/tags/v$version.tar.gz)
+packager=camini
+unpack(){
+	tar -xf v$version.tar.gz
+	cd $name-$version
+}
+
+build(){
+	make all
+
+	make DESTDIR=$PKG PREFIX=/usr install
+
+}
