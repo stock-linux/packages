@@ -1,10 +1,10 @@
 name=linux-lts
 version=6.1.36
-release=1
+release=2
 description="Linux Kernel Long-Term-Support"
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$version.tar.xz config)
 packager=Skythrew
-makedepends=(bc flex cpio libelf)
+makedepends=(bc flex cpio libelf dracut kmod)
 unpack() {
     tar -xf linux-$version.tar.xz
     cd linux-$version
@@ -22,4 +22,5 @@ build() {
     cp -iv System.map $PKG/boot/System.map-lts
     cp -iv .config $PKG/boot/config-lts
     rm -rf $PKG/lib/firmware
+    depmod -b $PKG -a $version
 }

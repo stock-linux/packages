@@ -1,0 +1,3 @@
+#!/bin/bash
+dracut /boot/initramfs-lts.img 6.1.36
+grub-mkconfig -o /boot/grub/grub.cfg
