@@ -1,0 +1,13 @@
+name=python-docutils
+version=0.20.1
+release=2
+description=" docutils is a set of Python modules and programs for processing plaintext docs into formats such as HTML, XML, or LaTeX. "
+source=(https://files.pythonhosted.org/packages/source/d/docutils/docutils-$version.tar.gz)
+packager=camini
+unpack(){
+	tar -xf docutils-$version.tar.gz
+	cd  docutils-$version
+}
+build() {
+build_python
+}
