@@ -4,6 +4,7 @@ release=2
 description="The systemd package contains programs for controlling the startup, running, and shutdown of the system."
 source=(https://github.com/$name/$name/archive/v$version/$name-$version.tar.gz)
 packager=Skythrew
+makedepends=(kmod)
 build() {
 
     sed '/bus_message_type_from_string/s/_pure_//' \
