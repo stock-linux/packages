@@ -1,0 +1,13 @@
+name=libatasmart
+version=0.19
+release=1
+description="The libatasmart package is a disk reporting library."
+source=(https://0pointer.de/public/$name-$version.tar.xz)
+packager=camini
+build(){
+	./configure --prefix=/usr --disable-static &&
+	
+	make
+	make DESTDIR=$PKG docdir=/usr/share/doc/libatasmart-0.19 install
+
+}
