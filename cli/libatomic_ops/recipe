@@ -1,0 +1,15 @@
+name=libatomic_ops
+version=7.8.0
+release=1
+description="libatomic_ops provides implementations for atomic memory update operations on a number of architectures."
+source=(https://github.com/ivmai/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=camini
+build(){
+	./configure --prefix=/usr    \
+            --enable-shared  \
+            --disable-static \
+            --docdir=/usr/share/doc/libatomic_ops-7.8.0 &&
+
+	make
+	make DESTDIR=$PKG install
+}
