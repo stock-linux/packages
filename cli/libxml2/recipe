@@ -1,0 +1,17 @@
+name=libxml2
+version=2.10.4
+release=1
+description="The libxml2 package contains libraries and utilities used for parsing XML files.  "
+source=(https://download.gnome.org/sources/$name/2.10/$name-$version.tar.xz)
+packager=camini
+build (){
+	./configure --prefix=/usr           \
+            --sysconfdir=/etc       \
+            --disable-static        \
+            --with-history          \
+            PYTHON=/usr/bin/python3 \
+            --docdir=/usr/share/doc/libxml2-2.10.4 &&
+
+	make
+	make DESTDIR=$PKG install
+}
