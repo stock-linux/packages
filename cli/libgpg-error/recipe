@@ -1,14 +1,14 @@
 name=libgpg-error
 version=1.47
-release=1
+release=2
 description="The libgpg-error package contains a library that defines common error values for all GnuPG components. "
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
 packager=camini
 build(){
-	./configure --prefix=/usr &&
+	./configure --prefix=/usr 
 
 	make
-	make install &&
+	make DESTDIR=$PKG install 
 	install -v -m644 -D README $PKG/usr/share/doc/libgpg-error-1.47/README
 
 
