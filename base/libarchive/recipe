@@ -1,0 +1,15 @@
+name=libarchive
+version=3.6.2
+release=1
+description="The libarchive library provides a single interface for reading/writing various compression formats. "
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.xz)
+packager=camini
+build(){
+	./configure --prefix=/usr --disable-static &&
+
+	make
+	make DESTDIR=$PKG install
+
+	sed -i "s/iconv //" $PKG/usr/lib/pkgconfig/libarchive.pc
+
+}
