@@ -1,0 +1,19 @@
+name=json-c
+version=0.16
+release=1
+description="The JSON-C implements a reference counting object model that allows you to easily construct JSON objects in C, output them as JSON formatted strings and parse JSON formatted strings back into the C representation of JSON objects."
+source=(https://s3.amazonaws.com/json-c_releases/releases/json-c-0.16.tar.gz)
+packager=camini
+makedepends=(cmake)
+build(){
+	mkdir build &&
+	cd    build &&
+
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+	      -DCMAKE_BUILD_TYPE=Release \
+	      -DBUILD_STATIC_LIBS=OFF    \
+	.. &&
+
+	make
+	make DESTDIR=$PKG install
+}
