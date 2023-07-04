@@ -1,6 +1,6 @@
 name=apr
 version=1.7.4
-release=1
+release=2
 description="he Apache Portable Runtime (APR) is a supporting library for the Apache web server."
 source=(ftp://ftp.mirrorservice.org/sites/ftp.apache.org/$name/$name-$version.tar.bz2)
 packager=camini
@@ -10,5 +10,5 @@ build(){
             --with-installbuilddir=/usr/share/apr-1/build &&
 
 	make
-	make DESTDIR=$PKg install
+	make DESTDIR=$PKG install
 }
