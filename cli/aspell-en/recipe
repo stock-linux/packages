@@ -1,0 +1,18 @@
+name=aspell-en
+version=0.60.8
+release=1
+description="Dictionaries for Aspell"
+source=(https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-2020.12.07-0.tar.bz2)
+packager=camini
+makedepends=(aspell which)
+unpack(){
+	tar -xf aspell6-en-2020.12.07-0.tar.bz2
+	cd aspell6-en-2020.12.07-0
+}
+build(){
+	./configure
+	
+	make
+	make DESTDIR=$PKG install
+
+}
