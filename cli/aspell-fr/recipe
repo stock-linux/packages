@@ -1,0 +1,18 @@
+name=aspell-fr
+version=0.60.8
+release=1
+description="Dictionaries for Aspell"
+source=(https://ftp.gnu.org/gnu/aspell/dict/fr/aspell-fr-0.50-3.tar.bz2)
+packager=camini
+makedepends=(aspell which)
+unpack(){
+	tar -xf aspell-fr-0.50-3.tar.bz2
+	cd aspell-fr-0.50-3
+}
+build(){
+	./configure
+	
+	make
+	make DESTDIR=$PKG install
+
+}
