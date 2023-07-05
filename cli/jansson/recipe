@@ -1,0 +1,15 @@
+name=jansson
+version=2.14
+release=1
+description="The Jansson package contains a library used to encode, decode, and manipulate JSON data. "
+source=(https://github.com/akheron/$name/releases/download/v$version/$name-$version.tar.bz2)
+packager=camini
+build(){
+sed -e "/DT/s;| sort;| sed 's/@@libjansson.*//' &;" \
+    -i test/suites/api/check-exports
+
+./configure --prefix=/usr --disable-static &&
+make
+
+make DESTDIR=$PKG install
+}
