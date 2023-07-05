@@ -1,0 +1,19 @@
+name=inih
+version=56
+release=1
+description="This package is a simple .INI file parser written in C. "
+source=(https://github.com/benhoyt/$name/archive/r$version/$name-r$version.tar.gz)
+packager=camini
+unpack(){
+	tar -xf $name-r$version.tar.gz
+	cd $name-r$version
+}
+build(){
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+}
