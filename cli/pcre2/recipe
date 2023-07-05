@@ -1,0 +1,22 @@
+name=pcre2
+version=10.42
+release=1
+description=" The PCRE2 package contains a new generation of the Perl Compatible Regular Expression libraries."
+source=(https://github.com/PCRE2Project/$name/releases/download/$name-$version/$name-$version.tar.bz2)
+packager=camini
+makedepends=(readline bzip2)
+build(){
+	./configure --prefix=/usr                       \
+	    --docdir=/usr/share/doc/pcre2-10.42 \
+	            --enable-unicode                    \
+	            --enable-jit                        \
+	            --enable-pcre2-16                   \
+	            --enable-pcre2-32                   \
+	            --enable-pcre2grep-libz             \
+	            --enable-pcre2grep-libbz2           \
+	            --enable-pcre2test-libreadline      \
+	            --disable-static                    &&
+
+	make
+	make DESTDIR=$PKG install
+}
