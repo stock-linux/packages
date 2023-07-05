@@ -1,0 +1,23 @@
+name=brotli
+version=1.0.9
+release=2
+description="Brotli provides a general-purpose lossless compression algorithm that compresses data using a combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling. Its libraries are particularly used for WOFF2 fonts on webpages." 
+source=(https://github.com/google/brotli/archive/v1.0.9/brotli-1.0.9.tar.gz)
+packager=camini
+makedepends=(cmake python-wheel)
+build(){
+    sed -i 's@-R..libdir.@@' scripts/*.pc.in
+    mkdir out &&
+    cd    out &&
+
+    cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      ..  &&
+
+    make
+    make DESTDIR=$PKG install
+    cd ..
+   
+   python3 setup.py build
+   python3 setup.py install --skip-build -O1 --root="$PKG"
+}

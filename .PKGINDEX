@@ -1,1 +1,1 @@
-stock-packaging|0.2.1|1|Package management tools|Skythrew||curl,tar,zstd
+which|2.21|1|The first option is to install the actual GNU which package.|Skythrew||glibc

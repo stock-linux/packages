@@ -1,0 +1,15 @@
+name=git
+version=2.41.0
+release=1
+description="Git is a free and open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency."
+source=(https://www.kernel.org/pub/software/scm/$name/$name-$version.tar.xz)
+packager=camini
+makedepends=(gettext)
+build(){
+	./configure --prefix=/usr \
+            --with-gitconfig=/etc/gitconfig \
+            --with-python=python3 &&
+
+	make
+	make DESTDIR=$PKG install
+}
