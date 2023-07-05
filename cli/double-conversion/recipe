@@ -1,0 +1,19 @@
+name=double-conversion
+version=3.3.0
+release=1
+description="The Double-conversion package contains a library that facilitates binary-to-decimal and decimal-to-binary routines for IEEE doubles. "
+source=(https://github.com/google/$name/archive/v$version/double-conversion-$version.tar.gz)
+packager=camini
+makedepends=(cmake)
+build(){
+	mkdir build &&
+	cd    build &&
+
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+	      -DBUILD_SHARED_LIBS=ON      \
+	      -DBUILD_TESTING=ON          \
+	      ..                          &&
+
+	make
+	make DESTDIR=PKG install
+}
