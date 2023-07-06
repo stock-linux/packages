@@ -1,0 +1,15 @@
+name=reiserfsprogs
+version=3.6.27
+release=1
+description=" The reiserfsprogs package contains various utilities for use with the Reiser file system. "
+source=(https://www.kernel.org/pub/linux/kernel/people/jeffm/$name/v$version/$name-$version.tar.xz)
+packager=camini
+makedepends=(e2fsprogs)
+build(){
+sed -i '/parse_time.h/i #define _GNU_SOURCE' lib/parse_time.c &&
+autoreconf -fiv           &&
+
+./configure --prefix=/usr &&
+make
+make DESTDIR=$PKG install
+}
