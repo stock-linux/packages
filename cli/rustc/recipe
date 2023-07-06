@@ -1,6 +1,6 @@
 name=rustc
 version=1.70.0
-release=1
+release=2
 description="The Rust programming language is designed to be a safe, concurrent, practical language."
 source=(https://static.rust-lang.org/dist/$name-$version-src.tar.xz)
 packager=Babilinx
@@ -40,8 +40,8 @@ tools = ["cargo", "clippy", "rustdoc", "rustfmt"]
 vendor = true
 
 [install]
-prefix = "/opt/rustc-1.70.0"
-docdir = "share/doc/rustc-1.70.0"
+prefix = "/usr"
+docdir = "/usr/share/doc/rustc-1.70.0"
 
 [rust]
 channel = "stable"
@@ -76,3 +76,4 @@ unpack() {
   tar -xf $name-$version-src.tar.*
   cd $name-$version-src
 }
+
