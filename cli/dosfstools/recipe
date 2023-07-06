@@ -1,0 +1,14 @@
+name=dosfstools
+version=4.2
+release=1
+description="The dosfstools package contains various utilities for use with the FAT family of file systems. "
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=camini
+build(){
+./configure --prefix=/usr            \
+            --enable-compat-symlinks \
+            --mandir=/usr/share/man  \
+            --docdir=/usr/share/doc/dosfstools-4.2 &&
+make
+make DESTDIR=$PKG install
+}
