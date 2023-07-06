@@ -1,0 +1,14 @@
+name=liboauth
+version=1.0.3
+release=1
+description="liboauth is a collection of POSIX-C functions implementing the OAuth Core RFC 5849 standard. "
+source=(https://downloads.sourceforge.net/$name/$name-$version.tar.gz https://www.linuxfromscratch.org/patches/blfs/svn/liboauth-1.0.3-openssl-1.1.0-3.patch)
+packager=camini
+build(){
+patch -Np1 -i ../liboauth-1.0.3-openssl-1.1.0-3.patch
+
+./configure --prefix=/usr --disable-static &&
+make
+
+make DESTDIR=$PKG install
+}
