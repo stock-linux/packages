@@ -1,0 +1,12 @@
+name=rpcsvc-proto
+version=1.4.4
+release=1
+description="The rpcsvc-proto package contains the rcpsvc protocol files and headers, formerly included with glibc, that are not included in replacement libtirpc-1.3.3, along with the rpcgen program. "
+source=(https://github.com/thkukuk/$name/releases/download/v$version/rpcsvc-proto-$version.tar.xz)
+packager=camini
+build(){
+./configure --sysconfdir=/etc &&
+make
+
+make DESTDIR=$PKG install
+}
