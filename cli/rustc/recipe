@@ -41,7 +41,7 @@ vendor = true
 
 [install]
 prefix = "/usr"
-docdir = "/usr/share/doc/rustc-1.70.0"
+docdir = "/usr/share/doc/rustc-$version"
 
 [rust]
 channel = "stable"
