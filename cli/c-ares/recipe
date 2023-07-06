@@ -1,0 +1,16 @@
+name=c-ares
+version=1.19.1
+release=1
+description="c-ares is a C library for asynchronous DNS requests. "
+source=(https://$name.haxx.se/download/c-ares-$version.tar.gz)
+packager=camini
+makedepends=(cmake)
+build(){
+mkdir build &&
+cd    build &&
+
+cmake  -DCMAKE_INSTALL_PREFIX=/usr .. &&
+make
+
+make DESTDIR=$PKG install
+}
