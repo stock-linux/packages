@@ -1,0 +1,49 @@
+name=llvm
+version=16.0.5
+release=1
+description='The LLVM package contains a collection of modular and reusable compiler and toolchain technologies.'
+source=(https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.5/$name-$version.src.tar.xz https://anduin.linuxfromscratch.org/BLFS/$name/$name-cmake.src.tar.xz https://anduin.linuxfromscratch.org/BLFS/llvm/llvm-third-party.src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/clang-$version.src.tar.xz https://www.linuxfromscratch.org/patches/blfs/svn/clang-$version-enable_default_ssp-1.patch)
+packager=Skythrew
+makedepends=(cmake)
+unpack() {
+tar -xf $name-$version.src.tar.xz
+cd $name-$version.src
+}
+build() {
+
+tar -xf ../llvm-cmake.src.tar.xz                                   &&
+tar -xf ../llvm-third-party.src.tar.xz                             &&
+sed '/LLVM_COMMON_CMAKE_UTILS/s@../cmake@llvm-cmake.src@'          \
+    -i CMakeLists.txt                                              &&
+sed '/LLVM_THIRD_PARTY_DIR/s@../third-party@llvm-third-party.src@' \
+    -i cmake/modules/HandleLLVMOptions.cmake
+
+tar -xf ../clang-16.0.5.src.tar.xz -C tools &&
+mv tools/clang-16.0.5.src tools/clang
+
+grep -rl '#!.*python' | xargs sed -i '1s/python$/python3/'
+
+patch -Np2 -d tools/clang <../clang-$version-enable_default_ssp-1.patch
+
+mkdir -v build &&
+cd       build &&
+
+CC=gcc CXX=g++                                  \
+cmake -DCMAKE_INSTALL_PREFIX=/usr               \
+      -DLLVM_ENABLE_FFI=ON                      \
+      -DCMAKE_BUILD_TYPE=Release                \
+      -DLLVM_BUILD_LLVM_DYLIB=ON                \
+      -DLLVM_LINK_LLVM_DYLIB=ON                 \
+      -DLLVM_ENABLE_RTTI=ON                     \
+      -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;BPF" \
+      -DLLVM_BINUTILS_INCDIR=/usr/include       \
+      -DLLVM_INCLUDE_BENCHMARKS=OFF             \
+      -DCLANG_DEFAULT_PIE_ON_LINUX=ON           \
+      -Wno-dev -G Ninja ..                      &&
+ninja
+
+DESTDIR=$PKG ninja install
+mkdir -p $PKG/usr/bin
+cp bin/FileCheck $PKG/usr/bin
+
+}
