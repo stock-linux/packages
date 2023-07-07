@@ -1,0 +1,16 @@
+name=libpaper
+version=2.1.1
+release=1
+description="This package is intended to provide a simple way for applications to take actions based on a system or user-specified paper size. "
+source=(https://github.com/rrthomas/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=camini
+build(){
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --disable-static     \
+            --enable-relocatable \
+            --docdir=/usr/share/doc/libpaper-2.1.1 &&
+make
+make DESTDIR=$PKG install
+}
+
