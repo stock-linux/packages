@@ -1,0 +1,17 @@
+name=xapian
+version=1.4.22
+release=1
+description="Xapian is an open source search engine library. "
+source=(https://oligarchy.co.uk/$name/$version/xapian-core-$version.tar.xz)
+packager=camini
+unpack(){
+	tar -xf xapian-core-$version.tar.xz
+	cd xapian-core-$version
+}
+build(){
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/xapian-core-1.4.22 &&
+make
+make DESTDIR=$PKG install
+}
