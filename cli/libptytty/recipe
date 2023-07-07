@@ -1,0 +1,18 @@
+name=libptytty
+version=2.0
+release=1
+description="The libptytty package provides a library that allows for OS independent and secure pty/tty and utmp/wtmp/lastlog handling. "
+source=(http://dist.schmorp.de/$name/$name-$version.tar.gz)
+packager=camini
+makedepends=(cmake)
+build(){
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr     \
+      -DCMAKE_BUILD_TYPE=Release      \
+      -DPT_UTMP_FILE:STRING=/run/utmp \
+      .. &&
+make
+make DESTDIR=$PKG install
+}
