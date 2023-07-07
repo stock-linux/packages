@@ -1,0 +1,29 @@
+name=doxygen
+version=1.9.7
+release=1
+description=" The Doxygen package contains a documentation system for C++, C, Java, Objective-C, Corba IDL and to some extent PHP, C# and D. It is useful for generating HTML documentation and/or an off-line reference manual from a set of documented source files. "
+source=(https://$name.nl/files/$name-$version.src.tar.gz)
+packager=camini
+makedepends=(libarchive flex bison python cmake xapian git)
+unpack(){
+	tar -xf $name-$version.src.tar.gz
+	cd $name-$version
+}
+build(){
+
+grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
+
+mkdir -v build &&
+cd       build &&
+
+cmake -G "Unix Makefiles"         \
+      -D CMAKE_BUILD_TYPE=Release  \
+      -D CMAKE_INSTALL_PREFIX=/usr \
+      -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+      -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+      -Wno-dev .. &&
+
+make
+
+make DESTDIR=$PKG install 
+}
