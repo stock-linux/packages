@@ -1,0 +1,18 @@
+name=btrfs-progs
+version=6.3.2
+release=1
+description=" The btrfs-progs package contains administration and debugging tools for the B-tree file system (btrfs). "
+source=(https://www.kernel.org/pub/linux/kernel/people/kdave/$name/btrfs-progs-v$version.tar.xz)
+packager=camini
+makedepends=(lzo e2fsprogs util-linux zlib)
+unpack(){
+	tar -xf btrfs-progs-v$version.tar.xz
+	cd btrfs-progs-v$version
+}
+build(){
+./configure --prefix=/usr           \
+            --disable-static        \
+            --disable-documentation &&
+make
+make DESTDIR=$PKG install
+}
