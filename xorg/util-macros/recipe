@@ -1,0 +1,6 @@
+name=util-macros
+version=1.20.0
+release=1
+description='The util-macros package contains the m4 macros used by all of the Xorg packages.'
+source=(https://www.x.org/pub/individual/util/$name-$version.tar.xz)
+packager=Skythrew
