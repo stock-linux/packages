@@ -1,0 +1,21 @@
+name=unzip
+version=6.0
+release=2
+description=" The UnZip package contains ZIP extraction utilities."
+source=(https://downloads.sourceforge.net/infozip/unzip60.tar.gz https://www.linuxfromscratch.org/patches/blfs/svn/unzip-6.0-consolidated_fixes-1.patch)
+packager=camini
+unpack(){
+	tar -xf unzip60.tar.gz
+	cd unzip60
+}
+build(){
+
+convmv -f cp936 -t utf-8 -r --nosmart --notest
+
+patch -Np1 -i ../unzip-6.0-consolidated_fixes-1.patch
+
+make -f unix/Makefile generic
+
+make prefix=$PKG/usr MANDIR=$PKG/usr/share/man/man1 \
+ -f unix/Makefile install
+}
