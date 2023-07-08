@@ -1,0 +1,6 @@
+name=xtrans
+version=1.5.0
+release=1
+description="X Transport Library"
+source=(https://www.x.org/pub/individual/lib/$name-$version.tar.xz)
+packager=Skythrew
