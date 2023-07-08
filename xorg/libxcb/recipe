@@ -1,0 +1,18 @@
+name=libxcb
+version=1.15
+release=1
+description="The libxcb package provides an interface to the X Window System protocol, which replaces the current Xlib interface."
+source=(https://xorg.freedesktop.org/archive/individual/lib/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto libxau xcb-proto libxdmcp)
+build() {
+
+    PYTHON=python3                \
+    ./configure --prefix=/usr      \
+            --without-doxygen \
+            --docdir='${datadir}'/doc/libxcb-$version &&
+    make
+
+    make DESTDIR=$PKG install
+
+}
