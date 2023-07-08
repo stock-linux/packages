@@ -1,0 +1,22 @@
+name=libxt
+version=1.3.0
+release=1
+description="X11 toolkit intrinsics library"
+source=(https://www.x.org/pub/individual/lib/libXt-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto libx11 libsm)
+unpack() {
+    tar -xf libXt-$version.tar.xz
+    cd libXt-$version
+}
+build() {
+
+    ./configure --prefix=/usr \
+                --docdir=/usr/share/doc/$name-$version \
+                --with-appdefaultdir=/etc/X11/app-defaults
+
+    make
+
+    make DESTDIR=$PKG install
+
+}
