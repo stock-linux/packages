@@ -1,0 +1,19 @@
+name=xorgproto
+version=2023.2
+release=1
+description='The xorgproto package provides the header files required to build the X Window system, and to allow other applications to build against the installed X Window system.'
+source=(https://xorg.freedesktop.org/archive/individual/proto/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr .. &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+    mv -v $PKG/usr/share/doc/xorgproto{,-2023.2}
+
+}
