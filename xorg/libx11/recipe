@@ -1,0 +1,11 @@
+name=libx11
+version=1.8.6
+release=1
+description="The Xorg libraries provide library routines that are used within all X Window applications."
+source=(https://www.x.org/pub/individual/lib/libX11-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto xtrans libxcb)
+unpack() {
+    tar -xf libX11-$version.tar.xz
+    cd libX11-$version
+}
