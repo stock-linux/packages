@@ -1,0 +1,19 @@
+name=sgml-common
+version=0.6.3
+release=1
+description="The SGML Common package contains install-catalog. This is useful for creating and maintaining centralized SGML catalogs. "
+source=(https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/sgml-common-$version.tgz https://www.linuxfromscratch.org/patches/blfs/svn/sgml-common-0.6.3-manpage-1.patch)
+packager=camini
+unpack(){
+	tar -xf sgml-common-$version.tgz
+	cd sgml-common-$version
+}
+build(){
+patch -Np1 -i ../sgml-common-0.6.3-manpage-1.patch &&
+autoreconf -f -i
+
+./configure --prefix=/usr --sysconfdir=/etc &&
+make
+
+make DESTDIR=$PKG install
+}
