@@ -1,0 +1,7 @@
+name=xev
+version=1.2.5
+release=1
+description="Print contents of X events"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxrandr util-macros xorgproto)
