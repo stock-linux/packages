@@ -1,0 +1,11 @@
+name=libxcomposite
+version=0.4.6
+release=1
+description="X11 Composite extension library"
+source=(https://www.x.org/archive//individual/lib/libXcomposite-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11 libxfixes libxext)
+unpack(){
+	tar -xf libXcomposite-$version.tar.gz
+	cd libXcomposite-$version
+}
