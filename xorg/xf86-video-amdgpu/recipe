@@ -1,0 +1,7 @@
+name=xf86-video-amdgpu
+version=23.0.0
+release=1
+description="The Xorg AMDGPU Driver package contains the X.Org Video Driver for newer AMD Radeon video cards and newer AMD-CPUs with integrated graphics"
+source=(https://www.x.org/pub/individual/driver/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xorg-server xorgproto)
