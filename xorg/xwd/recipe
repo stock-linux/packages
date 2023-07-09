@@ -1,0 +1,7 @@
+name=xwd
+version=1.0.9
+release=1
+description="X Window System image dumping utility"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxkbfile libxt util-macros xorgproto)
