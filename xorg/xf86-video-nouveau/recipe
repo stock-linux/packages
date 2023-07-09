@@ -1,0 +1,10 @@
+name=xf86-video-nouveau
+version=1.0.17
+release=1
+description="The Xorg Nouveau Driver package contains the X.Org Video Driver for NVidia Cards"
+source=(https://www.x.org/pub/individual/driver/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(xorg-server xorgproto)
+pre_build() {
+    grep -rl slave | xargs sed -i s/slave/secondary/
+}
