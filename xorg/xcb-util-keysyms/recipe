@@ -1,0 +1,7 @@
+name=xcb-util-keysyms
+version=0.4.1
+release=1
+description="The xcb-util-keysyms package contains a library for handling standard X key constants and conversion to/from keycodes."
+source=(https://xcb.freedesktop.org/dist/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xorgproto libxcb)

@@ -1,0 +1,18 @@
+name=libvdpau
+version=1.5
+release=1
+description="The libvdpau package contains a library which implements the VDPAU library."
+source=(https://gitlab.freedesktop.org/vdpau/$name/-/archive/$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(xorgproto libxext)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr .. &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}

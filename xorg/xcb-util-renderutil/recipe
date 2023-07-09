@@ -1,0 +1,7 @@
+name=xcb-util-renderutil
+version=0.3.10
+release=1
+description="The xcb-util-renderutil package provides additional extensions to the XCB library."
+source=(https://xcb.freedesktop.org/dist/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xorgproto libxcb)

@@ -1,0 +1,18 @@
+name=wayland-protocols
+version=1.32
+release=1
+description="The Wayland-Protocols package contains additional Wayland protocols that add functionality outside of protocols already in the Wayland core."
+source=(https://gitlab.freedesktop.org/wayland/$name/-/releases/$version/downloads/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(wayland)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr --buildtype=release &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}

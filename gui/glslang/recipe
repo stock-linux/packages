@@ -1,0 +1,19 @@
+name=glslang
+version=12.2.0
+release=1
+description="Khronos-reference front end for GLSL/ESSL, partial front end for HLSL, and a SPIR-V generator."
+source=(https://github.com/KhronosGroup/$name/archive/refs/tags/$version.tar.gz#$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake)
+build() {
+
+    mkdir build
+    cd    build
+
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$(pwd)/install" ..
+
+    make
+
+    make DESTDIR=$PKG install
+
+}
