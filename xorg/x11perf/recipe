@@ -1,0 +1,7 @@
+name=x11perf
+version=1.6.1
+release=1
+description="Simple X server performance benchmarker"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libx11 libxext libxft libxmu libxrender util-macros xorgproto)
