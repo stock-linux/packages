@@ -1,0 +1,7 @@
+name=xcb-util
+version=0.4.1
+release=1
+description="The xcb-util package provides additional extensions to the XCB library, many that were previously found in Xlib, but are not part of core X protocol."
+source=(https://xcb.freedesktop.org/dist/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xorgproto libxcb)
