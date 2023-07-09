@@ -1,0 +1,11 @@
+name=libxft
+version=2.3.8
+release=1
+description="FreeType-based font drawing library for X"
+source=(https://www.x.org/pub/individual/lib/libXft-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto libxrender freetype fontconfig)
+unpack() {
+    tar -xf libXft-$version.tar.xz
+    cd libXft-$version
+}
