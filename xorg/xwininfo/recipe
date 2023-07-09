@@ -1,0 +1,7 @@
+name=xwininfo
+version=1.1.6
+release=1
+description="Command-line utility to print information about windows on an X server"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxcb libx11 util-macros xorgproto)
