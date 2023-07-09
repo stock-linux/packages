@@ -1,0 +1,11 @@
+name=libxaw
+version=1.0.15
+release=1
+description="X11 Athena Widget library"
+source=(https://www.x.org/archive//individual/lib/libXaw-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11 libxext libxt libxmu libxpm libxau)
+unpack(){
+	tar -xf libXaw-$version.tar.gz
+	cd libXaw-$version
+}
