@@ -1,0 +1,7 @@
+name=xinput
+version=1.6.4
+release=1
+description="Small commandline tool to configure devices"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxrandr libxi libxinerama libxfixes util-macros xorgproto)
