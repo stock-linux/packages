@@ -4,15 +4,19 @@ release=1
 description="The libva package contains a library which provides access to hardware accelerated video processing."
 source=(https://github.com/intel/$name/releases/download/$version/$name-$version.tar.bz2)
 packager=Skythrew
-makedepends=(libdrm)
+makedepends=(libdrm xorg-server xorgproto)
 build() {
 
-    mkdir build &&
-    cd    build &&
+./configure --prefix=/usr \
+--sysconfdir=/etc \
+--localstatedir=/var \
+--disable-static
+make
+make DESTDIR=$PKG install
 
-    meson setup --prefix=/usr --buildtype=release &&
-    ninja
-
-    DESTDIR=$PKG ninja install
+# Obsolets libs
+rm $PKG/usr/lib/libva-drm.la
+rm $PKG/usr/lib/libva-x11.la
+rm $PKG/usr/lib/libva.la
 
 }
