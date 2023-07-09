@@ -1,0 +1,7 @@
+name=xcursor-themes
+version=1.0.7
+release=1
+description="The xcursor-themes package contains the redglass and whiteglass animated cursor themes."
+source=(https://www.x.org/pub/individual/data/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xcursorgen util-macros xorgproto)
