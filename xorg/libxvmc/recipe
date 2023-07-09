@@ -1,0 +1,11 @@
+name=libxvmc
+version=1.0.13
+release=1
+description="X11 Video Motion Compensation extension library"
+source=(https://www.x.org/archive//individual/lib/libXvMC-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11 libxext libxv)
+unpack(){
+	tar -xf libXvMC-$version.tar.gz
+	cd libXvMC-$version
+}
