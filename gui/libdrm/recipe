@@ -1,0 +1,22 @@
+name=libdrm
+version=2.4.115
+release=1
+description="Libdrm provides a userspace library for accessing the direct rendering manager (DRM) on operating systems that support the ioctl interface."
+source=(https://dri.freedesktop.org/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libpciaccess)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr \
+            --buildtype=release   \
+            -Dudev=true           \
+            -Dvalgrind=disabled   \
+            ..                    &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}
