@@ -1,0 +1,7 @@
+name=xpr
+version=1.1.0
+release=1
+description="Print an X window dump from xwd"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxmu util-macros xorgproto)
