@@ -1,0 +1,7 @@
+name=xf86-input-synaptics
+version=1.9.2
+release=1
+description="The Xorg Synaptics Driver package contains the X.Org Input Driver, support programs and SDK for Synaptics touchpads"
+source=(https://www.x.org/pub/individual/driver/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libevdev xorg-server xorgproto libxi)

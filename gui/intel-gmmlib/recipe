@@ -1,0 +1,23 @@
+name=intel-gmmlib
+version=22.3.7
+release=1
+description="The Intel-gmmlib package contains the Intel Graphics Memory Management Library"
+source=(https://github.com/intel/gmmlib/archive/refs/tags/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake)
+unpack() {
+    tar -xf $name-$version.tar.gz
+    cd gmmlib-intel-gmmlib-$version
+}
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    cmake -DCMAKE_INSTALL_PREFIX=/usr   \
+      -DBUILD_TYPE=Release          \
+      -Wno-dev ..                   &&
+    make
+    make DESTDIR=$PKG install
+
+}

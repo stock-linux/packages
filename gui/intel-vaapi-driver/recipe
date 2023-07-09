@@ -1,0 +1,7 @@
+name=intel-vaapi-driver
+version=2.4.1
+release=1
+description="The intel-vaapi-driver package contains a VA API driver for Intel GPUs that are provided with Haswell CPUs and earlier."
+source=(https://github.com/intel/$name/releases/download/$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libva)

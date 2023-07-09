@@ -1,0 +1,7 @@
+name=xf86-input-wacom
+version=1.2.0
+release=1
+description="The Xorg Wacom Driver package contains the X.Org X11 driver and SDK for Wacom and Wacom-like tablets."
+source=(https://github.com/linuxwacom/$name/releases/download/$name-$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(xorg-server xorgproto libxi libxrandr libxinerama)

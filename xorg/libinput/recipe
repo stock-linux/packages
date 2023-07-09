@@ -1,0 +1,24 @@
+name=libinput
+version=1.23.0
+release=1
+description="libinput is a library that handles input devices for display servers and other applications that need to directly deal with input devices."
+source=(https://gitlab.freedesktop.org/$name/$name/-/archive/$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(libevdev mtdev)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr    \
+            --buildtype=release      \
+            -Ddebug-gui=false        \
+            -Dtests=false            \
+            -Dlibwacom=false         \
+            -Dudev-dir=/usr/lib/udev \
+            ..                      &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}

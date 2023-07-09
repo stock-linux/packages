@@ -1,0 +1,23 @@
+name=xwayland
+version=23.1.2
+release=1
+description="The Xwayland package is an Xorg server running on top of the wayland server."
+source=(https://www.x.org/pub/individual/xserver/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxcvt pixman wayland-protocols wayland font-util libepoxy libtirpc mesa xorgproto xtrans xkbcomp libxfont2)
+build() {
+
+    sed -i '/install_man/,$d' meson.build &&
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr         \
+            --buildtype=release           \
+            -Dxkb_output_dir=/var/lib/xkb \
+            ..                            &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}

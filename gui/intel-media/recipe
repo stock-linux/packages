@@ -1,0 +1,25 @@
+name=intel-media
+version=23.2.4
+release=1
+description="The intel-media-driver package provides a VA API driver for Intel GPUs"
+source=(https://github.com/intel/media-driver/archive/refs/tags/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake intel-gmmlib libva)
+unpack() {
+    tar -xf $name-$version.tar.gz
+    cd media-driver-intel-media-$version
+}
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    cmake -DCMAKE_INSTALL_PREFIX=$XORG_PREFIX \
+      -DINSTALL_DRIVER_SYSCONF=OFF        \
+      -DBUILD_TYPE=Release                \
+      -Wno-dev ..                   &&
+    make
+
+    make DESTDIR=$PKG install
+
+}

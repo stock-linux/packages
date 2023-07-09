@@ -1,0 +1,15 @@
+name=libevdev
+version=1.13.1
+release=1
+description="The libevdev package contains common functions for Xorg input drivers."
+source=(https://www.freedesktop.org/software/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(check)
+build() {
+
+    mkdir build && cd build
+    meson -Dprefix=/usr -Dbuildtype=release -Ddocumentation=disabled ..
+    ninja
+    DESTDIR=$PKG ninja install
+
+}

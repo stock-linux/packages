@@ -1,0 +1,23 @@
+name=xorg-server
+version=21.1.8
+release=1
+description="The Xorg Server is the core of the X Window system."
+source=(https://www.x.org/pub/individual/xserver/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libdrm libepoxy libpciaccess libxcvt libxfont2 libxshmfence pixman libxi libxkbfile libxmu libxrender libxres libxtst libxv mesa xcb-util xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm font-util util-macros xkbcomp xorgproto xtrans libtirpc)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup ..              \
+      --prefix=/usr \
+      --localstatedir=/var  \
+      -Dsuid_wrapper=true   \
+      -Dxkb_output_dir=/var/lib/xkb &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+    mkdir -pv $PKG/etc/X11/xorg.conf.d
+
+}
