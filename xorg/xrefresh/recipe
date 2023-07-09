@@ -1,0 +1,7 @@
+name=xrefresh
+version=1.0.7
+release=1
+description="Refresh all or part of an X screen"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 util-macros xorgproto)
