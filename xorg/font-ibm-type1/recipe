@@ -1,0 +1,7 @@
+name=font-ibm-type1
+version=1.0.4
+release=1
+description="xorg ibm fonts"
+source=(https://www.x.org/archive//individual/font/$name-$version.tar.gz)
+packager=camini
+makedepends=(xcursor-themes util-macros mkfontscale)
