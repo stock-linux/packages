@@ -1,0 +1,7 @@
+name=xprop
+version=1.2.6
+release=1
+description="Property displayer for X"
+source=(https://www.x.org/archive//individual/app/$name-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11)
