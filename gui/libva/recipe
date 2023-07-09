@@ -1,0 +1,18 @@
+name=libva
+version=2.18.0
+release=1
+description="The libva package contains a library which provides access to hardware accelerated video processing."
+source=(https://github.com/intel/$name/releases/download/$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libdrm)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr --buildtype=release &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}
