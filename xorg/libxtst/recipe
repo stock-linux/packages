@@ -1,0 +1,11 @@
+name=libxtst
+version=1.2.4
+release=1
+description="X11 Testing -- Resource extension library"
+source=(https://www.x.org/archive//individual/lib/libXtst-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libxfixes libx11 libxext libxi)
+unpack(){
+	tar -xf libXtst-$version.tar.gz
+	cd libXtst-$version
+}
