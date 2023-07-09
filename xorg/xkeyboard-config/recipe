@@ -1,0 +1,18 @@
+name=xkeyboard-config
+version=2.39
+release=1
+description="The XKeyboardConfig package contains the keyboard configuration database for the X Window System."
+source=(https://www.x.org/pub/individual/data/xkeyboard-config/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxslt xkbcomp)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr --buildtype=release .. &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}
