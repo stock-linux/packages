@@ -1,0 +1,11 @@
+name=libxrender
+version=0.9.11
+release=1
+description="X Rendering Extension client library"
+source=(https://www.x.org/archive//individual/lib/libXrender-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11)
+unpack(){
+	tar -xf libXrender-$version.tar.gz
+	cd libXrender-$version
+}
