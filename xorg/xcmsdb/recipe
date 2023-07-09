@@ -1,0 +1,7 @@
+name=xcmsdb
+version=1.0.6
+release=1
+description="Device Color Characterization utility for X Color Management System"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto libx11)
