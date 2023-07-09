@@ -1,0 +1,7 @@
+name=xcursorgen
+version=1.0.8
+release=1
+description="Create an X cursor file from PNG images"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libpng libx11 libxcursor util-macros xorgproto)

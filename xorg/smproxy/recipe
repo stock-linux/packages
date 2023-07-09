@@ -1,0 +1,7 @@
+name=smproxy
+version=1.0.7
+release=1
+description="Allows X applications that do not support X11R6 session management to participate in an X11R6 session"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libsm libxmu libxt util-macros xorgproto)

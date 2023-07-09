@@ -1,0 +1,7 @@
+name=xdpyinfo
+version=1.3.4
+release=1
+description="Display information utility for X"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxcomposite libxext libxinerama libxrender libxtst libxxf86vm util-macros xorgproto libxfixes)

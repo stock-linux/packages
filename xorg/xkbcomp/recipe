@@ -1,0 +1,7 @@
+name=xkbcomp
+version=1.4.6
+release=1
+description="X Keyboard description compiler"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxkbfile util-macros xorgproto)

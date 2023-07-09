@@ -1,10 +1,9 @@
 name=curl
 version=8.1.2
-release=1
+release=2
 description="Software project providing a library (libcurl) and command-line tool (curl) for transferring data using various network protocols."
 source=(https://$name.se/download/$name-$version.tar.xz)
 packager=Skythrew
-run=(make-ca)
 build() {
 
     ./configure --prefix=/usr                           \

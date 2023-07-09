@@ -1,0 +1,7 @@
+name=xgamma
+version=1.0.7
+release=1
+description="Alter a monitor's gamma correction"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxxf86vm util-macros xorgproto)

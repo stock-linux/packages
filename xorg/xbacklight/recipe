@@ -1,0 +1,7 @@
+name=xbacklight
+version=1.2.3
+release=1
+description="RandR-based backlight control application"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(xcb-util util-macros xorgproto)
