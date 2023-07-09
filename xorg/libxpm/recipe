@@ -1,0 +1,11 @@
+name=libxpm
+version=3.5.16
+release=1
+description="X11 pixmap library"
+source=(https://www.x.org/archive//individual/lib/libXpm-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11 libxt libxext)
+unpack(){
+	tar -xf libXpm-$version.tar.gz
+	cd libXpm-$version
+}
