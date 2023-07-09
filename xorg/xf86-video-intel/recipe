@@ -1,0 +1,18 @@
+name=xf86-video-intel
+version=20230223
+release=1
+description="The Xorg Intel Driver package contains the X.Org Video Driver for Intel integrated video chips including 8xx, 9xx, Gxx, Qxx, HD, Iris, and Iris Pro graphics processors."
+source=(https://anduin.linuxfromscratch.org/BLFS/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xcb-util xorg-server xorgproto util-macros)
+build() {
+
+    ./autogen.sh --prefix=/usr     \
+            --enable-kms-only \
+            --enable-uxa      \
+            --mandir=/usr/share/man &&
+    make
+
+    make DESTDIR=$PKG install
+
+}
