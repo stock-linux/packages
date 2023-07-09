@@ -1,0 +1,7 @@
+name=xrandr
+version=1.5.2
+release=1
+description="Primitive command line interface to RandR extension"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxrandr util-macros xorgproto)
