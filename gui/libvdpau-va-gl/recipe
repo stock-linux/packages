@@ -1,0 +1,20 @@
+name=libvdpau-va-gl
+version=0.4.0
+release=1
+description="The libvdpau-va-gl package contains a library which implements the VDPAU library."
+source=(https://github.com/i-rinat/$name/archive/v$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake libvdpau libva xorgproto)
+build() {
+
+sed -e '/#include <stdlib.h>/a #include <string>' -i src/api-device.cc &&
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr .. &&
+make
+
+make DESTDIR=$PKG install
+
+}
