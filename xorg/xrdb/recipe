@@ -1,0 +1,7 @@
+name=xrdb
+version=1.2.2
+release=1
+description="X server resource database utility"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxmu util-macros xorgproto)
