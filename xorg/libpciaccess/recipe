@@ -1,0 +1,6 @@
+name=libpciaccess
+version=0.17
+release=1
+description="Library providing generic access to the PCI bus and devices"
+source=(https://www.x.org/pub/individual/lib/$name-$version.tar.xz)
+packager=Skythrew
