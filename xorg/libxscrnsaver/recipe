@@ -1,0 +1,11 @@
+name=libxscrnsaver
+version=1.2.4
+release=1
+description="X11 Screen Saver extension library"
+source=(https://www.x.org/pub/individual/lib/libXScrnSaver-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto libxext)
+unpack() {
+    tar -xf libXScrnSaver-$version.tar.xz
+    cd libXScrnSaver-$version
+}

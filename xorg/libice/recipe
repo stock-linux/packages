@@ -1,0 +1,11 @@
+name=libice
+version=1.1.1
+release=1
+description="X11 Inter-Client Exchange library"
+source=(https://www.x.org/pub/individual/lib/libICE-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto xtrans)
+unpack() {
+    tar -xf libICE-$version.tar.xz
+    cd libICE-$version
+}

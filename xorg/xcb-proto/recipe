@@ -1,0 +1,13 @@
+name=xcb-proto
+version=1.15.2
+release=1
+description="The xcb-proto package provides the XML-XCB protocol descriptions that libxcb uses to generate the majority of its code and API."
+source=(https://xorg.freedesktop.org/archive/individual/proto/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros)
+pre_build() {
+    export PYTHON=python3
+}
+post_build() {
+    unset PYTHON
+}
