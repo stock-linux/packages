@@ -1,0 +1,11 @@
+name=libxv
+version=1.0.12
+release=1
+description="X11 Video extension library"
+source=(https://www.x.org/pub/individual/lib/libXv-$version.tar.xz)
+packager=Skythrew
+makedepends=(xorgproto libxext)
+unpack() {
+    tar -xf libXv-$version.tar.xz
+    cd libXv-$version
+}
