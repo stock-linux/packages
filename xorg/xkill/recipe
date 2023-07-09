@@ -1,0 +1,7 @@
+name=xkill
+version=1.0.6
+release=1
+description="Kill a client by its X resource"
+source=(https://www.x.org/archive//individual/app/$name-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11 libxmu)
