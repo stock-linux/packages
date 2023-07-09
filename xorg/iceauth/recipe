@@ -1,0 +1,8 @@
+name=iceauth
+version=1.0.9
+release=1
+description="ICE authority file utility"
+source=(https://www.x.org/archive//individual/app/$name-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libice)
+
