@@ -1,0 +1,19 @@
+name=libxfont2
+version=2.0.6
+release=1
+description="X11 font rasterisation library"
+source=(https://www.x.org/pub/individual/lib/libXfont2-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto xtrans freetype libfontenc)
+unpack() {
+    tar -xf libXfont2-$version.tar.xz
+    cd libXfont2-$version
+}
+build() {
+    ./configure --prefix=/usr \
+                --disable-devel-docs
+
+    make
+
+    make DESTDIR=$PKG install
+}
