@@ -1,0 +1,15 @@
+name=libepoxy
+version=1.5.10
+release=1
+description="libepoxy is a library for handling OpenGL function pointer management."
+source=(https://download.gnome.org/sources/$name/1.5/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(mesa xorgproto)
+build() {
+
+    mkdir build && cd build
+    meson -Dprefix=/usr -Dbuildtype=release ..
+    ninja
+    DESTDIR=$PKG ninja install
+
+}
