@@ -1,0 +1,11 @@
+name=libxrandr
+version=1.5.3
+release=1
+description="X11 RandR extension library"
+source=(https://www.x.org/archive//individual/lib/libXrandr-$version.tar.gz)
+packager=camini
+makedepends=(xorgproto libx11 libxext libxrender)
+unpack(){
+	tar -xf libXrandr-$version.tar.gz
+	cd libXrandr-$version
+}
