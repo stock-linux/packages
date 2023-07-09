@@ -1,0 +1,8 @@
+name=font-util
+version=1.4.0
+release=1
+description="xorg fonts"
+source=(https://www.x.org/archive//individual/font/$name-$version.tar.gz)
+packager=camini
+makedepends=(xcursor-themes util-macros mkfontscale)
+
