@@ -1,0 +1,7 @@
+name=font-adobe-utopia-type1
+version=1.0.5
+release=1
+description="X.org Type1 fonts"
+source=(https://www.x.org/pub/individual/font/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xcursor-themes util-macros mkfontscale)
