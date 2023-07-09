@@ -1,0 +1,7 @@
+name=xset
+version=1.2.5
+release=1
+description="User preference utility for X"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxmu util-macros xorgproto)
