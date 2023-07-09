@@ -1,0 +1,7 @@
+name=xmodmap
+version=1.0.11
+release=1
+description="Utility for modifying keymaps and button mappings"
+source=(https://www.x.org/archive//individual/app/$name-$version.tar.gz)
+packager=camini
+makedepends=(libx11 xorgproto)
