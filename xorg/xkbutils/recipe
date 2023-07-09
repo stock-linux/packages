@@ -1,0 +1,7 @@
+name=xkbutils
+version=1.0.5
+release=1
+description="XKB utility demos"
+source=(https://www.x.org/pub/individual/app/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libx11 libxaw libxt util-macros xorgproto)
