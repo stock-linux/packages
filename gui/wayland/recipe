@@ -1,0 +1,21 @@
+name=wayland
+version=1.22.0
+release=1
+description="Wayland is a project to define a protocol for a compositor to talk to its clients as well as a library implementation of the protocol."
+source=(https://gitlab.freedesktop.org/$name/$name/-/releases/$version/downloads/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxml2)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Ddocumentation=false &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}
