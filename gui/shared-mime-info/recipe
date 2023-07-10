@@ -1,0 +1,18 @@
+name=shared-mime-info
+version=2.2
+release=1
+description="The Shared Mime Info package contains a MIME database."
+source=(https://gitlab.freedesktop.org/xdg/$name/-/archive/$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(glib libxml2)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release -Dupdate-mimedb=true .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
