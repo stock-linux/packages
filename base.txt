@@ -52,5 +52,6 @@ linux-firmware
 dhcpcd
 grub
 dracut
+make-ca
 curl
 stock-packaging
