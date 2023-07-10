@@ -1,0 +1,10 @@
+name=graphene
+version=1.10.8
+release=1
+description="The Graphene package provides a thin layer of types for graphics libraries. "
+source=(https://download.gnome.org/sources/$name/1.10/$name-$version.tar.xz)
+packager=camini
+makedepends=( glib gobject-introspection)
+build(){
+build_meson
+}
