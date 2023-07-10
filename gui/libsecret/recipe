@@ -1,0 +1,20 @@
+name=libsecret
+version=0.20.5
+release=1
+description="The libsecret package contains a GObject based library for accessing the Secret Service API."
+source=(https://download.gnome.org/sources/$name/0.20/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib gobject-introspection libgcrypt vala libxslt)
+build() {
+    mkdir bld
+    cd    bld
+
+    meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dgtk_doc=false     \
+            ..
+
+    ninja
+
+    DESTDIR=$PKG ninja install
+}
