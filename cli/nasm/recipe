@@ -1,0 +1,6 @@
+name=nasm
+version=2.16.01
+release=1
+description="NASM is an 80x86 assembler designed for portability and modularity"
+source=(https://www.$name.us/pub/$name/releasebuilds/$version/$name-$version.tar.xz)
+packager=Skythrew
