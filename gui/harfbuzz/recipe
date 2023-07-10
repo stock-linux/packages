@@ -1,0 +1,21 @@
+name=harfbuzz
+version=7.3.0
+release=1
+description="The HarfBuzz package contains an OpenType text shaping engine."
+source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gobject-introspection glib graphite2 icu freetype harfbuzz cairo)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dgraphite2=enabled &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}

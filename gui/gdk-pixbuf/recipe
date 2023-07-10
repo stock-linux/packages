@@ -1,0 +1,21 @@
+name=gdk-pixbuf
+version=2.42.10
+release=1
+description="The Gdk Pixbuf package is a toolkit for image loading and pixel buffer manipulation"
+source=(https://download.gnome.org/sources/$name/2.42/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib libjpeg-turbo libpng shared-mime-info python-docutils libtiff gobject-introspection)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      --wrap-mode=nofallback &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}

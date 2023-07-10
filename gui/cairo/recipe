@@ -1,0 +1,22 @@
+name=cairo
+version=1.17.6
+release=1
+description="Cairo is a 2D graphics library with support for multiple output devices."
+source=(https://download.gnome.org/sources/$name/1.17/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libpng pixman fontconfig glib libx11 libxcb libxext libxrender xorgproto)
+build() {
+
+sed 's/PTR/void */' -i util/cairo-trace/lookup-symbol.c
+
+sed -e "/@prefix@/a exec_prefix=@exec_prefix@" \
+    -i util/cairo-script/cairo-script-interpreter.pc.in
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --enable-tee &&
+make
+
+make DESTDIR=$PKG install
+
+}

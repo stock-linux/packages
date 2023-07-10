@@ -1,0 +1,33 @@
+name=gnupg
+version=2.4.2
+release=1
+description="The GnuPG package is GNU's tool for secure communication and data storage."
+source=(https://www.$name.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libassuan libgcrypt libksba npth gnutls pinentry)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    ../configure --prefix=/usr           \
+             --localstatedir=/var    \
+             --sysconfdir=/etc       \
+             --docdir=/usr/share/doc/gnupg-$version &&
+    make &&
+
+    makeinfo --html --no-split -I doc -o doc/gnupg_nochunks.html ../doc/gnupg.texi &&
+    makeinfo --plaintext       -I doc -o doc/gnupg.txt           ../doc/gnupg.texi &&
+    make -C doc html
+
+    make DESTDIR=$PKG install
+
+    install -v -m755 -d $PKG/usr/share/doc/gnupg-$version/html            &&
+    install -v -m644    doc/gnupg_nochunks.html \
+                    $PKG/usr/share/doc/gnupg-$version/html/gnupg.html &&
+    install -v -m644    ../doc/*.texi doc/gnupg.txt \
+                    $PKG/usr/share/doc/gnupg-$version &&
+    install -v -m644    doc/gnupg.html/* \
+                    $PKG/usr/share/doc/gnupg-$version/html
+
+}

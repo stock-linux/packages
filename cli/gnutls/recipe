@@ -1,0 +1,15 @@
+name=gnutls
+version=3.8.0
+release=1
+description="The GnuTLS package contains libraries and userspace tools which provide a secure layer over a reliable transport layer."
+source=(https://www.gnupg.org/ftp/gcrypt/$name/v3.8/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(nettle make-ca libunistring)
+build() {
+    ./configure --prefix=/usr \
+            --docdir=/usr/share/doc/gnutls-$version \
+            --with-default-trust-store-pkcs11="pkcs11:" &&
+    make
+
+    make DESTDIR=$PKG install
+}

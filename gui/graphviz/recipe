@@ -1,0 +1,11 @@
+name=graphviz
+version=8.0.5
+release=1
+description="The Graphviz package contains graph visualization software."
+source=(https://gitlab.com/$name/$name/-/archive/$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(flex)
+pre_build() {
+    sed -i '/LIBPOSTFIX="64"/s/64//' configure.ac &&
+    ./autogen.sh
+}

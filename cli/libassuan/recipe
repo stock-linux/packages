@@ -3,12 +3,13 @@ version=2.5.6
 release=1
 description="The libassuan package contains an inter process communication library used by some of the other GnuPG related packages. "
 source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
-packager=camini
+packager=Skythrew
 makedepends=(libgpg-error)
 build(){
+
 	./configure --prefix=/usr &&
 
 	make
-	make DESTDIR=$PKg install
+	make DESTDIR=$PKG install
 
 }

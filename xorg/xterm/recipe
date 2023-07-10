@@ -3,19 +3,20 @@ version=383
 release=1
 description="xterm is a terminal emulator for the X Window System. "
 source=(https://invisible-mirror.net/archives/$name/$name-$version.tgz)
-packager=camini
-makedepends=(xorg-apps)
+packager=Skythrew
+makedepends=(libxaw libxft libxkbfile luit ncurses xbitmaps xorgproto)
 unpack(){
 	tar -xf $name-$version.tgz
 	cd $name-$version
 }
 build(){
-	./configure --prefix=usr
+	./configure --prefix=/usr \
 		--with-app-defaults=/etc/X11/app-defaults &&
 
 	make
 	make DESTDIR=$PKG install
 
+mkdir -p $PKG/etc/X11/app-defaults
 cat >> $PKG/etc/X11/app-defaults/XTerm << "EOF"
 *VT100*locale: true
 *VT100*faceName: Monospace

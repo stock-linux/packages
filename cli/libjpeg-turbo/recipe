@@ -1,0 +1,23 @@
+name=libjpeg-turbo
+version=3.0.0
+release=1
+description="libjpeg-turbo is a fork of the original IJG libjpeg which uses SIMD to accelerate baseline JPEG compression and decompression."
+source=(https://downloads.sourceforge.net/$name/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake nasm)
+build() {
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=RELEASE  \
+      -DENABLE_STATIC=FALSE       \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libjpeg-turbo-$version \
+      -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib  \
+      .. &&
+make
+
+make DESTDIR=$PKG install
+
+}

@@ -1,0 +1,13 @@
+name=pinentry
+version=1.2.1
+release=1
+description="The PIN-Entry package contains a collection of simple PIN or pass-phrase entry dialogs."
+source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libassuan libgpg-error)
+build() {
+    ./configure --prefix=/usr --enable-pinentry-tty &&
+    make
+
+    make DESTDIR=$PKG install
+}

@@ -1,0 +1,20 @@
+name=gsettings-desktop-schemas
+version=44.0
+release=1
+description="The GSettings Desktop Schemas package contains a collection of GSettings schemas for settings shared by various components of a GNOME Desktop."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gobject-introspection)
+build() {
+
+sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in &&
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
