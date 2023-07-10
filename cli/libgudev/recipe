@@ -1,0 +1,10 @@
+name=libgudev
+version=237
+release=1
+description="The libgudev package contains GObject bindings for libudev."
+source=(https://download.gnome.org/sources/$name/$version/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib)
+build() {
+build_meson
+}
