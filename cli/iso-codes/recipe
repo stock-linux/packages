@@ -1,0 +1,10 @@
+name=iso-codes
+version=4.15.0
+release=1
+description=" The ISO Codes package contains a list of country, language and currency names and it is used as a central database for accessing this data. "
+source=(https://ftp.debian.org/debian/pool/main/i/$name/iso-codes_$version.orig.tar.xz)
+packager=camini
+unpack(){
+	tar -xf iso-codes_$version.orig.tar.xz
+	cd $name-$version
+}
