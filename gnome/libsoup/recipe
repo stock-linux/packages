@@ -1,0 +1,26 @@
+name=libsoup
+version=3.4.2
+release=1
+description="The libsoup3 is a HTTP client/server library for GNOME."
+source=(https://download.gnome.org/sources/$name/3.4/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib-networking libpsl libxml2 nghttp2 sqlite gobject-introspection vala)
+build() {
+
+sed 's/apiversion/soup_version/' -i docs/reference/meson.build
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr          \
+            --buildtype=release    \
+            -Dvapi=enabled         \
+            -Dgssapi=disabled      \
+            -Dsysprof=disabled     \
+            --wrap-mode=nofallback \
+            ..                     &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
