@@ -1,0 +1,24 @@
+name=glib
+version=2.76.3
+release=1
+description="The GLib package contains low-level libraries useful for providing data structure handling for C, portability wrappers and interfaces for such runtime functionality as an event loop, threads, dynamic loading and an object system."
+source=(https://download.gnome.org/sources/$name/2.76/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxslt pcre2)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dman=true          &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+    mkdir -p $PKG/usr/share/doc/glib-$version &&
+    cp -r ../docs/reference/{gio,glib,gobject} $PKG/usr/share/doc/glib-$version
+
+}
