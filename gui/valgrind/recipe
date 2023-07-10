@@ -1,0 +1,16 @@
+name=valgrind
+version=3.21.0
+release=1
+description="Valgrind is an instrumentation framework for building dynamic analysis tools. "
+source=(https://sourceware.org/pub/$name/$name-$version.tar.bz2)
+packager=camini
+makedepends=(boost llvm libxslt)
+pre_build(){
+sed -i 's|/doc/valgrind||' docs/Makefile.in 
+}
+build(){
+./configure --prefix=/usr \
+            --datadir=/usr/share/doc/valgrind-3.21.0 &&
+make
+make DESTDIR=$PKG install
+}
