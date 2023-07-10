@@ -1,16 +1,18 @@
 name=nghttp2
 version=1.54.0
 release=1
-description="nghttp2 is an implementation of HTTP/2 and its header compression algorithm, HPACK. "
+description="nghttp2 is an implementation of HTTP/2"
 source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.xz)
-packager=camini
+packager=Skythrew
 makedepends=(libxml2)
-build(){
-	./configure --prefix=/usr     \
+build() {
+
+./configure --prefix=/usr     \
             --disable-static  \
             --enable-lib-only \
-            --docdir=/usr/share/doc/nghttp2-1.54.0 &&
+            --docdir=/usr/share/doc/nghttp2-$version &&
+make
 
-	make
-	make DESTDIR=$PKG install
+make DESTDIR=$PKG install
+
 }
