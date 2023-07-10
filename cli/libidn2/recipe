@@ -1,0 +1,6 @@
+name=libidn2
+version=2.3.4
+release=1
+description="libidn2 is a package designed for internationalized string handling"
+source=(https://ftp.gnu.org/gnu/libidn/$name-$version.tar.gz)
+packager=Skythrew
