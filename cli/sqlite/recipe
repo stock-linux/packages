@@ -1,0 +1,25 @@
+name=sqlite
+version=3.42.0
+release=1
+description="The SQLite package is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine."
+source=(https://$name.org/2023/$name-autoconf-${version//./}000.tar.gz)
+packager=Skythrew
+unpack() {
+    tar -xf $name-autoconf-${version//./}000.tar.gz
+    cd $name-autoconf-${version//./}000
+}
+build() {
+
+./configure --prefix=/usr     \
+            --disable-static  \
+            --enable-fts{4,5} \
+            CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
+                      -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+                      -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
+                      -DSQLITE_SECURE_DELETE=1          \
+                      -DSQLITE_ENABLE_FTS3_TOKENIZER=1" &&
+make
+
+make DESTDIR=$PKG install
+
+}
