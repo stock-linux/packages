@@ -1,0 +1,11 @@
+name=libsass
+version=3.6.5
+release=1
+description="CSS pre-processor language library implementation"
+source=(https://github.com/sass/$name/archive/$version/$name-$version.tar.gz)
+packager=Skythrew
+pre_build() {
+
+autoreconf -fi
+
+}
