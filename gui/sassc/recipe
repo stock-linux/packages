@@ -1,0 +1,12 @@
+name=sassc
+version=3.6.2
+release=1
+description="SassC is a wrapper around libsass, a CSS pre-processor language."
+source=(https://github.com/sass/$name/archive/$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(libsass)
+pre_build() {
+
+autoreconf -fi
+
+}
