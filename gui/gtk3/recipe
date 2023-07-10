@@ -1,0 +1,25 @@
+name=gtk3
+version=3.24.38
+release=1
+description="The GTK+ 3 package contains libraries used for creating graphical user interfaces for applications."
+source=(https://download.gnome.org/sources/gtk+/3.24/gtk+-$version.tar.xz)
+packager=Skythrew
+makedepends=(at-spi2-core gdk-pixbuf libepoxy pango adwaita-icon-theme docbook-xsl hicolor-icon-theme iso-codes libxkbcommon libxslt sassc wayland wayland-protocols gobject-introspection libx11 libxext xorgproto shared-mime-info mesa libxrandr)
+unpack() {
+    tar -xf gtk+-$version.tar.xz
+    cd gtk+-$version
+}
+build() {
+
+mkdir build &&
+cd    build &&
+meson setup --prefix=/usr           \
+            --buildtype=release     \
+            -Dman=true              \
+            -Dbroadway_backend=true \
+            ..                      &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
