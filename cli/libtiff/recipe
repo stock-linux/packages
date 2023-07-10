@@ -1,0 +1,23 @@
+name=libtiff
+version=4.5.1
+release=1
+description="The libtiff package contains the TIFF libraries and associated utilities."
+source=(https://download.osgeo.org/$name/tiff-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake)
+unpack() {
+    tar -xf tiff-$version.tar.gz
+    cd tiff-$version
+}
+build() {
+
+mkdir -p libtiff-build &&
+cd       libtiff-build &&
+
+cmake -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libtiff-$version \
+      -DCMAKE_INSTALL_PREFIX=/usr -G Ninja .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
