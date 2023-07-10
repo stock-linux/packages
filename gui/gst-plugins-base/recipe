@@ -1,0 +1,23 @@
+name=gst-plugins-base
+version=1.22.4
+release=1
+description="The GStreamer Base Plug-ins is a well-groomed and well-maintained collection of GStreamer plug-ins and elements"
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gstreamer alsa-lib cdparanoia gobject-introspection iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis mesa pango wayland-protocols wayland libx11 libxi libxrandr libxv xorgproto)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson  setup ..               \
+       --prefix=/usr          \
+       --buildtype=release    \
+       --wrap-mode=nodownload \
+       -Dpackage-origin=https://www.linuxfromscratch.org/blfs/view/systemd/ \
+       -Dpackage-name="GStreamer 1.22.4 Stock"    &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
