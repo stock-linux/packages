@@ -1,0 +1,6 @@
+name=flac
+version=1.4.3
+release=1
+description="FLAC is an audio CODEC similar to MP3, but lossless, meaning that audio is compressed without losing any information."
+source=(https://downloads.xiph.org/releases/$name/$name-$version.tar.xz)
+packager=Skythrew
