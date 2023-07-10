@@ -1,0 +1,21 @@
+name=libxkbcommon
+version=1.5.0
+release=1
+description="libxkbcommon is a keymap compiler and support library which processes a reduced subset of keymaps as defined by the XKB specification."
+source=(https://xkbcommon.org/download/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xkeyboard-config libxcb wayland wayland-protocols xorgproto)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Denable-docs=false &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
