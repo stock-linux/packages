@@ -1,0 +1,7 @@
+name=mpg123
+version=1.31.3
+release=1
+description="The mpg123 package contains a console-based MP3 player."
+source=(https://downloads.sourceforge.net/$name/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(alsa-lib)
