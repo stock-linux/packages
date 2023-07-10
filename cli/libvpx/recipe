@@ -1,0 +1,22 @@
+name=libvpx
+version=1.13.0
+release=1
+description="This package, from the WebM project, provides the reference implementations of the VP8 Codec, used in most current html5 video, and of the next-generation VP9 Codec."
+source=(https://github.com/webmproject/$name/archive/v$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(nasm which)
+build() {
+
+sed -i 's/cp -p/cp/' build/make/Makefile &&
+
+mkdir libvpx-build            &&
+cd    libvpx-build            &&
+
+../configure --prefix=/usr    \
+             --enable-shared  \
+             --disable-static &&
+make
+
+make DESTDIR=$PKG install
+
+}
