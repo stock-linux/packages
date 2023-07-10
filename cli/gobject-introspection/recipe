@@ -1,0 +1,18 @@
+name=gobject-introspection
+version=1.76.1
+release=1
+description="The GObject Introspection is used to describe the program APIs and collect them in a uniform, machine readable format."
+source=(https://download.gnome.org/sources/$name/1.76/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib flex)
+build() {
+
+    mkdir build &&
+    cd    build &&
+
+    meson setup --prefix=/usr --buildtype=release .. &&
+    ninja
+
+    DESTDIR=$PKG ninja install
+
+}
