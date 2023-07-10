@@ -1,0 +1,20 @@
+name=librsvg
+version=2.56.2
+release=1
+description="The librsvg package contains a library and tools used to manipulate, convert and view Scalable Vector Graphic images."
+source=(https://download.gnome.org/sources/$name/2.56/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(cairo gdk-pixbuf pango rustc gobject-introspection vala libxml2 shared-mime-info xorgproto make-ca)
+build() {
+
+./configure --prefix=/usr    \
+            --enable-vala    \
+            --disable-static \
+            --docdir=/usr/share/doc/librsvg-$version &&
+make
+
+sed 's/-Z unstable-options//' -i Makefile
+
+make DOC_INSTALL_DIR='$(docdir)' DESTDIR=$PKG install
+
+}
