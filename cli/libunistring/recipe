@@ -1,0 +1,6 @@
+name=libunistring
+version=1.1
+release=1
+description="libunistring is a library that provides functions for manipulating Unicode strings and for manipulating C strings according to the Unicode standard."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=Skythrew
