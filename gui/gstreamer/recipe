@@ -1,0 +1,20 @@
+name=gstreamer
+version=1.22.4
+release=1
+description="gstreamer is a streaming media framework that enables applications to share a common set of plugins for tasks such as video encoding and decoding, audio encoding and decoding, audio and video filters, audio visualisation, web streaming and anything else that streams in real-time or otherwise. "
+source=(https://$name.freedesktop.org/src/$name/$name-$version.tar.xz)
+packager=camini
+makedepends=(glib flex gmp libcap libxml2 gobject-introspection)
+build(){
+mkdir build &&
+cd    build &&
+
+meson  setup ..            \
+       --prefix=/usr       \
+       --buildtype=release \
+       -Dgst_debug=false   \
+       -Dpackage-origin=https://www.linuxfromscratch.org/blfs/view/systemd/ \
+       -Dpackage-name="GStreamer 1.22.4 BLFS" &&
+ninja
+DESTDIR=$PKG ninja install
+}
