@@ -1,0 +1,22 @@
+name=gst-plugins-good
+version=1.22.4
+release=1
+description="The GStreamer Good Plug-ins is a set of plug-ins considered by the GStreamer developers to have good quality code, correct functionality, and the preferred license."
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gst-plugins-base cairo flac gdk-pixbuf lame libsoup2 libsoup libvpx mpg123 nasm pulseaudio)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dpackage-origin=https://www.linuxfromscratch.org/blfs/view/systemd/ \
+      -Dpackage-name="GStreamer 1.22.4 Stock" &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
