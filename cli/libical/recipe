@@ -1,0 +1,24 @@
+name=libical
+version=3.0.16
+release=1
+description="The libical package contains an implementation of the iCalendar protocols and data formats."
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake gobject-introspection vala libxml2)
+build() {
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr  \
+      -DCMAKE_BUILD_TYPE=Release   \
+      -DSHARED_ONLY=yes            \
+      -DICAL_BUILD_DOCS=false      \
+      -DGOBJECT_INTROSPECTION=true \
+      -DICAL_GLIB_VAPI=true        \
+      .. &&
+make || make -j1
+
+make DESTDIR=$PKG install
+
+}
