@@ -1,0 +1,10 @@
+name=at-spi2-core
+version=2.48.3
+release=1
+description="Protocol definitions and daemon for D-Bus at-spi"
+source=(https://download.gnome.org/sources/$name/2.48/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(dbus glib gsettings-desktop-schemas gobject-introspection libx11 libxml2 libxtst xorgproto libxfixes)
+build() {
+build_meson
+}
