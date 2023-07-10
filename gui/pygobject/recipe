@@ -1,0 +1,17 @@
+name=pygobject
+version=3.44.1
+release=1
+description="PyGObject3 provides Python bindings to the GObject class from GLib. "
+source=(https://download.gnome.org/sources/$name/3.44/$name-$version.tar.xz)
+packager=camini
+makedepends=(gobject-introspection pycairo)
+build(){
+mv -v tests/test_gdbus.py{,.nouse}
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release .. &&
+ninja
+DESTDIR=$PKG ninja install
+}
