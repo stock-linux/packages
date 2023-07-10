@@ -1,0 +1,7 @@
+name=libsndfile
+version=1.2.0
+release=1
+description="Libsndfile is a library of C routines for reading and writing files containing sampled audio data."
+source=(https://github.com/$name/$name/releases/download/$version/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(flac opus libvorbis)
