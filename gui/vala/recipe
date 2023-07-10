@@ -1,0 +1,7 @@
+name=vala
+version=0.56.9
+release=1
+description="Vala is a new programming language that aims to bring modern programming language features to GNOME developers without imposing any additional runtime requirements and without using a different ABI compared to applications and libraries written in C."
+source=(https://download.gnome.org/sources/$name/0.56/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib graphviz flex)
