@@ -1,0 +1,12 @@
+name=lame
+version=3.100
+release=1
+description="The LAME package contains an MP3 encoder and optionally, an MP3 frame analyzer. This is useful for creating and analyzing compressed audio files."
+source=(https://downloads.sourceforge.net/$name/$name-$version.tar.gz)
+packager=Skythrew
+build() {
+./configure --prefix=/usr --enable-mp3rtp --disable-static &&
+make
+
+make pkghtmldir=/usr/share/doc/lame-$version DESTDIR=$PKG install
+}
