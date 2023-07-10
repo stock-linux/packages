@@ -1,0 +1,23 @@
+name=gst-plugins-bad
+version=1.22.4
+release=1
+description="The GStreamer Bad Plug-ins package contains a set of plug-ins that aren't up to par compared to the rest"
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gst-plugins-base libdvdread libdvdnav soundtouch)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson  setup ..            \
+       --prefix=/usr       \
+       --buildtype=release \
+       -Dgpl=enabled       \
+       -Dpackage-origin=https://www.linuxfromscratch.org/blfs/view/systemd/ \
+       -Dpackage-name="GStreamer 1.22.4 Stock" &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
