@@ -1,0 +1,14 @@
+name=sbc
+version=2.0
+release=1
+description="The SBC is a digital audio encoder and decoder used to transfer data to Bluetooth audio output devices like headphones or loudspeakers."
+source=(https://www.kernel.org/pub/linux/bluetooth/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+
+./configure --prefix=/usr --disable-static --disable-tester &&
+make
+
+make DESTDIR=$PKG install
+
+}
