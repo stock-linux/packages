@@ -1,0 +1,22 @@
+name=boost
+version=1.82.0
+release=1
+description="Boost provides a set of free peer-reviewed portable C++ source libraries."
+source=(https://boostorg.jfrog.io/artifactory/main/release/$version/source/boost_1_82_0.tar.bz2)
+packager=camini
+makedepends=(icu which)
+unpack(){
+	tar -xf boost_1_82_0.tar.bz2
+	cd boost_1_82_0
+}
+pre_build(){
+sed -i '/#include.*phoenix.*tuple.hpp.*/d' \
+  boost/phoenix/stl.hpp
+}
+build(){
+./bootstrap.sh --prefix=$PKG/usr --with-toolset=gcc 
+./b2 stage -j${JOBS} threading=multi link=shared
+
+./b2 install threading=multi link=shared
+}
+
