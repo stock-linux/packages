@@ -1,0 +1,6 @@
+name=alsa-lib
+version=1.2.9
+release=1
+description="The ALSA Library package contains the ALSA library used by programs (including ALSA Utilities) requiring access to the ALSA sound interface."
+source=(https://www.alsa-project.org/files/pub/lib/$name-$version.tar.bz2)
+packager=Skythrew
