@@ -1,0 +1,26 @@
+name=gtk4
+version=4.10.4
+release=1
+description="The GTK 4 package contains libraries used for creating graphical user interfaces for applications."
+source=(https://download.gnome.org/sources/gtk/4.10/gtk-$version.tar.xz)
+packager=Skythrew
+makedepends=(fribidi gdk-pixbuf graphene iso-codes libepoxy libxkbcommon pango pygobject wayland-protocols wayland adwaita-icon-theme gst-plugins-bad gst-plugins-good hicolor-icon-theme librsvg gobject-introspection libx11 libxext xorgproto shared-mime-info mesa libxrandr libxcursor libxdamage libxinerama)
+unpack() {
+    tar -xf gtk-$version.tar.xz
+    cd gtk-$version
+}
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr           \
+            --buildtype=release     \
+            -Dbroadway-backend=true \
+            -Dintrospection=enabled \
+            .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
