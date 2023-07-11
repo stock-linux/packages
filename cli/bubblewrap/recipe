@@ -1,0 +1,9 @@
+name=bubblewrap
+version=0.8.0
+release=1
+description="Bubblewrap is a setuid implementation of user namespaces, or sandboxing, that provides access to a subset of kernel user namespace features."
+source=(https://github.com/containers/$name/releases/download/v$version/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+build_meson
+}
