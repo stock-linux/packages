@@ -1,0 +1,22 @@
+name=geocode-glib
+version=3.26.4
+release=1
+description="The Geocode GLib is a convenience library for the Yahoo! Place Finder APIs."
+source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(json-glib libsoup gobject-introspection)
+build() {
+
+mkdir build                   &&
+cd    build                   &&
+
+meson setup --prefix /usr           \
+            --buildtype=release     \
+            -Denable-gtk-doc=false  \
+            -Dsoup2=false           \
+            ..                      &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
