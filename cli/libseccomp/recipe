@@ -1,0 +1,6 @@
+name=libseccomp
+version=2.5.4
+release=1
+description="The libseccomp package provides an easy to use and platform independent interface to the Linux kernel's syscall filtering mechanism."
+source=(https://github.com/seccomp/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=Skythrew
