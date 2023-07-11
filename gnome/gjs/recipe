@@ -1,0 +1,21 @@
+name=gjs
+version=1.76.2
+release=1
+description="Gjs is a set of Javascript bindings for GNOME."
+source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(cairo dbus gobject-introspection js gtk3 gtk4)
+build() {
+
+mkdir gjs-build &&
+cd    gjs-build &&
+
+meson setup --prefix=/usr          \
+            --buildtype=release    \
+            --wrap-mode=nofallback \
+            ..                     &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
