@@ -1,0 +1,27 @@
+name=vte
+version=0.72.2
+release=1
+description="The VTE package contains a termcap file implementation for terminal emulators."
+source=(https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(pcre2 gnutls vala gtk3 gtk4 gobject-introspection xorgproto shared-mime-info)
+build() {
+env
+
+mkdir -p $PKG/usr/include
+
+mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr \
+--sysconfdir=/etc \
+-Dfribidi=false \
+-Dgtk4=true
+
+ninja
+
+DESTDIR=$PKG ninja install
+
+rm -v $PKG/etc/profile.d/vte.*
+
+}
