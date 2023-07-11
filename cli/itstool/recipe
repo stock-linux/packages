@@ -1,0 +1,7 @@
+name=itstool
+version=2.0.7
+release=1
+description="Itstool extracts messages from XML files and outputs PO template files, then merges translations from MO files to create translated XML files"
+source=(https://files.$name.org/$name/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(docbook-xml)
