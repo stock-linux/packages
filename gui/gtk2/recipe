@@ -1,0 +1,23 @@
+name=gtk2
+version=2.24.33
+release=1
+description="The GTK+ 2 package contains libraries used for creating graphical user interfaces for applications."
+source=(https://download.gnome.org/sources/gtk+/${version:0:4}/gtk+-$version.tar.xz)
+packager=Skythrew
+makedepends=(at-spi2-core gdk-pixbuf pango shared-mime-info xorgproto hicolor-icon-theme)
+unpack() {
+    tar -xf gtk+-$version.tar.xz
+    cd gtk+-$version
+}
+build() {
+
+sed -e 's#l \(gtk-.*\).sgml#& -o \1#' \
+    -i docs/{faq,tutorial}/Makefile.in      &&
+
+./configure --prefix=/usr --sysconfdir=/etc &&
+
+make
+
+make DESTDIR=$PKG install
+
+}
