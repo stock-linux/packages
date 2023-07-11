@@ -1,0 +1,10 @@
+name=libglade
+version=2.6.4
+release=1
+description="The libglade package contains libglade libraries. These are useful for loading Glade interface files in a program at runtime."
+source=(https://download.gnome.org/sources/$name/2.6/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libxml2 gtk2 xorgproto shared-mime-info)
+pre_build() {
+    sed -i '/DG_DISABLE_DEPRECATED/d' glade/Makefile.in
+}
