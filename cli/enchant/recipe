@@ -1,0 +1,7 @@
+name=enchant
+version=2.5.0
+release=1
+description="The enchant package provides a generic interface into various existing spell checking libraries."
+source=(https://github.com/AbiWord/$name/releases/download/v$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(glib groff aspell)
