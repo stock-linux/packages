@@ -1,0 +1,6 @@
+name=libusb
+version=1.0.26
+release=1
+description="The libusb package contains a library used by some applications for USB device access."
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.bz2)
+packager=Skythrew
