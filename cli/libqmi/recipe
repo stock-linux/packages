@@ -1,0 +1,7 @@
+name=libqmi
+version=1.30.8
+release=1
+description="The libqmi package contains a GLib-based library for talking to WWAN modems and devices which speak the Qualcomm MSM Interface protocol."
+source=(https://www.freedesktop.org/software/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib libgudev gobject-introspection libmbim)
