@@ -1,0 +1,17 @@
+name=gnome-menus
+version=3.36.0
+release=1
+description="The GNOME Menus package contains an implementation of the draft Desktop Menu Specification from freedesktop.org."
+source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib gobject-introspection)
+build() {
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --disable-static &&
+make
+
+make DESTDIR=$PKG install
+
+}
