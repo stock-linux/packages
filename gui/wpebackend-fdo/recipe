@@ -1,0 +1,14 @@
+name=wpebackend-fdo
+version=1.14.2
+release=1
+description="The wpebackend-fdo package contains the Freedesktop.org backend for WPE WebKit and the WPE renderer. "
+source=(https://wpewebkit.org/releases/wpebackend-fdo-$version.tar.xz)
+packager=camini
+makedepends=(cmake glib xorgproto libepoxy mesa libx11 libwpe wayland-protocols)
+unpack(){
+tar -xf wpebackend-fdo-$version.tar.xz
+cd wpebackend-fdo-$version
+}
+build(){
+build_meson
+}
