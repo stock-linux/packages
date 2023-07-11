@@ -1,0 +1,9 @@
+name=gnome-video-effects
+version=0.6.0
+release=1
+description="The GNOME Video Effects package contains a collection of GStreamer effects."
+source=(https://download.gnome.org/sources/$name/${version:0:3}/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+build_meson
+}
