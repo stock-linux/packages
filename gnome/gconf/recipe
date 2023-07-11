@@ -2,7 +2,7 @@ name=gconf
 version=3.2.6
 release=1
 description="The GConf package contains a configuration database system used by many GNOME applications."
-source=(https://download.gnome.org/sources/GConf/3.2/GConf-$version.tar.xz)
+source=(https://download.gnome.org/sources/GConf/${version:0:3}/GConf-$version.tar.xz)
 packager=Skythrew
 makedepends=(dbus-glib libxml2 gobject-introspection gtk3 polkit intltool xml-parser)
 unpack() {
