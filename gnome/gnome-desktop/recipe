@@ -1,0 +1,10 @@
+name=gnome-desktop
+version=44.0
+release=1
+description="The GNOME Desktop package contains a library that provides an API shared by several applications on the GNOME Desktop."
+source=(https://download.gnome.org/sources/$name/${version:0:2}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gsettings-desktop-schemas gtk3 gtk4 iso-codes libseccomp libxml2 xkeyboard-config xorgproto shared-mime-info mesa bubblewrap gobject-introspection itstool xml-parser)
+build() {
+build_meson
+}
