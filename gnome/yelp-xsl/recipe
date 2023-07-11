@@ -1,0 +1,14 @@
+name=yelp-xsl
+version=42.1
+release=1
+description="The Yelp XSL package contains XSL stylesheets that are used by the Yelp help browser to format Docbook and Mallard documents."
+source=(https://download.gnome.org/sources/$name/42/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libxslt itstool)
+build() {
+
+./configure --prefix=/usr
+
+make DESTDIR=$PKG install
+
+}
