@@ -1,0 +1,7 @@
+name=libmbim
+version=1.26.4
+release=1
+description="The libmbim package contains a GLib-based library for talking to WWAN modems and devices which speak the Mobile Interface Broadband Model protocol."
+source=(https://www.freedesktop.org/software/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gobject-introspection)
