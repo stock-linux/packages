@@ -1,0 +1,25 @@
+name=sdl12-compat
+version=1.2.64
+release=1
+description="This code is a compatibility layer,  it provides a binary and source compatible API for programs written against SDL 1.2, but it uses SDL 2.0 behind the scenes"
+source=(https://github.com/libsdl-org/$name/archive/refs/tags/release-$version/$name-release-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake sdl2 glu xorgproto)
+unpack() {
+    tar -xf $name-release-$version.tar.gz
+    cd $name-release-$version
+}
+build() {
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=RELEASE  \
+      ..  &&
+make
+
+make DESTDIR=$PKG install
+rm -vf $PKG/usr/lib/libSDLmain.a
+
+}
