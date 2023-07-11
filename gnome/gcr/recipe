@@ -1,0 +1,21 @@
+name=gcr
+version=4.1.0
+release=1
+description="The Gcr package contains libraries used for displaying certificates and accessing key stores. It also provides the viewer for crypto files on the GNOME Desktop."
+source=(https://download.gnome.org/sources/gcr/${version:0:3}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib libgcrypt p11-kit gnupg gobject-introspection gtk4 libsecret libxslt vala openssh xorgproto shared-mime-info mesa)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dgtk_doc=false     \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
