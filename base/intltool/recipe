@@ -1,9 +1,10 @@
 name=intltool
 version=0.51.0
-release=1
+release=2
 description="The Intltool is an internationalization tool used for extracting translatable strings from source files. "
 source=(https://launchpad.net/$name/trunk/$version/+download/$name-$version.tar.gz)
-packager=camini
+packager=Skythrew
+makedepends=(xml-parser)
 build(){
 	sed -i 's:\\\${:\\\$\\{:' intltool-update.in
 
