@@ -1,0 +1,10 @@
+name=libyaml
+version=0.2.5
+release=1
+description="The yaml package contains a C library for parsing and emitting YAML (YAML Ain't Markup Language) code."
+source=(https://github.com/yaml/$name/releases/download/$version/yaml-$version.tar.gz)
+packager=Skythrew
+unpack() {
+    tar -xf yaml-$version.tar.gz
+    cd yaml-$version
+}
