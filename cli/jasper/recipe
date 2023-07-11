@@ -1,0 +1,27 @@
+name=jasper
+version=4.0.0
+release=1
+description="The JasPer Project is an open-source initiative to provide a free software-based reference implementation of the JPEG-2000 codec."
+source=(https://github.com/$name-software/$name/archive/version-$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake libjpeg-turbo)
+unpack() {
+    tar -xf $name-$version.tar.gz
+    cd $name-version-$version
+}
+build() {
+
+mkdir BUILD &&
+cd    BUILD &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr    \
+      -DCMAKE_BUILD_TYPE=Release     \
+      -DCMAKE_SKIP_INSTALL_RPATH=YES \
+      -DJAS_ENABLE_DOC=NO            \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/jasper-$version \
+      ..  &&
+make
+
+make DESTDIR=$PKG install
+
+}
