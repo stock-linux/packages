@@ -1,0 +1,22 @@
+name=gnome-autoar
+version=0.4.4
+release=1
+description="The gnome-autoar package provides a framework for automatic archive extraction, compression, and management."
+source=(https://download.gnome.org/sources/$name/${version:0:3}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libarchive gtk3 vala xorgproto shared-mime-info mesa gobject-introspection)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dvapi=true         \
+            -Dtests=true        \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
