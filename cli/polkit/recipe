@@ -1,0 +1,23 @@
+name=polkit
+version=122
+release=1
+description="Polkit is a toolkit for defining and handling authorizations"
+source=(https://gitlab.freedesktop.org/$name/$name/-/archive/$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(glib duktape gobject-introspection libxslt)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup ..                            \
+      --prefix=/usr                       \
+      --buildtype=release                 \
+      -Dman=true                          \
+      -Dsession_tracking=libsystemd-login \
+      -Dtests=true                        &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
