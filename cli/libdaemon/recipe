@@ -1,0 +1,6 @@
+name=libdaemon
+version=0.14
+release=1
+description="The libdaemon package is a lightweight C library that eases the writing of UNIX daemons."
+source=(https://0pointer.de/lennart/projects/$name/$name-$version.tar.gz)
+packager=Skythrew
