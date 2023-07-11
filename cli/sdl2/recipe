@@ -1,0 +1,14 @@
+name=sdl2
+version=2.28.1
+release=1
+description="The Simple DirectMedia Layer Version 2 is a cross-platform library designed to make it easy to write multimedia software, such as games and emulators."
+source=(https://www.libsdl.org/release/SDL2-$version.tar.gz)
+packager=Skythrew
+makedepends=(libxkbcommon wayland-protocols wayland libx11 libxext libxcursor libxrender libxinerama libxrandr xorgproto)
+unpack() {
+    tar -xf SDL2-$version.tar.gz
+    cd SDL2-$version
+}
+post_build() {
+rm -v $PKG/usr/lib/libSDL2*.a
+}
