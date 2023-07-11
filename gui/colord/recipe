@@ -1,0 +1,30 @@
+name=colord
+version=1.4.6
+release=1
+description="Colord is a system service that makes it easy to manage, install, and generate color profiles"
+source=(https://www.freedesktop.org/software/$name/releases/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(dbus glib lcms2 polkit sqlite gobject-introspection libgudev libgusb vala)
+build() {
+
+sed '/cmsUnregisterPluginsTHR/d' -i lib/colord/cd-context-lcms.c
+
+mkdir build &&
+cd    build &&
+
+meson setup ..                 \
+      --prefix=/usr            \
+      --buildtype=release      \
+      -Ddaemon_user=colord     \
+      -Dvapi=true              \
+      -Dsystemd=true           \
+      -Dlibcolordcompat=true   \
+      -Dargyllcms_sensor=false \
+      -Dbash_completion=false  \
+      -Ddocs=false             \
+      -Dman=false              &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
