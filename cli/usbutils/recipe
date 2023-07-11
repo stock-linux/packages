@@ -1,0 +1,20 @@
+name=usbutils
+version=015
+release=1
+description="The USB Utils package contains utilities used to display information about USB buses in the system and the devices connected to them."
+source=(https://github.com/gregkh/$name/archive/v$version/$name-$version.tar.gz http://www.linux-usb.org/usb.ids)
+packager=Skythrew
+makedepends=(libusb)
+build() {
+
+autoreconf -fiv &&
+
+./configure --prefix=/usr --datadir=/usr/share/hwdata &&
+make
+
+make DESTDIR=$PKG install
+
+mkdir -p $PKG/usr/share/hwdata
+cp ../usb.ids $PKG/usr/share/hwdata/usb.ids
+
+}
