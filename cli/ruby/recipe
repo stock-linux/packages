@@ -1,0 +1,19 @@
+name=ruby
+version=3.2.2
+release=1
+description="The Ruby package contains the Ruby development environment. This is useful for object-oriented scripting."
+source=(https://cache.$name-lang.org/pub/$name/3.2/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libyaml)
+build() {
+
+./configure --prefix=/usr      \
+            --enable-shared    \
+            --without-valgrind \
+            --without-baseruby \
+            --docdir=/usr/share/doc/ruby-$version &&
+make
+
+make DESTDIR=$PKG install
+
+}
