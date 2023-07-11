@@ -1,0 +1,13 @@
+name=xmlto
+version=0.0.28
+release=1
+description="The xmlto package is a front-end to a XSL toolchain."
+source=(https://releases.pagure.org/$name/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(docbook-xml docbook-xsl libxslt)
+pre_build() {
+export LINKS="/usr/bin/links"
+}
+post_build() {
+unset LINKS
+}
