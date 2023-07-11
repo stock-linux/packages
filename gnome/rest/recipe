@@ -1,0 +1,22 @@
+name=rest
+version=0.9.1
+release=1
+description="The rest package contains a library that was designed to make it easier to access web services that claim to be RESTful."
+source=(https://download.gnome.org/sources/$name/0.9/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(json-glib libsoup make-ca gobject-introspection libxml2)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dexamples=false    \
+            -Dgtk_doc=false     \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
