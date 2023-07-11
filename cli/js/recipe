@@ -1,0 +1,30 @@
+name=js
+version=102.13.0
+release=1
+description="JS is Mozilla's JavaScript and WebAssembly Engine, written in C++ and Rust."
+source=(https://archive.mozilla.org/pub/firefox/releases/${version}esr/source/firefox-${version}esr.source.tar.xz)
+packager=Skythrew
+makedepends=(icu rustc which llvm)
+unpack() {
+    tar -xf firefox-${version}esr.source.tar.xz
+    cd firefox-${version}
+}
+build() {
+
+mkdir obj &&
+cd    obj &&
+
+sh ../js/src/configure.in --prefix=/usr            \
+                          --with-intl-api          \
+                          --with-system-zlib       \
+                          --with-system-icu        \
+                          --disable-jemalloc       \
+                          --disable-debug-symbols  \
+                          --enable-readline        &&
+make
+
+make DESTDIR=$PKG install &&
+rm -v $PKG/usr/lib/libjs_static.ajs &&
+sed -i '/@NSPR_CFLAGS@/d' $PKG/usr/bin/js102-config
+
+}
