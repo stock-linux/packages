@@ -1,0 +1,10 @@
+name=libwpe
+version=1.14.1
+release=1
+description="The libwpe package contains a general purpose library for WPE WebKit and the WPE Renderer. "
+source=(https://wpewebkit.org/releases/$name-$version.tar.xz)
+packager=camini
+makedepends=(libxkbcommon mesa)
+build(){
+build_meson
+}
