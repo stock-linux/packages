@@ -1,0 +1,8 @@
+name=clutter-gtk
+version=1.8.4
+release=1
+description="The Clutter Gtk package is a library providing facilities to integrate Clutter into GTK+ applications."
+source=(https://download.gnome.org/sources/$name/1.8/$name-$version.tar.xz)
+packager=camini
+makedepends=(shared-mime-info xorgproto clutter gtk3 gobject-introspection)
+
