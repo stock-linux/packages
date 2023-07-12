@@ -1,0 +1,8 @@
+name=libgtop
+version=2.40.0
+release=1
+description="The libgtop package contains the GNOME top libraries."
+source=(https://download.gnome.org/sources/$name/2.40/$name-$version.tar.xz)
+packager=camini
+makedepends=(glib intltool gobject-introspection)
+
