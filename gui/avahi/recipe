@@ -26,8 +26,7 @@ return; \
     --disable-qt3        \
     --disable-qt4        \
     --enable-core-docs   \
-    --with-distro=none   \
-    --with-dbus-system-address='unix:path=/run/dbus/system_bus_socket' &&
+    --with-distro=none
 make
 
 make DESTDIR=$PKG install
