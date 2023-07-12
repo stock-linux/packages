@@ -1,0 +1,26 @@
+name=libaom
+version=3.6.1
+release=1
+description="The libaom package contains a reference version of the Alliance for Open Media video codec."
+source=(https://storage.googleapis.com/aom-releases/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(nasm cmake)
+build() {
+
+mkdir aom-build &&
+cd    aom-build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DBUILD_SHARED_LIBS=1       \
+      -DENABLE_DOCS=no            \
+      -DENABLE_NASM=yes           \
+      -G Ninja \
+      ..
+
+ninja
+
+DESTDIR=$PKG cmake --install .
+rm -v $PKG/usr/lib/libaom.a
+
+}
