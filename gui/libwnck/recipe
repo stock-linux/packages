@@ -1,0 +1,10 @@
+name=libwnck
+version=43.0
+release=1
+description="The libwnck package contains the Window Navigator Construction Kit."
+source=(https://download.gnome.org/sources/$name/43/$name-$version.tar.xz)
+packager=camini
+makedepends=(mesa cmake gtk3 gobject-introspection startup-notification xorgproto shared-mime-info)
+build(){
+build_meson
+}
