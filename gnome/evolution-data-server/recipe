@@ -1,0 +1,27 @@
+name=evolution-data-server
+version=3.48.4
+release=1
+description="The Evolution Data Server package provides a unified backend for programs that work with contacts, tasks, and calendar information."
+source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libical libsecret nss sqlite gnome-online-accounts gobject-introspection gtk3 icu libcanberra libgweather vala webkitgtk3 webkitgtk4 cmake gtk4 xorgproto shared-mime-info)
+build() {
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr    \
+      -DSYSCONF_INSTALL_DIR=/etc     \
+      -DENABLE_VALA_BINDINGS=ON      \
+      -DENABLE_INSTALLED_TESTS=ON    \
+      -DWITH_OPENLDAP=OFF            \
+      -DWITH_KRB5=OFF                \
+      -DENABLE_INTROSPECTION=ON      \
+      -DENABLE_GTK_DOC=OFF           \
+      -DWITH_LIBDB=OFF               \
+      -Wno-dev -G Ninja ..           &&
+ninja
+
+DESTDIR=$PKG cmake --install .
+
+}
