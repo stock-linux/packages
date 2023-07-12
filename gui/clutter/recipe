@@ -1,0 +1,17 @@
+name=clutter
+version=1.26.4
+release=1
+description="The Clutter package contains an open source software library used for creating fast, visually rich and animated graphical user interfaces. "
+source=(https://download.gnome.org/sources/$name/1.26/$name-$version.tar.xz)
+packager=camini
+makedepends=(shared-mime-info mesa xorgproto at-spi2-core cogl json-glib gobject-introspection gtk3 libgudev libinput libxkbcommon wayland)
+build(){
+./configure --prefix=/usr               \
+            --sysconfdir=/etc           \
+            --enable-egl-backend        \
+            --enable-evdev-input        \
+            --enable-wayland-backend    \
+            --enable-wayland-compositor &&
+make
+make DESTDIR=$PKG install
+}
