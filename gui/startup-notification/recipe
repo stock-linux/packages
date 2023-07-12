@@ -1,6 +1,6 @@
 name=startup-notification
 version=0.12
-release=2
+release=3
 description="The startup-notification package contains startup-notification libraries."
 source=(https://www.freedesktop.org/software/$name/releases/startup-notification-$version.tar.gz)
 packager=camini
@@ -14,6 +14,6 @@ build(){
 
 make
 make DESTDIR=$PKG install
-#install -v -m644 -D doc/startup-notification.txt \
-#    $PKG/usr/share/doc/startup-notification-0.12/startup-notification.txt
+install -v -m644 -D doc/startup-notification.txt \
+    $PKG/usr/share/doc/startup-notification-0.12/startup-notification.txt
 }
