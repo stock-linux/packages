@@ -1,0 +1,22 @@
+name=geoclue
+version=2.7.0
+release=1
+description="GeoClue is a modular geoinformation service built on top of the D-Bus messaging system."
+source=(https://gitlab.freedesktop.org/$name/$name/-/archive/$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(json-glib libsoup modemmanager vala avahi gobject-introspection)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dgtk-doc=false     \
+            -Ddemo-agent=false  \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
