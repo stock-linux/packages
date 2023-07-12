@@ -1,0 +1,18 @@
+name=libshumate
+version=1.0.4
+release=1
+description="The libshumate package contains a GTK-4 widget to display maps."
+source=(https://download.gnome.org/sources/$name/1.0/$name-$version.tar.xz)
+packager=camini
+makedepends=(gtk4 libsoup gobject-introspection xorgproto shared-mime-info)
+build(){
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dgtk_doc=false     \
+            ..                  &&
+ninja
+DESTDIR=$PKG ninja install
+}
