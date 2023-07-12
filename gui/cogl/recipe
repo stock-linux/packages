@@ -1,0 +1,16 @@
+name=cogl
+version=1.22.8
+release=1
+description="Cogl is a modern 3D graphics API with associated utility APIs designed to expose the features of 3D graphics hardware using a direct state access API design, as opposed to the state-machine style of OpenGL. "
+source=(https://download.gnome.org/sources/$name/1.22/$name-$version.tar.xz)
+packager=camini
+makedepends=(shared-mime-info libxrandr libxcomposite libdrm libxdamage cmake xorgproto mesa cairo gdk-pixbuf glu pango wayland gobject-introspection)
+build(){
+./configure --prefix=/usr  \
+            --enable-gles1 \
+            --enable-gles2 \
+            --enable-{kms,wayland,xlib}-egl-platform \
+            --enable-wayland-egl-server              &&
+make
+make DESTDIR=$PKG install
+}
