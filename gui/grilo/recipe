@@ -1,0 +1,18 @@
+name=grilo
+version=0.3.16
+release=1
+description="Grilo is a framework focused on making media discovery and browsing easy for applications and application developers. "
+source=(https://download.gnome.org/sources/$name/0.3/$name-$version.tar.xz)
+packager=camini
+makedepends=(mesa cmake xorgproto shared-mime-info meson glib libxml2 gobject-introspection gtk3 libsoup totem-pl-parser vala)
+build(){
+mkdir build &&
+cd    build    &&
+
+meson setup --prefix=/usr          \
+            --buildtype=release    \
+            -Denable-gtk-doc=false \
+            ..                     &&
+ninja
+DESTDIR=$PKG ninja install
+}
