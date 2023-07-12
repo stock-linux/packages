@@ -1,0 +1,18 @@
+name=libpeas
+version=1.36.0
+release=1
+description="libpeas is a GObject based plugins engine, and is targeted at giving every application the chance to assume its own extensibility."
+source=(https://download.gnome.org/sources/$name/1.36/$name-$version.tar.xz)
+packager=camini
+makedepends=(gobject-introspection gtk3 libxml2 pygobject)
+build(){
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr          \
+            --buildtype=release    \
+            --wrap-mode=nofallback \
+            ..                     &&
+ninja
+DESTDIR=$PKG ninja install
+}
