@@ -1,0 +1,35 @@
+name=avahi
+version=0.8
+release=1
+description="The Avahi package is a system which facilitates service discovery on a local network."
+source=(https://github.com/lathiat/$name/releases/download/v$version/$name-$version.tar.gz https://www.linuxfromscratch.org/patches/blfs/svn/avahi-$version-ipv6_race_condition_fix-1.patch)
+packager=Skythrew
+makedepends=(glib gobject-introspection gtk2 gtk3 libdaemon libglade qt5 xorgproto shared-mime-info gdbm)
+build() {
+
+patch -Np1 -i ../$name-$version-ipv6_race_condition_fix-1.patch
+
+sed -i '426a if (events & AVAHI_WATCH_HUP) { \
+client_free(c); \
+return; \
+}' avahi-daemon/simple-protocol.c
+
+./configure \
+    --prefix=/usr        \
+    --sysconfdir=/etc    \
+    --localstatedir=/var \
+    --disable-static     \
+    --disable-libevent   \
+    --disable-mono       \
+    --disable-monodoc    \
+    --disable-python     \
+    --disable-qt3        \
+    --disable-qt4        \
+    --enable-core-docs   \
+    --with-distro=none   \
+    --with-dbus-system-address='unix:path=/run/dbus/system_bus_socket' &&
+make
+
+make DESTDIR=$PKG install
+
+}
