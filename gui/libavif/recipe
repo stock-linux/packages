@@ -1,0 +1,23 @@
+name=libavif
+version=0.11.1
+release=1
+description="The libavif package contains a library used for encoding and decoding AVIF files."
+source=(https://github.com/AOMediaCodec/$name/archive/v$version/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(cmake libaom)
+run=(gdk-pixbuf)
+build() {
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DAVIF_CODEC_AOM=ON         \
+      -DAVIF_BUILD_GDK_PIXBUF=ON  \
+      -G Ninja .. &&
+ninja
+
+DESTDIR=$PKG cmake --install .
+
+}
