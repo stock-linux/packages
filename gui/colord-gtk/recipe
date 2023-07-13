@@ -1,0 +1,25 @@
+name=colord-gtk
+version=0.3.0
+release=1
+description="The Colord GTK package contains GTK+ bindings for Colord."
+source=(https://www.freedesktop.org/software/colord/releases/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(colord gtk3 gtk2 gtk4 gobject-introspection vala xorgproto shared-mime-info mesa)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dgtk2=true         \
+            -Dgtk4=true         \
+            -Dvapi=true         \
+            -Ddocs=false        \
+            -Dman=false         \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
