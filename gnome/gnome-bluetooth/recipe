@@ -1,0 +1,10 @@
+name=gnome-bluetooth
+version=42.5
+release=1
+description="The GNOME Bluetooth package contains tools for managing and manipulating Bluetooth devices using the GNOME Desktop."
+source=(https://download.gnome.org/sources/$name/${version:0:2}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gtk4 gsound libnotify upower gobject-introspection libadwaita xorgproto shared-mime-info mesa)
+build() {
+build_meson
+}
