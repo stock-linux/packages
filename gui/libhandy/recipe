@@ -1,0 +1,10 @@
+name=libhandy
+version=1.8.2
+release=1
+description="The libhandy package provides additional GTK UI widgets for use in developing user interfaces."
+source=(https://download.gnome.org/sources/$name/${version:0:3}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gtk3 vala xorgproto shared-mime-info mesa gobject-introspection)
+build() {
+build_meson
+}

@@ -1,0 +1,25 @@
+name=lvm2
+version=2.03.21
+release=1
+description="The LVM2 package is a set of tools that manage logical partitions."
+source=(https://sourceware.org/ftp/$name/LVM2.$version.tgz)
+packager=Skythrew
+makedepends=(libaio)
+unpack() {
+    tar -xf LVM2.$version.tgz
+    cd LVM2.$version
+}
+build() {
+
+./configure --prefix=/usr       \
+            --enable-cmdlib     \
+            --enable-pkgconfig  \
+            --enable-udev_sync  &&
+make
+make DESTDIR=$PKG install
+make DESTDIR=$PKG install_systemd_units
+
+sed -e '/locking_dir =/{s/#//;s/var/run/}' \
+    -i $PKG/etc/lvm/lvm.conf
+
+}

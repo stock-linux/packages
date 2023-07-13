@@ -1,0 +1,10 @@
+name=gsound
+version=1.0.3
+release=1
+description="The gsound package contains a small library for playing system sounds"
+source=(https://download.gnome.org/sources/$name/${version:0:3}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libcanberra gobject-introspection vala)
+build() {
+build_meson
+}

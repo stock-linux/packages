@@ -1,0 +1,7 @@
+name=libcdio-paranoia
+version=10.2+2.0.1
+release=1
+description="The libcdio-cdparanoia library reads audio from the CD-ROM directly as data"
+source=(https://ftp.gnu.org/gnu/libcdio/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libcdio)

@@ -1,0 +1,27 @@
+name=upower
+version=1.90.2
+release=1
+description="The UPower package provides an interface for enumerating power devices, listening to device events and querying history and statistics. Any application or service on the system can access the org.freedesktop.UPower service via the system message bus."
+source=(https://gitlab.freedesktop.org/$name/$name/-/archive/v$version/$name-v$version.tar.bz2#$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libgudev libusb polkit gobject-introspection)
+unpack() {
+    tar -xf $name-$version.tar.*
+    cd $name-v$version
+}
+build() {
+
+sed '/parse_version/d' -i src/linux/integration-test.py
+
+mkdir build                         &&
+cd    build                         &&
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dgtk-doc=false     \
+      -Dman=false         &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}

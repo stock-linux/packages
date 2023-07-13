@@ -1,0 +1,27 @@
+name=poppler
+version=23.07.0
+data_ver=0.4.12
+release=1
+description="The Poppler package contains a PDF rendering library and command line tools used to manipulate PDF files. This is useful for providing PDF rendering functionality as a shared library."
+source=(https://$name.freedesktop.org/$name-$version.tar.xz https://poppler.freedesktop.org/poppler-data-${data_ver}.tar.gz)
+packager=Skythrew
+makedepends=(cmake fontconfig gobject-introspection boost cairo lcms2 libjpeg-turbo libpng nss openjpeg)
+build() {
+
+mkdir build                         &&
+cd    build                         &&
+
+cmake  -DCMAKE_BUILD_TYPE=Release   \
+       -DCMAKE_INSTALL_PREFIX=/usr  \
+       -DTESTDATADIR=$PWD/testfiles \
+       -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+       ..                           &&
+make
+
+make DESTDIR=$PKG install
+
+tar -xf ../../poppler-data-${data_ver}.tar.gz &&
+cd poppler-data-${data_ver}
+make prefix=$PKG/usr install
+
+}

@@ -1,0 +1,13 @@
+name=desktop-file-utils
+version=0.26
+release=1
+description="The Desktop File Utils package contains command line utilities for working with Desktop entries."
+source=(https://www.freedesktop.org/software/$name/releases/$name-$version.tar.xz https://www.linuxfromscratch.org/patches/blfs/svn/desktop-file-utils-$version-update_standard-1.patch)
+packager=Skythrew
+makedepends=(glib)
+pre_build() {
+patch -Np1 -i ../desktop-file-utils-$version-update_standard-1.patch
+}
+build() {
+build_meson
+}

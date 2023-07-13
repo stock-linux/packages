@@ -1,0 +1,11 @@
+name=libgrss
+version=0.7.0
+release=1
+description="The libgrss package contains a library designed to manipulate RSS and Atom feeds"
+source=(https://download.gnome.org/sources/$name/${version:0:3}/$name-$version.tar.xz https://www.linuxfromscratch.org/patches/blfs/svn/libgrss-$version-bugfixes-2.patch)
+packager=Skythrew
+makedepends=(libsoup2)
+pre_build() {
+patch -Np1 -i ../libgrss-$version-bugfixes-2.patch &&
+autoreconf -fv
+}

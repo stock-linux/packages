@@ -1,0 +1,13 @@
+name=exempi
+version=2.6.3
+release=1
+description="Exempi is an implementation of XMP"
+source=(https://libopenraw.freedesktop.org/download/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(boost)
+pre_build() {
+
+sed -i -r '/^\s?testadobesdk/d' exempi/Makefile.am &&
+autoreconf -fiv
+
+}

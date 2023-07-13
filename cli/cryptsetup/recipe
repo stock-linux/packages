@@ -1,0 +1,15 @@
+name=cryptsetup
+version=2.4.3
+release=1
+description="cryptsetup is used to set up transparent encryption of block devices using the kernel crypto API"
+source=(https://www.kernel.org/pub/linux/utils/$name/v2.4/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(json-c lvm2 popt)
+build() {
+
+./configure --prefix=/usr --disable-ssh-token &&
+make
+
+make DESTDIR=$PKG install
+
+}

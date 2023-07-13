@@ -1,0 +1,22 @@
+name=libnotify
+version=0.8.2
+release=1
+description="The libnotify library is used to send desktop notifications to a notification daemon, as defined in the Desktop Notifications spec."
+source=(https://download.gnome.org/sources/$name/0.8/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gtk3 gobject-introspection xorgproto shared-mime-info mesa)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dgtk_doc=false     \
+            -Dman=false         \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}

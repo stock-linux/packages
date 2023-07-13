@@ -1,0 +1,22 @@
+name=giflib
+version=5.2.1
+release=1
+description="The giflib package contains libraries for reading and writing GIFs as well as programs for converting and working with GIF files."
+source=(https://sourceforge.net/projects/$name/files/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(xmlto)
+build() {
+
+make
+
+make PREFIX=$PKG/usr install &&
+
+rm -fv $PKG/usr/lib/libgif.a &&
+
+find doc \( -name Makefile\* -o -name \*.1 \
+         -o -name \*.xml \) -exec rm -v {} \; &&
+
+install -v -dm755 $PKG/usr/share/doc/giflib-$version &&
+cp -v -R doc/* $PKG/usr/share/doc/giflib-$version
+
+}

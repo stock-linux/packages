@@ -1,0 +1,22 @@
+name=libgdata
+version=0.18.1
+release=1
+description="The libgdata package is a GLib-based library for accessing online service APIs using the GData protocol"
+source=(https://download.gnome.org/sources/$name/0.18/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(libsoup2 gnome-online-accounts gtk3 json-glib vala gcr3 gobject-introspection)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr              \
+            --buildtype=release        \
+            -Dgtk_doc=false            \
+            -Dalways_build_tests=false \
+            ..                         &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
