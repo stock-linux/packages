@@ -1,0 +1,24 @@
+name=nautilus
+version=44.2.1
+release=1
+description="The Nautilus package contains the GNOME file manager."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(bubblewrap gexiv2 gnome-autoar gnome-desktop libadwaita libcloudproviders libnotify libportal libseccomp tracker desktop-file-utils exempi gobject-introspection gst-plugins-base libexif shared-mime-info gsettings-desktop-schemas xkeyboard-config iso-codes xorgproto)
+run=(gvfs)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dselinux=false     \
+            -Dpackagekit=false  \
+            ..                  &&
+
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
