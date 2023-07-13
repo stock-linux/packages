@@ -1,0 +1,10 @@
+name=dconf-editor
+version=43.0
+release=1
+description="The DConf-Editor, as the name suggests, is a graphical editor for the DConf database."
+source=(https://download.gnome.org/sources/$name/${version:0:2}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gtk3 libhandy libxml2 libxslt vala dconf xorgproto shared-mime-info mesa)
+build() {
+build_meson
+}
