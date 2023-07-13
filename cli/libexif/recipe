@@ -1,0 +1,6 @@
+name=libexif
+version=0.6.24
+release=1
+description="The libexif package contains a library for parsing, editing, and saving EXIF data."
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.bz2)
+packager=Skythrew
