@@ -1,0 +1,18 @@
+name=libportal
+version=0.6
+release=1
+description="The libportal package provides a library that contains GIO-style async APIs for most Flatpak portals."
+source=(https://github.com/flatpak/$name/releases/download/$version/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gobject-introspection gtk3 gtk4 qt5 xorgproto shared-mime-info mesa vala)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release -Ddocs=false .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
