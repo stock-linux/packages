@@ -1,0 +1,22 @@
+name=gst-libav
+version=1.22.4
+release=1
+description="The GStreamer Libav package contains GStreamer plugins for Libav"
+source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(ffmpeg gst-plugins-base yasm)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson  setup ..            \
+       --prefix=/usr       \
+       --buildtype=release \
+       -Dpackage-origin=https://www.linuxfromscratch.org/blfs/view/systemd/ \
+       -Dpackage-name="GStreamer 1.22.4 Stock" &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
