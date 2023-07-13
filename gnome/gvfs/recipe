@@ -1,0 +1,30 @@
+name=gvfs
+version=1.50.5
+release=1
+description="The Gvfs package is a userspace virtual filesystem designed to work with the I/O abstractions of GLib's GIO library."
+source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(dbus glib libusb libsecret gcr3 gtk3 libcdio-paranoia libsoup udisks gsettings-desktop-schemas libarchive)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup               \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dfuse=false        \
+      -Dgphoto2=false     \
+      -Dafc=false         \
+      -Dbluray=false      \
+      -Dnfs=false         \
+      -Dmtp=false         \
+      -Dsmb=false         \
+      -Ddnssd=false       \
+      -Dgoa=false         \
+      -Dgoogle=false      .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
