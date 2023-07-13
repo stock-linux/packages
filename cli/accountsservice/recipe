@@ -1,0 +1,28 @@
+name=accountsservice
+version=23.13.9
+release=1
+description="The AccountsService package provides a set of D-Bus interfaces for querying and manipulating user account information"
+source=(https://www.freedesktop.org/software/$name/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(dbus polkit gobject-introspection vala)
+build() {
+
+mv tests/dbusmock{,-tests}
+
+sed -e '/accounts_service\.py/s/dbusmock/dbusmock-tests/' \
+   -i tests/test-libaccountsservice.py
+
+sed -i '/^SIMULATED_SYSTEM_LOCALE/s/en_IE.UTF-8/en_HK.iso88591/' tests/test-daemon.py
+
+mkdir build &&
+cd    build &&
+
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dadmin_group=adm   &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
