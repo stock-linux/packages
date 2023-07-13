@@ -1,0 +1,19 @@
+name=udisks
+version=2.10.0
+release=1
+description="The UDisks package provides a daemon, tools and libraries to access and manipulate disks and storage devices."
+source=(https://github.com/storaged-project/$name/releases/download/$name-$version/$name-$version.tar.bz2)
+packager=Skythrew
+makedepends=(libatasmart libblockdev libgudev libxslt polkit gobject-introspection)
+build() {
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static     \
+            --enable-available-modules &&
+make
+
+make DESTDIR=$PKG install
+
+}
