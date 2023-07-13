@@ -1,0 +1,23 @@
+name=libblockdev
+version=3.0
+release=1
+description="libblockdev is a C library supporting GObject Introspection for manipulation of block devices."
+source=(https://github.com/storaged-project/$name/releases/download/$version-1/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(glib cryptsetup gobject-introspection keyutils libnvme lvm2 kmod libbytesize e2fsprogs)
+build() {
+
+./configure --prefix=/usr      \
+            --sysconfdir=/etc  \
+            --with-python3     \
+            --without-escrow   \
+            --without-gtk-doc  \
+            --without-lvm      \
+            --without-lvm_dbus \
+            --without-nvdimm   \
+            --without-tools    &&
+make
+
+make DESTDIR=$PKG install
+
+}
