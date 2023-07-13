@@ -1,0 +1,24 @@
+name=tracker
+version=3.5.3
+release=1
+description="Tracker is the file indexing and search provider used in the GNOME desktop environment."
+source=(https://download.gnome.org/sources/$name/3.5/$name-$version.tar.xz)
+packager=camini
+makedepends=(cmake dbus libxml2 json-glib libseccomp vala gobject-introspection libsoup icu pygobject)
+build(){
+mv docs/reference/libtracker-sparql/doc/{Tracker-3.0,tracker-3.5.3} &&
+sed '/docs_name/s/Tracker-3.0/tracker-3.5.3/' \
+    -i docs/reference/libtracker-sparql/meson.build
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dman=false         \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+}
+
