@@ -4,7 +4,7 @@ release=1
 description="PulseAudio is a sound system for POSIX OSes, meaning that it is a proxy for sound applications."
 source=(https://www.freedesktop.org/software/$name/releases/$name-$version.tar.xz)
 packager=Skythrew
-makedepends=(libsndfile alsa-lib dbus glib speexdsp bluez sbc libxtst xorgproto)
+makedepends=(libsndfile alsa-lib dbus glib speexdsp bluez sbc libxtst xorgproto gdbm libice libsm libxfixes check xml-parser)
 build() {
 
 mkdir build &&
