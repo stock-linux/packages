@@ -1,0 +1,6 @@
+name=libcdio
+version=2.1.0
+release=1
+description="The libcdio is a library for CD-ROM and CD image access."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
+packager=Skythrew
