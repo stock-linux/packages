@@ -1,0 +1,15 @@
+name=python-six
+version=1.16.0
+release=1
+description="Six is a Python 2 to 3 compatibility library."
+source=(https://files.pythonhosted.org/packages/source/s/six/six-$version.tar.gz)
+packager=Skythrew
+makedepends=(python-wheel)
+unpack() {
+    tar -xf six-$version.tar.gz
+    cd six-$version
+}
+build() {
+pip3 wheel -w dist --no-build-isolation --no-deps $PWD
+pip3 install --root=$PKG --no-index --find-links dist --no-cache-dir --no-user six
+}
