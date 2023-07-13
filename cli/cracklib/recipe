@@ -1,0 +1,18 @@
+name=cracklib
+version=2.9.11
+release=1
+description="The CrackLib package contains a library used to enforce strong passwords by comparing user selected passwords to words in chosen word lists."
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.xz)
+packager=Skythrew
+build() {
+
+autoreconf -fiv &&
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --with-default-dict=/usr/lib/cracklib/pw_dict &&
+make
+
+make DESTDIR=$PKG install
+
+}
