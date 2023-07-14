@@ -1,0 +1,10 @@
+name=sysprof
+version=3.48.0
+release=1
+description="The sysprof package contains a statistical and system-wide profiler for Linux."
+source=(https://download.gnome.org/sources/$name/3.48/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(desktop-file-utils gtk4 itstool json-glib libadwaita libdazzle libunwind polkit xorgproto shared-mime-info mesa)
+build() {
+build_meson
+}
