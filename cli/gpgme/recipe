@@ -1,0 +1,13 @@
+name=gpgme
+version=1.21.0
+release=1
+description="The GPGME package is a C library that allows cryptography support to be added to a program."
+source=(https://www.gnupg.org/ftp/gcrypt/$name/$name-$version.tar.bz2)
+packager=camini
+makedepends=(libassuan qt5 doxygen gnupg libgpg-error python)
+build(){
+./configure --prefix=/usr --disable-gpg-test &&
+make
+
+make DESTDIR=$PKG install
+}
