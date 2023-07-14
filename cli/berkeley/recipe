@@ -1,0 +1,23 @@
+name=berkeley
+version=6.2.32
+release=1
+description="The Berkeley DB package contains programs and utilities used by many other applications for database related functions."
+source=(https://download.oracle.com/berkeley-db/db-$version.tar.gz)
+packager=camini
+makedepends=(libnsl sharutils)
+unpack(){
+tar -xf db-$version.tar.gz
+cd db-$version
+}
+build(){
+cd build_unix                        &&
+../dist/configure --prefix=/usr      \
+                  --enable-compat185 \
+                  --enable-dbm       \
+                  --disable-static   \
+                  --enable-cxx       &&
+make
+
+make DESTDIR=$PKG install 
+}
+
