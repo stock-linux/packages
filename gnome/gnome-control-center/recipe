@@ -1,0 +1,20 @@
+name=gnome-control-center
+version=44.3
+release=1
+description="The GNOME Control Center package contains the GNOME settings manager."
+source=(https://download.gnome.org/sources/$name/${version:0:2}/$name-$version.tar.xz https://raw.githubusercontent.com/stock-linux/stock/main/LOGO__bord_2.png)
+packager=Skythrew
+makedepends=(accountsservice colord-gtk gnome-online-accounts gnome-settings-daemon gsound libgtop libpwquality krb5 shared-mime-info udisks cups gnome-bluetooth libadwaita modemmanager libnma xorgproto mesa gsettings-desktop-schemas ibus xkeyboard-config iso-codes gnutls samba)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release -Ddistributor_logo=/usr/share/gnome-control-center/logo.png .. &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+cp ../../LOGO*.png $PKG/usr/share/gnome-control-center/logo.png
+
+}
