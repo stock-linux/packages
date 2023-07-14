@@ -1,0 +1,26 @@
+name=openldap
+version=2.6.5
+release=1
+description="The OpenLDAP package provides an open source implementation of the Lightweight Directory Access Protocol."
+source=(https://www.$name.org/software/download/OpenLDAP/$name-release/$name-$version.tgz#$name-$version.tar.gz https://www.linuxfromscratch.org/patches/blfs/svn/openldap-$version-consolidated-1.patch)
+packager=Skythrew
+makedepends=(cyrus-sasl groff)
+build() {
+
+patch -Np1 -i ../openldap-$version-consolidated-1.patch &&
+autoconf &&
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  \
+            --enable-dynamic  \
+            --enable-versioning=yes  \
+            --disable-debug   \
+            --disable-slapd &&
+
+make depend &&
+make
+
+make DESTDIR=$PKG install
+
+}
