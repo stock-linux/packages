@@ -1,0 +1,7 @@
+name=xf86-video-vmware
+version=13.4.0
+release=1
+description="The Xorg VMware Driver package contains the X.Org Video Driver for VMware SVGA virtual video cards."
+source=(https://www.x.org/pub/individual/driver/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xorg-server xorgproto)
