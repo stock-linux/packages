@@ -1,0 +1,7 @@
+name=xf86-video-vesa
+version=2.6.0
+release=1
+description="Generic VESA video driver"
+source=(https://xorg.freedesktop.org/releases/individual/driver/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(xorg-server xorgproto)
