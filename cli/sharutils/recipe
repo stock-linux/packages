@@ -1,0 +1,18 @@
+name=sharutils
+version=4.15.2
+release=1
+description="The Sharutils package contains utilities that can create 'shell' archives."
+source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+packager=camini
+build(){
+sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c &&
+sed -i '/program_name/s/^/extern /' src/*opts.h
+
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c        &&
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h &&
+
+./configure --prefix=/usr &&
+make
+
+make DESTDIR=$PKG install
+}
