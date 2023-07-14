@@ -1,0 +1,6 @@
+name=libunwind
+version=1.6.2
+release=1
+description="The libunwind package contains a portable and efficient C programming interface to determine the call-chain of a program."
+source=(https://download.savannah.nongnu.org/releases/$name/$name-$version.tar.gz)
+packager=Skythrew
