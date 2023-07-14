@@ -1,0 +1,30 @@
+name=fuse
+version=3.15.0
+release=1
+description="FUSE (Filesystem in Userspace) is a simple interface for userspace programs to export a virtual filesystem to the Linux kernel."
+source=(https://github.com/lib$name/lib$name/releases/download/$name-$version/$name-$version.tar.xz)
+packager=camini
+makedepends=(doxygen)
+build(){
+sed -i '/^udev/,$ s/^/#/' util/meson.build &&
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release .. &&
+ninja
+
+pushd .. &&
+  doxygen doc/Doxyfile &&
+popd
+
+DESTDIR=$PKG ninja install
+
+chmod u+s $PKG/usr/bin/fusermount3 &&
+
+cd ..                          &&
+install -v -m755 -d $PKG/usr/share/doc/fuse-3.15.0 &&
+install -v -m644    doc/{README.NFS,kernel.txt} \
+                    $PKG/usr/share/doc/fuse-3.15.0 &&
+cp -Rv doc/html     $PKG/usr/share/doc/fuse-3.15
+}
