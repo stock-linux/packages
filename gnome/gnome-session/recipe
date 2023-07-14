@@ -1,0 +1,13 @@
+name=gnome-session
+version=44.0
+release=1
+description="The GNOME Session package contains the GNOME session manager."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gnome-desktop json-glib xorgproto shared-mime-info mesa upower xtrans libice libsm gsettings-desktop-schemas xkeyboard-config iso-codes libxcomposite libxslt xmlto)
+pre_build() {
+sed 's@/bin/sh@/bin/sh -l@' -i gnome-session/gnome-session.in
+}
+build() {
+build_meson
+}
