@@ -1,0 +1,13 @@
+name=libnsl
+version=2.0.0
+release=1
+description="The libnsl package contains the public client interface for NIS(YP). It replaces the NIS library that used to be in glibc."
+source=(https://github.com/thkukuk/$name/releases/download/v$version/$name-$version.tar.xz)
+packager=camini
+makedepends=(libtirpc)
+build(){
+./configure --sysconfdir=/etc --disable-static &&
+make
+
+make DESTDIR=$PKG install
+}
