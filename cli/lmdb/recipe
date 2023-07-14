@@ -1,0 +1,17 @@
+name=lmdb
+version=0.9.29
+release=1
+description="The lmdb package is a fast, compact, key-value embedded data store."
+source=(https://github.com/LMDB/$name/archive/LMDB_$version.tar.gz)
+packager=camini
+unpack(){
+tar -xf LMDB_$version.tar.gz
+cd lmdb-LMDB_$version
+}
+build(){
+cd libraries/liblmdb &&
+make                 &&
+sed -i 's| liblmdb.a||' Makefile
+
+make DESTDIR=$PKG install
+}
