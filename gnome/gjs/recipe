@@ -4,7 +4,7 @@ release=1
 description="Gjs is a set of Javascript bindings for GNOME."
 source=(https://download.gnome.org/sources/$name/${version:0:4}/$name-$version.tar.xz)
 packager=Skythrew
-makedepends=(cairo dbus gobject-introspection js gtk3 gtk4)
+makedepends=(cairo dbus gobject-introspection js gtk3 gtk4 xorgproto shared-mime-info mesa)
 build() {
 
 mkdir gjs-build &&
