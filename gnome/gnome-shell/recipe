@@ -1,0 +1,21 @@
+name=gnome-shell
+version=44.3
+release=1
+description="The GNOME Shell is the core user interface of the GNOME Desktop environment."
+source=(https://download.gnome.org/sources/$name/${version:0:2}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(evolution-data-server gcr gjs gnome-desktop ibus mutter polkit sassc startup-notification desktop-file-utils gnome-autoar gnome-bluetooth gst-plugins-base networkmanager xorgproto shared-mime-info mesa gsettings-desktop-schemas xkeyboard-config iso-codes)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dtests=false       \
+            ..                  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
