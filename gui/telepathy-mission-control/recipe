@@ -1,0 +1,7 @@
+name=telepathy-mission-control
+version=5.16.6
+release=1
+description="Telepathy Mission Control is an account manager and channel dispatcher for the Telepathy framework, allowing user interfaces and other clients to share connections to real-time communication services without conflicting."
+source=(https://telepathy.freedesktop.org/releases/$name/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(telepathy-glib networkmanager libxslt)
