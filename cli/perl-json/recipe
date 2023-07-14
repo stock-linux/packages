@@ -1,0 +1,18 @@
+name=perl-json
+version=4.10
+release=1
+description="JSON provides a simple wrapper for JSON::XS-compatible modules with some additional features."
+source=(https://www.cpan.org/authors/id/I/IS/ISHIGAKI/JSON-$version.tar.gz)
+packager=Skythrew
+unpack() {
+    tar -xf JSON-$version.tar.gz
+    cd JSON-$version
+}
+build() {
+
+perl Makefile.PL &&
+make
+
+make DESTDIR=$PKG install
+
+}
