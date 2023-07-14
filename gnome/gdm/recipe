@@ -1,0 +1,23 @@
+name=gdm
+version=44.1
+release=1
+description="GDM is a system service that is responsible for providing graphical logins and managing local and remote displays."
+source=(https://download.gnome.org/sources/$name/${version:0:2}/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(accountsservice dconf libcanberra libgudev xorgproto shared-mime-info mesa gobject-introspection itstool)
+run=(gnome-session gnome-shell)
+build() {
+
+mkdir build &&
+cd    build &&
+
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dgdm-xsession=true \
+      -Drun-dir=/run/gdm  &&
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
