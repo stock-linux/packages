@@ -1,0 +1,20 @@
+name=telepathy-glib
+version=0.24.2
+release=1
+description="The Telepathy GLib contains a library used by GLib based Telepathy components."
+source=(https://telepathy.freedesktop.org/releases/$name/$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(dbus-glib libxslt gobject-introspection vala)
+build() {
+
+sed -i 's%/usr/bin/python%&3%' tests/all-errors-documented.py
+
+./configure --prefix=/usr          \
+    --enable-vala-bindings \
+    --disable-static
+
+make
+
+make DESTDIR=$PKG install
+
+}
