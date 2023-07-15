@@ -1,0 +1,19 @@
+name=eog
+version=44.3
+release=1
+description="EOG is an application used for viewing and cataloging image files on the GNOME Desktop. It also has basic editing capabilities."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=camini
+makedepends=(itstool iso-codes xkeyboard-config gsettings-desktop-schemas desktop-file-utils adwaita-icon-theme xorgproto exempi gnome-desktop cmake libhandy libjpeg-turbo libpeas shared-mime-info gobject-introspection lcms2 libexif librsvg webp-pixbuf-loader libportal)
+build(){
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr       \
+            --buildtype=release \
+            -Dlibportal=false   \
+            ..                  &&
+ninja
+DESTDIR=$PKG ninja install
+update-desktop-database
+}
