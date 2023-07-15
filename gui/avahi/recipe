@@ -4,7 +4,7 @@ release=1
 description="The Avahi package is a system which facilitates service discovery on a local network."
 source=(https://github.com/lathiat/$name/releases/download/v$version/$name-$version.tar.gz https://www.linuxfromscratch.org/patches/blfs/svn/avahi-$version-ipv6_race_condition_fix-1.patch)
 packager=Skythrew
-makedepends=(glib gobject-introspection gtk2 gtk3 libdaemon libglade qt5 xorgproto shared-mime-info gdbm)
+makedepends=(glib gobject-introspection libdaemon libglade xorgproto shared-mime-info gdbm)
 build() {
 
 patch -Np1 -i ../$name-$version-ipv6_race_condition_fix-1.patch
@@ -25,6 +25,9 @@ return; \
     --disable-python     \
     --disable-qt3        \
     --disable-qt4        \
+    --disable-gtk        \
+    --disable-gtk3       \
+    --disable-qt5        \
     --enable-core-docs   \
     --with-distro=none
 make
