@@ -1,0 +1,11 @@
+name=sound-theme-freedesktop
+version=0.8
+release=1
+description="The Sound Theme Freedesktop package contains sound themes for the desktop."
+source=(https://people.freedesktop.org/~mccann/dist/sound-theme-freedesktop-0.8.tar.bz2)
+packager=camini
+makedepends=(intltool xml-parser)
+unpack(){
+tar -xf sound-theme-freedesktop-0.8.tar.bz2
+cd sound-theme-freedesktop-$version
+}
