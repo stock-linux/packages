@@ -1,10 +1,10 @@
 name=gst-plugins-good
 version=1.22.4
-release=1
+release=2
 description="The GStreamer Good Plug-ins is a set of plug-ins considered by the GStreamer developers to have good quality code, correct functionality, and the preferred license."
 source=(https://gstreamer.freedesktop.org/src/$name/$name-$version.tar.xz)
-packager=Skythrew
-makedepends=(gst-plugins-base cairo flac gdk-pixbuf lame libsoup2 libsoup libvpx mpg123 nasm pulseaudio)
+packager=camini
+makedepends=(v4l-utils wayland gst-plugins-base cairo flac gdk-pixbuf lame libsoup2 libsoup libvpx mpg123 nasm pulseaudio)
 build() {
 
 mkdir build &&
