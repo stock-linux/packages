@@ -1,0 +1,18 @@
+name=noto-fonts-emoji
+version=2.038
+release=1
+description="Noto Emoji fonts"
+source=(https://github.com/googlefonts/noto-emoji/archive/refs/tags/v$version.tar.gz)
+packager=camini
+unpack(){
+tar -xf v$version.tar.gz
+cd noto-emoji-$version
+}
+build(){
+cd noto-emoji-$version
+
+mkdir -p $PKG/usr/share/fonts/noto
+
+install -m644 fonts/NotoColorEmoji.ttf $PKG/usr/share/fonts/noto
+install -Dm644 LICENSE $PKG/usr/share/licenses/noto-emoji/LICENSE
+}
