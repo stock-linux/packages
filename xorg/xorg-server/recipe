@@ -1,6 +1,6 @@
 name=xorg-server
 version=21.1.8
-release=1
+release=2
 description="The Xorg Server is the core of the X Window system."
 source=(https://www.x.org/pub/individual/xserver/$name-$version.tar.xz)
 packager=Skythrew
@@ -19,5 +19,9 @@ build() {
 
     DESTDIR=$PKG ninja install
     mkdir -pv $PKG/etc/X11/xorg.conf.d
+
+    cat > $PKG/etc/X11/Xwrapper.config << EOF
+needs_root_rights=yes
+EOF
 
 }
