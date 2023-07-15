@@ -1,10 +1,10 @@
 name=gnome-tweaks
 version=40.10
-release=1
+release=2
 description="GNOME Tweaks is a simple program used to tweak advanced GNOME settings."
 source=(https://download.gnome.org/sources/$name/40/gnome-tweaks-$version.tar.xz)
 packager=camini
-makedepends=(gtk3 gsettings-desktop-schemas lbhandy pygobject sound-theme-freedesktop)
+makedepends=(gnome-settings-daemon gtk3 gsettings-desktop-schemas lbhandy pygobject sound-theme-freedesktop)
 unpack(){
 tar -xf gnome-tweaks-$version.tar.xz
 cd gnome-tweaks-$version
