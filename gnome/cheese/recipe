@@ -1,0 +1,19 @@
+name=cheese
+version=44.0.1
+release=1
+description="Cheese is used to take photos and videos with fun graphical effects."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=camini
+makedepends=(libxslt itstool iso-codes xkeyboard-config gsettings-desktop-schemas cmake clutter-gst clutter-gtk gnome-desktop gst-plugins-bad gst-plugins-good libcanberra libgudev gnome-video-effects gobject-introspection vala xorgproto shared-mime-info)
+build(){
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr        \
+            --buildtype=release  \
+            -Dgtk_doc=false      \
+            -Dtests=true         \
+            ..                   &&
+ninja
+DESTDIR=$PKG ninja install
+}
