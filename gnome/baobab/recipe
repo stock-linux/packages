@@ -1,6 +1,6 @@
 name=baobab
 version=44.0
-release=1
+release=2
 description="The Baobab package contains a graphical directory tree analyzer."
 source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
 packager=camini
