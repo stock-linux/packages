@@ -3,7 +3,7 @@ version=5.15.10
 release=1
 description="Qt5 is a cross-platform application framework that is widely used for developing application software with a graphical user interface."
 source=(https://download.qt.io/archive/qt/5.15/$version/single/qt-everywhere-opensource-src-$version.tar.xz https://www.linuxfromscratch.org/patches/blfs/svn/qt-everywhere-opensource-src-$version-kf5-1.patch)
-packager=Skythrew
+packager=camini
 makedepends=(libxi libxrender xorgproto alsa-lib make-ca cups double-conversion glib gst-plugins-base harfbuzz icu jasper libjpeg-turbo libmng libpng libtiff libwebp libxkbcommon mesa mtdev pcre2 sqlite wayland xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm which)
 unpack() {
     tar -xf qt-everywhere-opensource*.tar.xz
@@ -69,57 +69,6 @@ install -v -Dm644 qttools/src/qdbus/qdbusviewer/images/qdbusviewer-128.png \
 
 install -dm755 $PKG/usr/share/applications &&
 
-cat > $PKG/usr/share/applications/assistant-qt5.desktop << EOF
-[Desktop Entry]
-Name=Qt5 Assistant
-Comment=Shows Qt5 documentation and examples
-Exec=$QT5BINDIR/assistant
-Icon=assistant-qt5.png
-Terminal=false
-Encoding=UTF-8
-Type=Application
-Categories=Qt;Development;Documentation;
-EOF
-
-cat > $PKG/usr/share/applications/designer-qt5.desktop << EOF
-[Desktop Entry]
-Name=Qt5 Designer
-GenericName=Interface Designer
-Comment=Design GUIs for Qt5 applications
-Exec=$QT5BINDIR/designer
-Icon=designer-qt5.png
-MimeType=application/x-designer;
-Terminal=false
-Encoding=UTF-8
-Type=Application
-Categories=Qt;Development;
-EOF
-
-cat > $PKG/usr/share/applications/linguist-qt5.desktop << EOF
-[Desktop Entry]
-Name=Qt5 Linguist
-Comment=Add translations to Qt5 applications
-Exec=$QT5BINDIR/linguist
-Icon=linguist-qt5.png
-MimeType=text/vnd.trolltech.linguist;application/x-linguist;
-Terminal=false
-Encoding=UTF-8
-Type=Application
-Categories=Qt;Development;
-EOF
-
-cat > $PKG/usr/share/applications/qdbusviewer-qt5.desktop << EOF
-[Desktop Entry]
-Name=Qt5 QDbusViewer
-GenericName=D-Bus Debugger
-Comment=Debug D-Bus applications
-Exec=$QT5BINDIR/qdbusviewer
-Icon=qdbusviewer-qt5.png
-Terminal=false
-Encoding=UTF-8
-Type=Application
-Categories=Qt;Development;Debugger;
-EOF
 
 for file in moc uic rcc qmake lconvert lrelease lupdate; do
   ln -sfrvn $file $PKG/usr/bin/$file-qt5
