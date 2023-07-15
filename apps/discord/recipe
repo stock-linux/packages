@@ -1,0 +1,30 @@
+name=discord
+version=0.0.28
+release=1
+description="All-in-one voice and text chat for gamers that's free and secure."
+source=(https://dl.discordapp.net/apps/linux/$version/$name-$version.tar.gz https://discord.com/terms https://discord.com/licenses)
+packager=Skythrew
+run=(gtk3 libnotify libxscrnsaver alsa-lib nspr nss pulseaudio noto-fonts-emoji hicolor-icon-theme desktop-file-utils shared-mime-info)
+build() {
+
+    sed -i "s|Exec=.*|Exec=/usr/bin/$name|" Discord/$name.desktop
+
+    install -d $PKG/opt/$name
+    cp -a Discord/. $PKG/opt/$name
+    chmod 755 $PKG/opt/$name/Discord
+
+    install -d $PKG/usr/share/applications
+    ln -s /opt/$name/$name.desktop $PKG/usr/share/applications
+
+    install -d $PKG/usr/bin
+    ln -s /opt/$name/Discord $PKG/usr/bin/$name
+
+    install -d $PKG/usr/share/pixmaps
+    ln -s /opt/$name/$name.png $PKG/usr/share/pixmaps/$name.png
+
+    chmod u+s $PKG/opt/$name/chrome-sandbox
+
+    install -Dm644 terms $PKG/usr/share/licenses/$name/LICENSE.html
+    install -Dm644 licenses $PKG/usr/share/licenses/$name/OSS-LICENSES.html
+
+}
