@@ -1,0 +1,16 @@
+name=xdg-user-dirs
+version=0.18
+release=1
+description="Xdg-user-dirs is a tool to help manage “well known” user directories like the desktop folder and the music folder. It also handles localization (i.e. translation) of the filenames."
+source=(https://user-dirs.freedesktop.org/releases/xdg-user-dirs-$version.tar.gz)
+packager=camini
+makedepends=(libxslt docbook-xsl)
+unpack(){
+tar -xf xdg-user-dirs-$version.tar.gz
+cd xdg-user-dirs-$version
+}
+build(){
+./configure --prefix=/usr --sysconfdir=/etc &&
+make
+make DESTDIR=$PKG install
+}
