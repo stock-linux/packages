@@ -1,0 +1,10 @@
+name=gnome-disk-utility
+version=44.0
+release=1
+description="The GNOME Disk Utility package provides applications used for dealing with storage devices."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=camini
+makedepends=(desktop-file-utils libxslt gnome-settings-daemon itstool libdvdread libhandy libpwquality libsecret udisks xorgproto shared-mime-info)
+build(){
+build_meson
+}
