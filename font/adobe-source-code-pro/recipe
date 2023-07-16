@@ -1,0 +1,15 @@
+name=adobe-source-code-pro
+version=2.042
+release=1
+description="Monospaced font family for user interface and coding environments"
+source=(https://github.com/adobe-fonts/source-code-pro/archive/refs/tags/2.042R-u/1.062R-i/1.026R-vf.tar.gz)
+packager=camini
+unpack(){
+tar -xf 1.026R-vf.tar.gz
+cd source-code-pro-2.042R-u-1.062R-i-1.026R-vf
+}
+build(){
+cd OTF
+
+install -Dt "$PKG/usr/share/fonts/${name%-fonts}" -m644 *.otf
+}
