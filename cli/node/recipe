@@ -1,0 +1,25 @@
+name=node
+version=20.4.0
+release=1
+description="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine."
+source=(https://${name}js.org/dist/v$version/$name-v$version.tar.xz)
+packager=Skythrew
+makedepends=(which c-ares icu libuv nghttp2)
+unpack() {
+    tar -xf $name-v$version.tar.xz
+    cd $name-v$version
+}
+build() {
+
+./configure --prefix=/usr          \
+            --shared-cares         \
+            --shared-libuv         \
+            --shared-openssl       \
+            --shared-nghttp2       \
+            --shared-zlib          \
+            --with-intl=system-icu &&
+make
+
+make DESTDIR=$PKG install
+
+}
