@@ -5,6 +5,7 @@ description="Mesa is an OpenGL compatible 3D graphics library."
 source=(https://$name.freedesktop.org/archive/$name-$version.tar.xz)
 packager=Skythrew
 makedepends=(libdrm libelf libxdamage libxshmfence libxxf86vm llvm vulkan-icd-loader wayland-protocols libva libvdpau cmake glslang xorgproto python-mako flex wayland libxrandr libglvnd)
+run=(libglvnd)
 build() {
 
 mkdir build
