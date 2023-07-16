@@ -1,0 +1,8 @@
+name=gspell
+version=1.12.1
+release=1
+description="The gspell package provides a flexible API to add spell checking to a GTK+ application."
+source=(https://download.gnome.org/sources/$name/1.12/$name-$version.tar.xz)
+packager=camini
+makedepends=(iso-codes mesa xorgproto shared-mime-info glib libglvnd enchant icu gtk3 gobject-introspection vala valgrind)
+
