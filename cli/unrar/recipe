@@ -1,0 +1,14 @@
+name=unrar
+version=6.2.8
+release=1
+description="The UnRar package contains a RAR extraction utility used for extracting files from RAR archives. RAR archives are usually created with WinRAR, primarily in a Windows environment."
+source=(https://www.rarlab.com/rar/unrarsrc-$version.tar.gz)
+packager=camini
+unpack(){
+tar -xf unrarsrc-$version.tar.gz
+cd unrar
+}
+build(){
+make -f makefile
+install -Dm755 unrar $PKG/usr/bin/unrar
+}
