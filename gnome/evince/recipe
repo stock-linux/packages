@@ -1,0 +1,20 @@
+name=evince
+version=44.3
+release=1
+description="Evince is a document viewer for multiple document formats."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=camini
+makedepends=(desktop-file-utils itstool xorgproto shared-mime-info adwaita-icon-theme gsettings-desktop-schemas gtk3 libhandy libxml2 openjpeg gnome-keyring gobject-introspection libarchive libsecret poppler cups gnome-desktop gspell gst-plugins-base libtiff)
+build(){
+mkdir build &&
+cd    build &&
+
+CPPFLAGS+=" -I/opt/texlive/2023/include" \
+meson setup --prefix=/usr          \
+            --buildtype=release    \
+            -Dgtk_doc=false        \
+            --wrap-mode=nodownload \
+            ..                     &&
+ninja
+DESTDIR=$PKG ninja install
+}
