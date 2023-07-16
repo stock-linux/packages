@@ -1,0 +1,14 @@
+name=gnome-console
+version=44.0
+release=1
+description="A simple user-friendly terminal emulator for the GNOME desktop."
+source=(https://gitlab.gnome.org/GNOME/console/-/archive/$version/console-$version.tar.bz2)
+packager=Skythrew
+makedepends=(glib vte gtk4 gsettings-desktop-schemas pcre2 libadwaita libgtop xorgproto shared-mime-info desktop-file-utils)
+unpack() {
+    tar -xf console-$version.tar.bz2
+    cd console-$version
+}
+build() {
+build_meson
+}
