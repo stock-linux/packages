@@ -1,10 +1,11 @@
 name=mutter
 version=44.3
-release=1
+release=2
 description="Mutter is the window manager for GNOME"
 source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
 packager=Skythrew
-makedepends=(gnome-settings-daemon graphene libxcvt libxkbcommon pipewire xorgproto shared-mime-info mesa desktop-file-utils gobject-introspection startup-notification libinput sysprof wayland wayland-protocols xwayland gsettings-desktop-schemas libxcomposite libxkbfile xkeyboard-config iso-codes)
+makedepends=(libglvnd gnome-settings-daemon graphene libxcvt libxkbcommon pipewire xorgproto shared-mime-info mesa desktop-file-utils gobject-introspection startup-notification libinput sysprof wayland wayland-protocols xwayland gsettings-desktop-schemas libxcomposite libxkbfile xkeyboard-config iso-codes)
+run=(libglvnd)
 build() {
 
 mkdir build &&
