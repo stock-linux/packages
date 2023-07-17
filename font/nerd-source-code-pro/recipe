@@ -1,0 +1,14 @@
+name=nerd-source-code-pro
+version=3.0.2
+release=1
+description="Patched monospaced font family for user interface and coding environments"
+source=(https://github.com/ryanoasis/nerd-fonts/releases/download/v$version/SourceCodePro.zip)
+packager=Skythrew
+makedepends=(unzip)
+unpack() {
+    unzip SourceCodePro.zip
+}
+build() {
+    install -Dm644 *.ttf -t "$PKG/usr/share/fonts/TTF"
+    install -Dm644 LICENSE.txt -t "$PKG/usr/share/licenses/$name/"
+}
