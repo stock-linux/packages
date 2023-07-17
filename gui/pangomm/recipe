@@ -1,0 +1,10 @@
+name=pangomm
+version=2.46.3
+release=1
+description="The Pangomm package provides a C++ interface to Pango."
+source=(https://download.gnome.org/sources/$name/2.46/$name-$version.tar.xz)
+packager=camini
+makedepends=(xorgproto shared-mime-info libcairomm glibmm pango)
+build(){
+build_meson
+}
