@@ -1,0 +1,16 @@
+name=nerd-symbols
+version=3.0.2
+release=1
+description="Just the Nerd Font Icons. I.e Symbol font only"
+source=(https://github.com/ryanoasis/nerd-fonts/releases/download/v$version/NerdFontsSymbolsOnly.zip)
+packager=Skythrew
+makedepends=(unzip)
+unpack() {
+    unzip NerdFontsSymbolsOnly.zip
+}
+build() {
+    mkdir -p $PKG/usr/share/fonts
+    cp *.ttf $PKG/usr/share/fonts
+    mkdir -p $PKG/usr/share/$name
+    cp LICENSE $PKG/usr/share/$name/
+}
