@@ -1,0 +1,10 @@
+name=gnome-system-monitor
+version=44.0
+release=1
+description="The GNOME System Monitor package contains GNOME's replacement for gtop."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=camini
+makedepends=(mesa gtk3 xorgproto shared-mime-info adwaita-icon-theme gtkmm itstool libgtop libhandy librsvg desktop-file-utils)
+build(){
+build_meson
+}
