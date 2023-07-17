@@ -1,0 +1,23 @@
+name=libcairomm
+version=1.14.0
+release=1
+description="The libcairomm-1.0 package provides a C++ interface to Cairo."
+source=(https://www.cairographics.org/releases/cairomm-$version.tar.xz)
+packager=camini
+makedepends=(xorgproto shared-mime-info cairo libsigc++ boost doxygen)
+unpack(){
+tar -xf cairomm-$version.tar.xz
+cd cairomm-$version
+}
+build(){
+mkdir bld &&
+cd    bld &&
+
+meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -Dbuild-tests=true  \
+      -Dboost-shared=true &&
+ninja
+DESTDIR=$PKG ninja install
+}
