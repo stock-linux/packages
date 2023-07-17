@@ -5,6 +5,7 @@ description="GNOME Maps is a map application for GNOME."
 source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
 packager=Skythrew
 makedepends=(desktop-file-utils geoclue geocode-glib gjs libadwaita libshumate libgweather rest shared-mime-info xorgproto)
+run=(glib-networking)
 build() {
 build_meson
 }
