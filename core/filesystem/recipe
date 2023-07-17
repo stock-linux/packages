@@ -104,15 +104,15 @@ EOF
 
     cat > $PKG/etc/os-release << EOF
 NAME="Stock Linux"
-VERSION="$version"
+VERSION="rolling"
 ID=stocklinux
-PRETTY_NAME="Stock Linux $version"
+PRETTY_NAME="Stock Linux rolling"
 VERSION_CODENAME="sunbird"
 EOF
 
     cat > $PKG/etc/lsb-release << "EOF"
 DISTRIB_ID="Stock Linux"
-DISTRIB_RELEASE="$version"
+DISTRIB_RELEASE="rolling"
 DISTRIB_CODENAME="sunbird"
 DISTRIB_DESCRIPTION="Stock Linux"
 EOF
@@ -325,17 +325,6 @@ alias grep='grep --color=auto'
 # in the X environment. [Review the LFS archive thread titled
 # PS1 Environment Variable for a great case study behind this script
 # addendum.]
-
-NORMAL="\[\e[0m\]"
-RED="\[\e[1;31m\]"
-GREEN="\[\e[1;32m\]"
-if [[ $EUID == 0 ]] ; then
-  PS1="$RED\u [ $NORMAL\w$RED ]# $NORMAL"
-else
-  PS1="$GREEN\u [ $NORMAL\w$GREEN ]\$ $NORMAL"
-fi
-
-unset RED GREEN NORMAL
 
 eval "$(starship init bash)"
 # End /etc/bashrc
