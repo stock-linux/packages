@@ -1,6 +1,6 @@
 name=filesystem
-version=23.06
-release=3
+version=23.07
+release=1
 description="Simple Linux filesystem"
 iana_version=20230524
 source=(https://github.com/Mic92/iana-etc/releases/download/$iana_version/iana-etc-$iana_version.tar.gz)
@@ -337,6 +337,7 @@ fi
 
 unset RED GREEN NORMAL
 
+eval "$(starship init bash)"
 # End /etc/bashrc
 EOF
 
