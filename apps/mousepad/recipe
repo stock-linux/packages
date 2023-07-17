@@ -1,6 +1,6 @@
 name=mousepad
 version=0.5.10
-release=1
+release=2
 description="Mousepad is a simple GTK+ 3 text editor for the Xfce desktop environment."
 source=(https://archive.xfce.org/src/apps/$name/0.5/$name-$version.tar.bz2)
 packager=camini
