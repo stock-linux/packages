@@ -1,0 +1,10 @@
+name=gnome-weather
+version=44.0
+release=1
+description="GNOME Weather is a small application that allows you to monitor the current weather conditions for your city, or anywhere in the world, and to access updated forecasts provided by various internet services."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(gjs libadwaita libgweather xorgproto shared-mime-info geoclue)
+build() {
+build_meson
+}
