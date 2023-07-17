@@ -1,0 +1,19 @@
+name=gtksourceview4
+version=4.8.4
+release=1
+description="The GtkSourceView package contains a library used for extending the GTK text functions to include syntax highlighting."
+source=(https://download.gnome.org/sources/gtksourceview/4.8/gtksourceview-$version.tar.xz)
+packager=camini
+makedepends=(xorgproto shared-mime-info mesa cmake gtk3 xorg-server pcre2 gobject-introspection libxml2 sysprof vala valgrind vulkan-icd-loader)
+unpack(){
+tar -xf gtksourceview-$version.tar.xz
+cd gtksourceview-$version
+}
+build(){
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release .. &&
+ninja
+DESTDIR=$PKG ninja install
+}
