@@ -1,0 +1,7 @@
+name=gnome-user-docs
+version=44.3
+release=1
+description="The GNOME User Docs package contains documentation for GNOME."
+source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
+packager=camini
+makedepends=(itstool libxml2)
