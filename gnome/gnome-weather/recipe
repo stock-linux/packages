@@ -5,6 +5,7 @@ description="GNOME Weather is a small application that allows you to monitor the
 source=(https://download.gnome.org/sources/$name/44/$name-$version.tar.xz)
 packager=Skythrew
 makedepends=(gjs libadwaita libgweather xorgproto shared-mime-info geoclue)
+run=(glib-networking)
 build() {
 build_meson
 }
