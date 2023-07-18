@@ -1,0 +1,10 @@
+name=adw-gtk3
+version=4.8
+release=1
+description="The theme from libadwaita ported to GTK-3"
+source=(https://github.com/lassekongo83/$name/archive/refs/tags/v$version.tar.gz#$name-$version.tar.gz)
+packager=Skythrew
+makedepends=(sassc)
+build() {
+build_meson
+}
