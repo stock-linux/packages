@@ -1,8 +1,8 @@
 name=stock-gnome-settings
 version=44.3
-release=1
+release=2
 description="GNOME Customization for Stock Linux"
-source=(gtk3-settings.ini)
+source=(gtk3-settings.ini gtk4-settings.ini)
 packager=Skythrew
 unpack() {
     return
@@ -10,4 +10,7 @@ unpack() {
 build() {
     mkdir -p $PKG/etc/gtk-3.0
     cp gtk3-settings.ini $PKG/etc/gtk-3.0/settings.ini
+
+    mkdir -p $PKG/usr/share/gtk-4.0
+    cp gtk4-settings.ini $PKG/usr/share/gtk-4.0/settings.ini
 }
