@@ -1,2 +1,4 @@
-su $(logname) -c "gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'"
-su $(logname) -c "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+if [ -n "$SUDO_USER" ]; then
+	su $SUDO_USER -c "gsettings set org.gnome.desktop.interface gtk-theme \'adw-gtk3-dark\'"
+        su $SUDO_USER -c "gsettings set org.gnome.desktop.interface color-scheme \'prefer-dark\'"
+fi
