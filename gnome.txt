@@ -31,3 +31,4 @@ gnome-maps
 gnome-power-manager
 gnome-system-monitor
 gnome-weather
+stock-gnome-settings
