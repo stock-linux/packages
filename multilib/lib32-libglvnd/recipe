@@ -1,0 +1,29 @@
+_name=libglvnd
+name=lib32-libglvnd
+version=1.6.0
+release=1
+description="The GL Vendor-Neutral Dispatch library"
+source=(https://gitlab.com/freedesktop-sdk/mirrors/github/NVIDIA/${_name}/-/archive/v$version/${_name}-v$version.tar.gz)
+packager=Skythrew
+makedepends=(lib32-libxext lib32-libx11 xorgproto)
+run=(libglvnd)
+unpack() {
+    tar -xf ${_name}-v$version.tar.gz
+}
+build() {
+export CC='gcc -m32'
+export CXX='g++ -m32'
+export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
+
+cd ${_name}-v$version
+mkdir build
+cd build
+
+meson --libdir=/usr/lib32 \
+-D headers=false \
+-D gles1=false \
+..
+
+ninja
+DESTDIR=$PKG ninja install
+}
