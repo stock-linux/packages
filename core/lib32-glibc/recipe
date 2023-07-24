@@ -30,4 +30,6 @@ build() {
     mkdir -p $PKG/usr/include/gnu/
     install -vm644 DESTDIR/usr/include/gnu/{lib-names,stubs}-32.h \
                $PKG/usr/include/gnu/
+    mkdir -p $PKG/usr/lib
+    ln -s ../lib32/ld-linux.so.2 $PKG/usr/lib/
 }
