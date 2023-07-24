@@ -1,0 +1,16 @@
+_name=libxau
+name=lib32-libxau
+version=1.0.11
+release=1
+description="The libXau package contains a library implementing the X11 Authorization Protocol."
+source=(https://www.x.org/pub/individual/lib/libXau-$version.tar.xz)
+packager=Skythrew
+makedepends=(util-macros xorgproto)
+run=(libxau)
+unpack() {
+    tar -xf libXau-$version.tar.xz
+    cd libXau-$version
+}
+post_build() {
+    rm -rf "$PKG"/usr/{include,share}
+}
