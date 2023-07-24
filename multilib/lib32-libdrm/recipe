@@ -1,10 +1,15 @@
-name=libdrm
+_name=libdrm
+name=lib32-libdrm
 version=2.4.115
 release=1
 description="Libdrm provides a userspace library for accessing the direct rendering manager (DRM) on operating systems that support the ioctl interface."
-source=(https://dri.freedesktop.org/$name/$name-$version.tar.xz)
+source=(https://dri.freedesktop.org/${_name}/${_name}-$version.tar.xz)
 packager=Skythrew
 makedepends=(lib32-libpciaccess)
+unpack() {
+    tar -xf ${_name}-$version.tar.xz
+    cd ${_name}-$version
+}
 build() {
 
     export CC="gcc -m32"
