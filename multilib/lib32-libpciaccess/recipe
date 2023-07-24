@@ -1,0 +1,15 @@
+_name=libpciaccess
+name=lib32-libpciaccess
+version=0.17
+release=1
+description="Library providing generic access to the PCI bus and devices"
+source=(https://www.x.org/pub/individual/lib/${_name}-$version.tar.xz)
+packager=Skythrew
+run=(libpciaccess)
+unpack() {
+    tar -xf ${_name}-$version.tar.xz
+    cd ${_name}-$version
+}
+post_build() {
+    rm -rf "${pkgdir}"/usr/include
+}
