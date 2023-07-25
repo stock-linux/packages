@@ -1,6 +1,6 @@
 name=lib32-libxrandr
 version=1.5.3
-release=1
+release=2
 description="X11 RandR extension library"
 source=(https://www.x.org/archive//individual/lib/libXrandr-$version.tar.gz)
 packager=camini
@@ -21,5 +21,5 @@ export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
         --localstatedir=/var \
         --disable-static
 make
-make DESTDIR=$PWD/DESTDIR install
+make DESTDIR=$PKG install
 }
