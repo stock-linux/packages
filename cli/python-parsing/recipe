@@ -1,0 +1,15 @@
+name=python-parsing
+version=3.0.7
+release=1
+description="General parsing module for Python"
+source=(https://github.com/pyparsing/pyparsing/archive/pyparsing_$version.tar.gz)
+packager=Skythrew
+makedepends=(python-wheel)
+unpack() {
+    tar -xf pyparsing_$version.tar.gz
+    cd pyparsing-pyparsing_$version
+}
+build() {
+pip install setuptools
+build_python
+}
