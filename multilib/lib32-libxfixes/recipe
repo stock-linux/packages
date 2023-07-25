@@ -1,0 +1,25 @@
+name=lib32-libxfixes
+version=6.0.1
+release=1
+description="X11 miscellaneous 'fixes' extension library"
+source=(https://www.x.org/archive//individual/lib/libXfixes-$version.tar.gz)
+packager=camini
+makedepends=(libxfixes xorgproto-32 lib32-libx11)
+unpack(){
+	tar -xf libXfixes-$version.tar.gz
+	cd libXfixes-$version
+}
+build(){
+export CC="gcc -m32"
+export CXX="g++ -m32"
+export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
+
+./configure \
+	--prefix=/usr \
+        --sysconfdir=/etc \
+	--libdir=/usr/lib32 \
+        --localstatedir=/var \
+        --disable-static
+make
+make DESTDIR=$PKG install
+}
