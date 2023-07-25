@@ -10,7 +10,7 @@ build() {
 mkdir build
 cd build
 
-meson -Dgtkdoc=false -Dtests=false ..
+meson -Dprefix=/usr -Dgtkdoc=false -Dtests=false ..
 ninja
 
 DESTDIR=$PKG ninja install
