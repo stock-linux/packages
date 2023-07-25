@@ -1,0 +1,25 @@
+name=lib32-libxrender
+version=0.9.11
+release=1
+description="X Rendering Extension client library"
+source=(https://www.x.org/archive//individual/lib/libXrender-$version.tar.gz)
+packager=camini
+makedepends=( libxrender lib32-libx11 xorgproto-32)
+unpack(){
+tar -xf libXrender-$version.tar.gz
+cd libXrender-$version
+}
+build(){
+export CC="gcc -m32"
+export CXX="g++ -m32"
+export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
+
+./configure \
+	--prefix=/usr \
+	--libdir=/usr/lib32 \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static
+make
+make DESTDIR=$PKG install
+}
