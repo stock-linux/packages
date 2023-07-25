@@ -1,0 +1,25 @@
+name=lib32-libxrandr
+version=1.5.3
+release=1
+description="X11 RandR extension library"
+source=(https://www.x.org/archive//individual/lib/libXrandr-$version.tar.gz)
+packager=camini
+makedepends=(lib32-libxext xorgproto-32 lib32-libxrender libxrandr)
+unpack(){
+tar -xf libXrandr-$version.tar.gz
+cd libXrandr-$version
+}
+build(){
+export CC="gcc -m32"
+export CXX="g++ -m32"
+export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
+
+./configure \
+	--prefix=/usr \
+        --sysconfdir=/etc \
+	--libdir=/usr/lib32 \
+        --localstatedir=/var \
+        --disable-static
+make
+make DESTDIR=$PWD/DESTDIR install
+}
