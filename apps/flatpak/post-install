@@ -1,0 +1,6 @@
+UN=flatpak
+
+if ! (getent passwd $UN > /dev/null); then
+	useradd  -c "Flatpak User" -d /var/run/flatpak \
+	-s /bin/false -u 89 $UN
+fi
