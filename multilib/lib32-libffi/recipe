@@ -1,0 +1,20 @@
+name=lib32-libffi
+version=3.4.4
+release=1
+description="The Libffi library provides a portable, high level programming interface to various calling conventions."
+source=(https://github.com/libffi/libffi/releases/download/v$version/libffi-$version.tar.gz)
+packager=camini
+makedepends=(libffi)
+unpack=(){
+tar -xf libffi-$version.tar.gz
+cd libffi-$version
+}
+build(){
+export CC="gcc -m32"
+export CXX="g++ -m32"
+export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
+
+./configure --prefix=/usr --libdir=/usr/lib32 --disable-static --with-gcc-arch=x86-64
+make
+make DESTDIR=$PKG install
+}
