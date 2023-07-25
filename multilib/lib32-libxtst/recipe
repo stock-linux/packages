@@ -1,0 +1,25 @@
+name=lib32-libxtst
+version=1.2.4
+release=1
+description="X11 Testing -- Resource extension library"
+source=(https://www.x.org/archive//individual/lib/libXtst-$version.tar.gz)
+packager=camini
+makedepends=(libxtst xorgproto-32 lib32-libxfixes lib32-libx11 lib32-libxext lib32-libxi)
+unpack(){
+	tar -xf libXtst-$version.tar.gz
+	cd libXtst-$version
+}
+build(){
+export CC="gcc -m32"
+export CXX="g++ -m32"
+export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
+
+./configure \
+	--prefix=/usr \
+        --sysconfdir=/etc \
+	--libdir=/usr/lib32 \
+        --localstatedir=/var \
+        --disable-static
+make
+make DESTDIR=$PKG install
+}
