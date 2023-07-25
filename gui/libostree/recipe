@@ -1,0 +1,21 @@
+name=libostree
+version=2023.2
+release=1
+description="Operating system and container binary deployment and upgrades"
+source=(https://github.com/ostreedev/ostree/releases/download/v$version/$name-$version.tar.xz)
+packager=Skythrew
+makedepends=(openssl glib gpgme fuse libsoup e2fsprogs)
+build() {
+
+./configure --prefix=/usr \
+--with-openssl \
+--sysconfdir=/etc \
+--disable-man     \
+--localstatedir=/var
+
+sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+make
+make DESTDIR=$PKG install
+
+}
