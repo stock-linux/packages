@@ -1,0 +1,28 @@
+name=appstream
+version=0.16.2
+release=1
+description="Provides a standard for creating app stores across distributions"
+source=(https://www.freedesktop.org/software/$name/releases/AppStream-$version.tar.xz)
+packager=Skythrew
+makedepends=(glib gobject-introspection libyaml xmlto curl libxml2 libxmlb cairo xorgproto gdk-pixbuf shared-mime-info pango librsvg itstool libxslt)
+unpack() {
+    tar -xf AppStream-$version.tar.xz
+    cd AppStream-$version
+}
+build() {
+
+mkdir build
+cd    build
+
+
+meson --prefix=/usr \
+      -Dstemming=false \
+      -Dapidocs=false \
+      -Dinstall-docs=false \
+      -Dcompose=true \
+      ..
+
+ninja
+DESTDIR=$PKG ninja install
+
+}
