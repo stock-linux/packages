@@ -3,4 +3,4 @@ version=1.2.13
 release=1
 description="32-bit zlib"
 source=(https://zlib.net/zlib-$version.tar.xz)
-packager=Skythrew
+packager=camini
