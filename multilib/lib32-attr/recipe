@@ -1,0 +1,25 @@
+name=lib32-attr
+version=2.5.1
+release=1
+description="The Attr package contains utilities to administer the extended attributes of filesystem objects."
+source=(https://download.savannah.gnu.org/releases/attr/attr-$version.tar.gz)
+packager=camini
+unpack(){
+tar -xf attr-$version.tar.gz
+cd attr-$version
+}
+build(){
+export CC="gcc -m32"
+export CXX="g++ -m32"
+export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
+
+./configure \
+	--prefix=/usr \
+	--libdir=/usr/lib32 \
+	--bindir=/bin \
+	--disable-static \
+	--sysconfdir=/etc \
+	--disable-nls
+make
+make DESTDIR=$PKG install
+}
