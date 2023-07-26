@@ -1,0 +1,20 @@
+name=lib32-alsa-lib
+version=1.2.9
+release=1
+description="The ALSA Library package contains the ALSA library used by programs (including ALSA Utilities) requiring access to the ALSA sound interface."
+source=(https://www.alsa-project.org/files/pub/lib/alsa-lib-$version.tar.bz2)
+packager=camini
+makedepends=(alsa-lib)
+unpack(){
+tar -xf alsa-lib-$version.tar.bz2
+cd alsa-lib-$version
+}
+build(){
+export CC="gcc -m32"
+export CXX="g++ -m32"
+export PKG_CONFIG_LIBDIR="/usr/lib32/pkgconfig"
+
+./configure --libdir=/usr/lib32
+make
+make DESTDIR=$PKG install
+}
