@@ -1,0 +1,98 @@
+name=thunderbird
+version=115.0
+release=1
+description="Thunderbird is a stand-alone mail/news client based on the Mozilla codebase. It uses the Gecko rendering engine to enable it to display and compose HTML emails."
+source=(https://archive.mozilla.org/pub/$name/releases/$version/source/$name-$version.source.tar.xz)
+packager=camini
+makedepends=(rustc cbindgen alsa-lib dbus-glib gtk2 gtk3 xorgproto shared-mime-info mesa node pulseaudio startup-notification zip unzip libevent libvpx yasm which nspr doxygen libnotify libxt desktop-file-utils hicolor-icon-theme nasm nss libxcomposite libxcursor libxdamage)
+unpack(){
+tar -xf $name-$version.source.tar.xz
+cd $name-$version
+}
+build(){
+cat > mozconfig << "EOF"
+# If you have a multicore machine, all cores will be used.
+
+# If you have installed wireless-tools comment out this line:
+ac_add_options --disable-necko-wifi
+
+# Uncomment the following option if you have not installed PulseAudio
+#ac_add_options --enable-audio-backends=alsa
+
+# Comment out following options if you have not installed
+# recommended dependencies:
+ac_add_options --with-system-libevent
+ac_add_options --with-system-libvpx
+ac_add_options --with-system-nspr
+ac_add_options --with-system-nss
+ac_add_options --with-system-icu
+
+# The elf-hack causes failed installs on some machines.
+# It is supposed to improve startup time and it shrinks libxul.so
+# by a few MB - comment this if you know your machine is not affected.
+ac_add_options --disable-elf-hack
+
+# The BLFS editors recommend not changing anything below this line:
+ac_add_options --prefix=/usr
+ac_add_options --enable-application=comm/mail
+
+ac_add_options --disable-crashreporter
+ac_add_options --disable-updater
+ac_add_options --disable-debug
+ac_add_options --disable-debug-symbols
+ac_add_options --disable-tests
+
+ac_add_options --enable-optimize=-O2
+ac_add_options --enable-linker=gold
+ac_add_options --enable-strip
+ac_add_options --enable-install-strip
+
+ac_add_options --enable-official-branding
+
+ac_add_options --enable-system-ffi
+ac_add_options --enable-system-pixman
+
+ac_add_options --with-system-jpeg
+ac_add_options --with-system-png
+ac_add_options --with-system-zlib
+
+# Using sandboxed wasm libraries has been moved to all builds instead
+# of only mozilla automation builds. It requires extra llvm packages
+# and was reported to seriously slow the build. Disable it.
+ac_add_options --without-wasm-sandboxed-libraries
+EOF
+
+sed -e '/<exception>/i#include <cstdint>' \
+    -i comm/third_party/rnp/src/libsexp/include/sexp/sexp-error.h
+    
+
+export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none &&
+export MOZBUILD_STATE_PATH=${PWD}/mozbuild          &&
+./mach configure                                    &&
+./mach build
+
+SHELL=/bin/bash DESTDIR=$PKG MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=none ./mach install
+
+mkdir -pv $PKG/usr/bin
+ln -sfv ../lib/$name/thunderbird $PKG/usr/bin
+
+mkdir -pv $PKG/usr/share/applications 
+mkdir -pv $PKG/usr/share/pixmaps
+
+cat > $PKG/usr/share/applications/thunderbird.desktop << "EOF"
+[Desktop Entry]
+Name=Thunderbird Mail
+Comment=Send and receive mail with Thunderbird
+GenericName=Mail Client
+Exec=thunderbird %u
+Terminal=false
+Type=Application
+Icon=thunderbird
+Categories=Network;Email;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;x-scheme-handler/mailto;
+StartupNotify=true
+EOF
+
+ln -sfv /usr/lib/thunderbird/chrome/icons/default/default256.png \
+        $PKG/usr/share/pixmaps/thunderbird.png
+}
