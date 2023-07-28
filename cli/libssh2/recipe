@@ -1,0 +1,18 @@
+name=libssh2
+version=1.11.0
+release=1
+description="Libssh2 package is a client-side C library implementing the SSH2 protocol."
+source=(https://www.$name.org/download/$name-$version.tar.gz)
+packager=camini
+makedepends=(cmake libgcrypt openssh)
+unpack(){
+tar -xf libssh2-$version.tar.gz
+cd libssh2-$version
+}
+build(){
+./configure --prefix=/usr          \
+            --disable-docker-tests \
+            --disable-static       &&
+make
+make DESTDIR=$PKG install
+}
