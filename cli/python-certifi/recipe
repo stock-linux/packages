@@ -1,0 +1,15 @@
+name=python-certifi
+version=2023.7.22
+release=1
+description="Python package for providing Mozilla's CA Bundle"
+source=(https://pypi.io/packages/source/c/certifi/certifi-$version.tar.gz)
+packager=camini
+makedepends=(python-setuptools)
+unpack(){
+tar -xf certifi-$version.tar.gz
+cd certifi-$version
+}
+build(){
+python setup.py build
+python setup.py install --prefix=/usr --root=$PKG --skip-build -O1
+}
