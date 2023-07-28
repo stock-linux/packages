@@ -1,0 +1,22 @@
+name=liba52
+version=0.7.4
+release=1
+description="liba52 is a free library for decoding ATSC A/52 (also known as AC-3) streams. The A/52 standard is used in a variety of applications, including digital television and DVD."
+source=(https://$name.sourceforge.net/files/a52dec-$version.tar.gz)
+packager=camini
+unpack(){
+tar -xf a52dec-$version.tar.gz
+cd a52dec-$version
+}
+build(){
+./configure --prefix=/usr \
+            --mandir=/usr/share/man \
+            --enable-shared \
+            --disable-static \
+            CFLAGS="${CFLAGS:--g -O2} $([ $(uname -m) = x86_64 ] && echo -fPIC)" &&
+make
+
+make DESTDIR=$PKG install &&
+cp liba52/a52_internal.h $PKG/usr/include/a52dec 
+}
+
