@@ -1,0 +1,13 @@
+name=cabextract
+version=1.11
+release=1
+description="cabextract is Free Software for extracting Microsoft cabinet files, also called .CAB files."
+source=(https://$name.org.uk/$name-$version.tar.gz)
+packager=camini
+build(){
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --mandir=/usr/share/man
+make
+make DESTDIR=$PKG install
+}
